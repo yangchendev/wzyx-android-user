@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--自定义控件的属性-->
+<resources>
+    <declare-styleable name="TitleBar">
+        <!--左边按钮属性：文字、文字颜色、文字大小、背景图片-->
+        <attr name="leftButtonText" format="string|reference"/>
+        <attr name="leftButtonTextColor" format="color|reference"/>
+        <attr name="leftButtonTextSize" format="dimension|reference"/>
+        <attr name="leftButtonBackground" format="color|reference"/>
+        <!--中间文字属性：文字、文字颜色、文字大小-->
+        <attr name="titleText" format="string|reference"/>
+        <attr name="titleColor" format="color|reference"/>
+        <attr name="titleSize" format="dimension|reference"/>
+        <!--右边按钮属性：文字、文字颜色、文字大小、背景图片-->
+        <attr name="rightButtonText" format="string|reference"/>
+        <attr name="rightButtonTextColor" format="color|reference"/>
+        <attr name="rightButtonTextSize" format="dimension|reference"/>
+        <attr name="rightButtonBackground" format="color|reference"/>
+    </declare-styleable>
+</resources>

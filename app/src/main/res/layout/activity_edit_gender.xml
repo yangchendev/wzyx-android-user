@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/bg_eee"
+    android:layout_height="match_parent">
+    <!--导航栏开始-->
+    <com.allelink.wzyx.ui.TitleBar
+        android:id="@+id/tb_edit_gender"
+        android:background="@color/white"
+        app:titleColor="@color/black_666"
+        app:titleSize="6sp"
+        app:leftButtonBackground="@drawable/btn_back_selector"
+        app:titleText="@string/alter_gender"
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+    </com.allelink.wzyx.ui.TitleBar>
+    <!--导航栏结束-->
+    <!--男开始-->
+    <LinearLayout
+        android:id="@+id/ll_edit_gender_male"
+        android:background="@drawable/layout_bg_selector"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="44dp">
+        <ImageView
+            android:id="@+id/iv_edit_gender_male"
+            android:layout_marginStart="10dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/ic_select_index"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <android.support.v7.widget.AppCompatTextView
+            android:textColor="@color/black_333"
+            android:textSize="16sp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="10dp"
+            android:text="@string/male"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <!--男结束-->
+    <!--女开始-->
+    <LinearLayout
+        android:id="@+id/ll_edit_gender_female"
+        android:background="@drawable/layout_bg_selector"
+        android:layout_marginTop="1dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="44dp">
+        <ImageView
+            android:visibility="invisible"
+            android:id="@+id/iv_edit_gender_female"
+            android:layout_marginStart="10dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/ic_select_index"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <android.support.v7.widget.AppCompatTextView
+            android:textColor="@color/black_333"
+            android:textSize="16sp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="10dp"
+            android:text="@string/female"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <!--女结束-->
+    <!--保密开始-->
+    <LinearLayout
+        android:id="@+id/ll_edit_gender_secret"
+        android:background="@drawable/layout_bg_selector"
+        android:layout_marginTop="1dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="44dp">
+        <ImageView
+            android:visibility="invisible"
+            android:id="@+id/iv_edit_gender_secret"
+            android:layout_marginStart="10dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/ic_select_index"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <android.support.v7.widget.AppCompatTextView
+            android:textColor="@color/black_333"
+            android:textSize="16sp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="10dp"
+            android:text="@string/gender_secret"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <!--保密结束-->
+    <Button
+        android:id="@+id/btn_edit_gender_confirm"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:text="@string/confirm"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/btn_confirm_selector"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="44dp" />
+</LinearLayout>

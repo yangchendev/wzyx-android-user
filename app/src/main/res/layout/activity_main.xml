@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.allelink.wzyx.activity.MainActivity">
+    <!--底部导航栏开始-->
+    <include
+        android:id="@+id/include_main_bottom_bar"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        layout="@layout/bottom_bar"/>
+    <!--底部导航栏结束-->
+    <!--fragment容器开始-->
+    <FrameLayout
+        android:layout_above="@id/include_main_bottom_bar"
+        android:id="@+id/fl_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </FrameLayout>
+    <!--fragment容器结束-->
+</RelativeLayout>

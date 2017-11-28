@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:orientation="vertical"
+    android:background="@android:color/transparent"
+    android:paddingBottom="10dp"
+    >
+    <!--拍照按钮开始-->
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_dialog_take_photo"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center"
+        android:text="@string/take_photo"
+        android:textColor="@color/black_333"
+        android:background="@drawable/btn_border_take_photo"
+        />
+    <!--拍照按钮结束-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_gravity="center"
+        android:background="@android:color/transparent"
+        />
+    <!--本地按钮开始-->
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_dialog_pick_photo"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center"
+        android:text="@string/pick_photo"
+        android:textColor="@color/black_333"
+        android:background="@drawable/btn_border_pick_photo"
+        />
+    <!--本地按钮结束-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_gravity="center"
+        android:background="@android:color/transparent"
+        />
+    <!--取消按钮开始-->
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_dialog_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center"
+        android:text="@string/cancel"
+        android:textColor="@color/warning"
+        android:background="@drawable/btn_border"
+        />
+    <!--取消按钮结束-->
+</android.support.v7.widget.LinearLayoutCompat>

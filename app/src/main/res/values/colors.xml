@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="brands_color">#3ca9fe</color>
+    <color name="white">#ffffff</color>
+    <color name="black_666">#666666</color>
+    <color name="black_333">#333333</color>
+    <color name="black_999">#999999</color>
+    <color name="grey">#f5f5f5</color>
+    <color name="bg_eee">#eeeeee</color>
+    <color name="brands_color_pressed">#80c8ff</color>
+    <color name="warning">#b92020</color>
+</resources>

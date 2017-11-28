@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--底部导航栏开始-->
+<android.support.v7.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    android:orientation="horizontal"
+    android:descendantFocusability="afterDescendants"
+    android:id="@+id/ll_bottom_bar_layout"
+    android:background="@color/white">
+    <!--首页tab开始-->
+    <android.support.v7.widget.LinearLayoutCompat
+        android:descendantFocusability="blocksDescendants"
+        android:gravity="center"
+        android:id="@+id/ll_bottom_bar_home_tab_layout"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent">
+        <ImageView
+            android:contentDescription="@string/fragment_home"
+            android:id="@+id/iv_bottom_bar_home"
+            android:background="@drawable/ic_home_nor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_bottom_bar_home"
+            android:textColor="@color/black_666"
+            android:textSize="12sp"
+            android:layout_marginTop="4dp"
+            android:text="@string/fragment_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </android.support.v7.widget.LinearLayoutCompat>
+    <!--首页tab结束-->
+    <!--附近tab开始-->
+    <android.support.v7.widget.LinearLayoutCompat
+        android:descendantFocusability="blocksDescendants"
+        android:gravity="center"
+        android:id="@+id/ll_bottom_bar_near_tab_layout"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent">
+        <ImageView
+            android:contentDescription="@string/fragment_home"
+            android:id="@+id/iv_bottom_bar_near"
+            android:background="@drawable/ic_nearby_nor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_bottom_bar_near"
+            android:textColor="@color/black_666"
+            android:textSize="12sp"
+            android:layout_marginTop="4dp"
+            android:text="@string/fragment_near"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </android.support.v7.widget.LinearLayoutCompat>
+    <!--附近tab结束-->
+    <!--论坛tab开始-->
+    <android.support.v7.widget.LinearLayoutCompat
+        android:descendantFocusability="blocksDescendants"
+        android:gravity="center"
+        android:id="@+id/ll_bottom_bar_forum_tab_layout"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/iv_bottom_bar_forum"
+            android:background="@drawable/ic_forum_nor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_bottom_bar_forum"
+            android:textColor="@color/black_666"
+            android:textSize="12sp"
+            android:layout_marginTop="4dp"
+            android:text="@string/fragment_forum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </android.support.v7.widget.LinearLayoutCompat>
+    <!--论坛tab结束-->
+    <!--订单tab开始-->
+    <android.support.v7.widget.LinearLayoutCompat
+        android:descendantFocusability="blocksDescendants"
+        android:gravity="center"
+        android:id="@+id/ll_bottom_bar_order_tab_layout"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/iv_bottom_bar_order"
+            android:background="@drawable/ic_order_nor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_bottom_bar_order"
+            android:textColor="@color/black_666"
+            android:textSize="12sp"
+            android:layout_marginTop="4dp"
+            android:text="@string/fragment_order"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </android.support.v7.widget.LinearLayoutCompat>
+    <!--订单tab结束-->
+    <!--我的tab开始-->
+    <android.support.v7.widget.LinearLayoutCompat
+        android:descendantFocusability="blocksDescendants"
+        android:gravity="center"
+        android:id="@+id/ll_bottom_bar_mine_tab_layout"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent">
+        <ImageView
+            android:contentDescription="@string/fragment_home"
+            android:id="@+id/iv_bottom_bar_mine"
+            android:background="@drawable/ic_mine_nor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_bottom_bar_mine"
+            android:textColor="@color/black_666"
+            android:textSize="12sp"
+            android:layout_marginTop="4dp"
+            android:text="@string/fragment_mine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </android.support.v7.widget.LinearLayoutCompat>
+    <!--我的tab结束-->
+</android.support.v7.widget.LinearLayoutCompat>
+    <!--底部导航栏结束-->
