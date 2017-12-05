@@ -80,6 +80,7 @@ public class MainActivity extends BaseActivity {
         mForumFragment = ForumFragment.newInstance();
         mOrderFragment = OrderFragment.newInstance();
         mMineFragment = MineFragment.newInstance();
+        //初始时显示第一个fragment
         loadMultipleRootFragment(R.id.fl_container,FIRST,
                 mHomeFragment,
                 mNearFragment,
@@ -155,5 +156,6 @@ public class MainActivity extends BaseActivity {
         ivMine.setImageResource(R.drawable.ic_mine_nor);
         tvMine.setTextColor(getResources().getColor(R.color.black_666));
     }
+
 
 }

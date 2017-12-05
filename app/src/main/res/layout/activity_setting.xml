@@ -68,9 +68,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="1dp"
                 android:background="@color/bg_eee" />
-            <!--通用栏开始-->
+            <!--清空缓存栏开始-->
             <RelativeLayout
-                android:id="@+id/rl_setting_general"
+                android:id="@+id/rl_setting_clear_cache"
                 android:descendantFocusability="blocksDescendants"
                 android:background="@drawable/layout_bg_selector"
                 android:layout_width="match_parent"
@@ -80,11 +80,42 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="10dp"
-                    android:text="@string/general"
+                    android:text="@string/clear_cache"
+                    android:textColor="@color/black_333"
+                    android:textSize="16sp" />
+                <android.support.v7.widget.AppCompatTextView
+                    android:textSize="16sp"
+                    android:id="@+id/tv_setting_cache_size"
+                    android:textColor="@color/warning"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="10dp"
+                    android:text="@string/cache_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+            <!--清空缓存栏结束-->
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:background="@color/bg_eee" />
+            <!--检查更新栏开始-->
+            <RelativeLayout
+                android:id="@+id/rl_setting_check_update"
+                android:descendantFocusability="blocksDescendants"
+                android:background="@drawable/layout_bg_selector"
+                android:layout_width="match_parent"
+                android:layout_height="48dp">
+                <android.support.v7.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/check_update"
                     android:textColor="@color/black_333"
                     android:textSize="16sp" />
             </RelativeLayout>
-            <!--通用栏结束-->
+            <!--检查更新栏结束-->
         </android.support.v7.widget.LinearLayoutCompat>
     <Button
         style="@style/Widget.AppCompat.Button.Borderless"

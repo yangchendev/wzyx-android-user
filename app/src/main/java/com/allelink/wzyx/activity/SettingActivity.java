@@ -27,7 +27,7 @@ import butterknife.OnClick;
 
 public class SettingActivity extends BaseActivity {
     private static final String TAG = "SettingActivity";
-    private static final int REQUEST_LOGOUT_PASSWORD = 2002;
+    private static final int REQUEST_CODE_LOGOUT = 2002;
     /**
     * titleBar
     */
@@ -77,13 +77,27 @@ public class SettingActivity extends BaseActivity {
     @OnClick(R.id.rl_setting_security_setting)
     void securitySetting(){
         LogUtil.d(TAG,"securitySetting");
+        ActivityUtils.startActivity(SettingActivity.this,SecuritySettingActivity.class);
     }
     /**
-     * 通用设置点击事件
+     * 清除缓存点击事件
      */
-    @OnClick(R.id.rl_setting_general)
-    void generalSetting(){
-        LogUtil.d(TAG,"generalSetting");
+    @OnClick(R.id.rl_setting_clear_cache)
+    void clearCache(){
+        LogUtil.d(TAG,"clearCache");
+        //1.获取缓存大小，并显示在textview上
+        //2.弹出对话框提示用户是否要清除缓存
+        //3.清除缓存
+    }
+    /**
+     * 检查更新点击事件
+     */
+    @OnClick(R.id.rl_setting_check_update)
+    void checkUpdate(){
+        LogUtil.d(TAG,"checkUpdate");
+        //1.从服务器获取apk版本号
+        //2.与本地版本号进行比较，如果小于服务器端的则进行下载安装
+
     }
     /**
      * 退出登录点击事件
@@ -94,10 +108,10 @@ public class SettingActivity extends BaseActivity {
         //退出登录清除用户数据
         WzyxPreference.clearAppPreferences();
         AccountManager.setSignState(false);
+        //退出当前activity到登录activity并退出其他activity
         Intent intent = new Intent(SettingActivity.this,LoginActivity.class);
         setResult(RESULT_OK);
-        startActivityForResult(intent,REQUEST_LOGOUT_PASSWORD);
+        startActivityForResult(intent,REQUEST_CODE_LOGOUT);
         ((WzyxApplication)getApplication()).finishSingleActivity(SettingActivity.this);
     }
-
 }

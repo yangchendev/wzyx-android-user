@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_eee"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <com.allelink.wzyx.ui.TitleBar
+        android:id="@+id/tb_security_setting_title_bar"
+        app:titleText="@string/security_setting"
+        app:titleSize="6sp"
+        app:titleColor="@color/white"
+        app:leftButtonBackground="@drawable/btn_back_white_selector"
+        android:background="@color/brands_color"
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+    </com.allelink.wzyx.ui.TitleBar>
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="10dp"
+        android:background="@color/bg_eee" />
+    <android.support.v7.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:background="@color/bg_eee" />
+        <!--实名认证栏开始-->
+        <RelativeLayout
+            android:id="@+id/rl_security_setting_real_name_certification"
+            android:descendantFocusability="blocksDescendants"
+            android:background="@drawable/layout_bg_selector"
+            android:layout_width="match_parent"
+            android:layout_height="48dp">
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:text="@string/real_name_certification"
+                android:textColor="@color/black_333"
+                android:textSize="16sp" />
+            <android.support.v7.widget.AppCompatTextView
+                android:textSize="16sp"
+                android:text="@string/certification"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="10dp"
+                android:textColor="@color/brands_color"
+                android:id="@+id/tv_security_setting_real_name_certification"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+        <!--实名认证栏结束-->
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:background="@color/bg_eee" />
+        <!--登录密码栏开始-->
+        <RelativeLayout
+            android:id="@+id/rl_security_setting_login_password"
+            android:descendantFocusability="blocksDescendants"
+            android:background="@drawable/layout_bg_selector"
+            android:layout_width="match_parent"
+            android:layout_height="48dp">
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:text="@string/login_password"
+                android:textColor="@color/black_333"
+                android:textSize="16sp" />
+            <android.support.v7.widget.AppCompatTextView
+                android:textColor="@color/brands_color"
+                android:textSize="16sp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="10dp"
+                android:text="@string/change_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+        <!--登录密码栏结束-->
+    </android.support.v7.widget.LinearLayoutCompat>
+</android.support.v7.widget.LinearLayoutCompat>

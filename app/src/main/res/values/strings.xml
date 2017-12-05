@@ -89,4 +89,12 @@
     <string name="logout">退出登录</string>
     <string name="security_setting">安全设置</string>
     <string name="general">通用</string>
+    <string name="account_management">账号管理</string>
+    <string name="real_name_certification">实名认证</string>
+    <string name="login_password">登录密码</string>
+    <string name="certification">认证</string>
+    <string name="uncertification">未认证</string>
+    <string name="clear_cache">清空缓存</string>
+    <string name="check_update">检查更新</string>
+    <string name="cache_size">42.15MB</string>
 </resources>

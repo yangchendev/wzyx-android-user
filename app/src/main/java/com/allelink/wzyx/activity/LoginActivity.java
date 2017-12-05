@@ -35,7 +35,7 @@ import butterknife.OnClick;
 public class LoginActivity extends BaseActivity {
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_CODE_EDIT_PASSWORD = 2001;
-    private static final int REQUEST_LOGOUT_PASSWORD = 2002;
+    private static final int REQUEST_CODE_LOGOUT = 2002;
     /**
     * UI
     */
@@ -176,7 +176,7 @@ public class LoginActivity extends BaseActivity {
                 case REQUEST_CODE_EDIT_PASSWORD:
                     finishAllActivityExceptMine();
                     break;
-                case REQUEST_LOGOUT_PASSWORD:
+                case REQUEST_CODE_LOGOUT:
                     finishAllActivityExceptMine();
                     break;
                 default:
