@@ -35,6 +35,7 @@ import butterknife.OnClick;
 public class LoginActivity extends BaseActivity {
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_CODE_EDIT_PASSWORD = 2001;
+    private static final int REQUEST_LOGOUT_PASSWORD = 2002;
     /**
     * UI
     */
@@ -120,6 +121,7 @@ public class LoginActivity extends BaseActivity {
             }
         });
     }
+
     /**
      * 跳转到注册界面
      */
@@ -169,10 +171,23 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == REQUEST_CODE_EDIT_PASSWORD){
-            if(resultCode == RESULT_OK){
-                ((WzyxApplication)getApplication()).finishAllActivityExceptMine(LoginActivity.this);
+        if(resultCode == RESULT_OK){
+            switch (requestCode){
+                case REQUEST_CODE_EDIT_PASSWORD:
+                    finishAllActivityExceptMine();
+                    break;
+                case REQUEST_LOGOUT_PASSWORD:
+                    finishAllActivityExceptMine();
+                    break;
+                default:
+                    break;
             }
         }
+    }
+    /**
+    * 清除其他activity
+    */
+    private void finishAllActivityExceptMine(){
+        ((WzyxApplication)getApplication()).finishAllActivityExceptMine(LoginActivity.this);
     }
 }

@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.allelink.wzyx">
-    <!--网络权限-->
+
+    <!-- 网络权限 -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <!--文件权限-->
+    <!-- 文件权限 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <!--相机权限-->
+    <!-- 相机权限 -->
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.CAMERA" />
 
@@ -49,9 +50,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.AccountSettingActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".activity.EditNicknameActivity"
             android:launchMode="singleTask"
@@ -60,15 +61,21 @@
             android:name=".activity.EditGenderActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-        <activity android:name=".activity.EditPasswordActivity"
+        <activity
+            android:name=".activity.EditPasswordActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            />
-        <!--图片剪裁Activity-->
+            android:screenOrientation="portrait" />
+        <!-- 图片剪裁Activity -->
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".activity.SettingActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            >
+        </activity>
     </application>
 
 </manifest>

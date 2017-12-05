@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.allelink.wzyx.R;
 import com.allelink.wzyx.activity.AccountSettingActivity;
+import com.allelink.wzyx.activity.SettingActivity;
 import com.allelink.wzyx.utils.activity.ActivityUtils;
 import com.allelink.wzyx.utils.log.LogUtil;
 import com.allelink.wzyx.utils.storage.WzyxPreference;
@@ -103,6 +104,7 @@ public class MineFragment extends SupportFragment{
     @OnClick(R.id.iv_mine_settings)
     void setting(){
         LogUtil.d(TAG,"settings");
+        ActivityUtils.startActivity(_mActivity, SettingActivity.class);
     }
     /**
      * 通知按钮点击事件

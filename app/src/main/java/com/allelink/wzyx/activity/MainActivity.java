@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.allelink.wzyx.R;
+import com.allelink.wzyx.activity.base.BaseActivity;
 import com.allelink.wzyx.fragment.main.forum.ForumFragment;
 import com.allelink.wzyx.fragment.main.home.HomeFragment;
 import com.allelink.wzyx.fragment.main.mine.MineFragment;
@@ -15,7 +16,6 @@ import com.allelink.wzyx.fragment.main.order.OrderFragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import me.yokeyword.fragmentation.SupportActivity;
 
 /**
  * @author yangc
@@ -25,7 +25,7 @@ import me.yokeyword.fragmentation.SupportActivity;
  * @description 管理5个fragment
  * @email 1048027353@qq.com
  */
-public class MainActivity extends SupportActivity {
+public class MainActivity extends BaseActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final int FIRST = 0;
     /**

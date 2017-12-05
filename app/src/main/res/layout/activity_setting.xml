@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_eee"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <com.allelink.wzyx.ui.TitleBar
+        android:id="@+id/tb_setting_title_bar"
+        app:titleText="@string/setting"
+        app:titleSize="6sp"
+        app:titleColor="@color/white"
+        app:leftButtonBackground="@drawable/btn_back_white_selector"
+        android:background="@color/brands_color"
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+    </com.allelink.wzyx.ui.TitleBar>
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="10dp"
+        android:background="@color/bg_eee" />
+        <android.support.v7.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <!--账号设置栏开始-->
+            <RelativeLayout
+                android:descendantFocusability="blocksDescendants"
+                android:id="@+id/rl_setting_account_setting"
+                android:background="@drawable/layout_bg_selector"
+                android:layout_width="match_parent"
+                android:layout_height="48dp">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/account_setting"
+                    android:textColor="@color/black_333"
+                    android:textSize="16sp" />
+            </RelativeLayout>
+            <!--账号设置栏结束-->
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:background="@color/bg_eee" />
+            <!--安全设置栏开始-->
+            <RelativeLayout
+                android:id="@+id/rl_setting_security_setting"
+                android:descendantFocusability="blocksDescendants"
+                android:background="@drawable/layout_bg_selector"
+                android:layout_width="match_parent"
+                android:layout_height="48dp">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/security_setting"
+                    android:textColor="@color/black_333"
+                    android:textSize="16sp" />
+            </RelativeLayout>
+            <!--通用栏结束-->
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:background="@color/bg_eee" />
+            <!--通用栏开始-->
+            <RelativeLayout
+                android:id="@+id/rl_setting_general"
+                android:descendantFocusability="blocksDescendants"
+                android:background="@drawable/layout_bg_selector"
+                android:layout_width="match_parent"
+                android:layout_height="48dp">
+                <android.support.v7.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/general"
+                    android:textColor="@color/black_333"
+                    android:textSize="16sp" />
+            </RelativeLayout>
+            <!--通用栏结束-->
+        </android.support.v7.widget.LinearLayoutCompat>
+    <Button
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:id="@+id/btn_setting_logout"
+        android:background="@drawable/btn_logout_selector"
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom"
+        android:text="@string/logout"
+        android:textSize="16sp"
+        android:textColor="@color/warning"/>
+</android.support.v7.widget.LinearLayoutCompat>

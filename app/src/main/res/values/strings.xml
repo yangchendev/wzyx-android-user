@@ -86,4 +86,7 @@
     <string name="upload_avatar_success">头像上传成功</string>
     <string name="upload_avatar_failure">头像上传失败</string>
     <string name="not_set_nickname">未设置昵称</string>
+    <string name="logout">退出登录</string>
+    <string name="security_setting">安全设置</string>
+    <string name="general">通用</string>
 </resources>
