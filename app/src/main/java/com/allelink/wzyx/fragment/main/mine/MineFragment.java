@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.allelink.citypicker.CityPickerActivity;
 import com.allelink.wzyx.R;
 import com.allelink.wzyx.activity.AccountSettingActivity;
 import com.allelink.wzyx.activity.SettingActivity;
@@ -168,6 +169,7 @@ public class MineFragment extends SupportFragment{
     @OnClick(R.id.ll_mine_share_layout)
     void share(){
         LogUtil.d(TAG,"share");
+        ActivityUtils.startActivity(_mActivity,CityPickerActivity.class);
     }
     /**
      * 客服中心点击事件

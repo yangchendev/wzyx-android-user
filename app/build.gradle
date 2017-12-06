@@ -55,4 +55,6 @@ dependencies {
     annotationProcessor "com.github.hotchemi:permissionsdispatcher-processor:3.0.1"
     //AndroidUtilCode依赖
     implementation 'com.blankj:utilcode:1.9.8'
+    //城市选择器依赖
+    implementation project(':citypicker')
 }
