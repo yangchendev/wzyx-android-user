@@ -30,14 +30,7 @@ import java.util.List;
  */
 public class CityPickerActivity extends AppCompatActivity implements View.OnClickListener{
     public static final String KEY_PICKED_CITY = "picked_city";
-    /**
-    * 纬度
-    */
-    private double lat;
-    /**
-    * 经度
-    */
-    private double lon;
+
     private ListView mListView;
     private ListView mResultListView;
     private SideLetterBar mLetterBar;
