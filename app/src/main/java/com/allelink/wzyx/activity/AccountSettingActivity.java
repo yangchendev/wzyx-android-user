@@ -50,6 +50,7 @@ import permissions.dispatcher.OnPermissionDenied;
 import permissions.dispatcher.OnShowRationale;
 import permissions.dispatcher.PermissionRequest;
 import permissions.dispatcher.RuntimePermissions;
+import qiu.niorgai.StatusBarCompat;
 
 /**
  * 账号设置
@@ -87,6 +88,7 @@ public class AccountSettingActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_setting);
+        StatusBarCompat.setStatusBarColor(this,getResources().getColor(R.color.brands_color));
         //隐藏actionBar
         android.app.ActionBar actionBar = getActionBar();
         if(actionBar != null){

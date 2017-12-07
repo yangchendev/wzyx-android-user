@@ -23,6 +23,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import me.yokeyword.fragmentation.SupportFragment;
+import qiu.niorgai.StatusBarCompat;
 
 /**
  * @author yangc
@@ -215,5 +216,10 @@ public class MineFragment extends SupportFragment{
     public void onDestroy() {
         super.onDestroy();
         mUnbinder.unbind();
+    }
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        StatusBarCompat.setStatusBarColor(_mActivity,getResources().getColor(R.color.brands_color));
     }
 }

@@ -97,4 +97,11 @@
     <string name="clear_cache">清空缓存</string>
     <string name="check_update">检查更新</string>
     <string name="cache_size">42.15MB</string>
+    <string name="position">宁波</string>
+    <string name="comprehensive_order">综合排序</string>
+    <string name="cost_order">费用</string>
+    <string name="distance_order">距离最近</string>
+    <string name="enroll_number">已有%s人报名</string>
+    <string name="activity_cost">￥%s</string>
+    <string name="activity_distance">%skm</string>
 </resources>

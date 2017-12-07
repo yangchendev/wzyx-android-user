@@ -19,6 +19,7 @@ import com.allelink.wzyx.utils.toast.ToastUtil;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import qiu.niorgai.StatusBarCompat;
 
 /**
  * 修改昵称
@@ -44,6 +45,7 @@ public class EditNicknameActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_nickname);
+        StatusBarCompat.setStatusBarColor(this,getResources().getColor(R.color.white));
         //隐藏actionBar
         ActionBar actionBar = getSupportActionBar();
         if(actionBar != null){

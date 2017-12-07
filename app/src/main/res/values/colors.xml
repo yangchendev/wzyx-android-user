@@ -12,4 +12,5 @@
     <color name="bg_eee">#eeeeee</color>
     <color name="brands_color_pressed">#80c8ff</color>
     <color name="warning">#b92020</color>
+    <color name="price_color">#FC6636</color>
 </resources>

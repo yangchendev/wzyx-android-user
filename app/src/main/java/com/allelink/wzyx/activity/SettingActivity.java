@@ -16,6 +16,7 @@ import com.allelink.wzyx.utils.storage.WzyxPreference;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import qiu.niorgai.StatusBarCompat;
 
 /**
  * 设置
@@ -37,6 +38,7 @@ public class SettingActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
+        StatusBarCompat.setStatusBarColor(this,getResources().getColor(R.color.brands_color));
         //隐藏actionBar
         ActionBar actionBar = getActionBar();
         if(actionBar != null){

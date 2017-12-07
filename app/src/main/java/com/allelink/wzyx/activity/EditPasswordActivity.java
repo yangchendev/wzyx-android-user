@@ -26,6 +26,7 @@ import com.allelink.wzyx.utils.toast.ToastUtil;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import qiu.niorgai.StatusBarCompat;
 
 /**
  * 修改密码
@@ -84,6 +85,7 @@ public class EditPasswordActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_password);
+        StatusBarCompat.setStatusBarColor(this,getResources().getColor(R.color.white));
         //隐藏actionBar
         ActionBar actionBar = getSupportActionBar();
         if(actionBar != null){

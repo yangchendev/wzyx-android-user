@@ -1,9 +1,150 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/grey"
+    android:orientation="vertical"
     android:layout_height="match_parent">
-    <TextView
-        android:text="@string/fragment_near"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-</RelativeLayout>
+    <!--顶部导航栏开始-->
+    <android.support.v7.widget.LinearLayoutCompat
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+        <android.support.v7.widget.LinearLayoutCompat
+            android:gravity="center_vertical"
+            android:descendantFocusability="blocksDescendants"
+            android:id="@+id/ll_fragment_near_position"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"
+            android:layout_height="match_parent">
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_fragment_near_position"
+                android:textSize="16sp"
+                android:layout_marginStart="10dp"
+                android:text="@string/position"
+                android:textColor="@color/black_666"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:layout_marginStart="8dp"
+                android:background="@drawable/ic_drop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </android.support.v7.widget.LinearLayoutCompat>
+        <ImageView
+            android:layout_marginEnd="10dp"
+            android:id="@+id/iv_fragment_near_search_bar"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/search_bar_bg_selector"
+            android:layout_weight="4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/iv_fragment_near_map"
+            android:layout_marginEnd="14dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/ic_map_selector"
+            android:layout_width="22dp"
+            android:layout_height="22dp" />
+    </android.support.v7.widget.LinearLayoutCompat>
+    <!--顶部导航栏结束-->
+    <!--活动类型选择栏开始-->
+    <android.support.design.widget.TabLayout
+        app:tabTextColor="@color/black_999"
+        app:tabSelectedTextColor="@color/black_333"
+        app:tabIndicatorColor="@color/black_333"
+        app:tabIndicatorHeight="1dp"
+        android:id="@+id/tab_fragment_near_tab_layout"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="36dp">
+    </android.support.design.widget.TabLayout>
+    <!--活动类型选择栏结束-->
+    <View
+        android:background="@color/grey"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+    <!--排序选择栏开始-->
+    <android.support.v7.widget.LinearLayoutCompat
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="36dp">
+        <!--综合排序开始-->
+        <android.support.v7.widget.AppCompatTextView
+            android:text="@string/comprehensive_order"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:textSize="14sp"
+            android:textColor="@color/brands_color"
+            android:id="@+id/tv_fragment_near_comprehensive_ordering"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+        <!--综合排序结束-->
+        <!--费用排序开始-->
+        <android.support.v7.widget.LinearLayoutCompat
+            android:gravity="center"
+            android:id="@+id/ll_fragment_near_cost_ordering"
+            android:descendantFocusability="blocksDescendants"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_fragment_near_cost_order"
+                android:text="@string/cost_order"
+                android:textSize="14sp"
+                android:textColor="@color/black_666"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <android.support.v7.widget.LinearLayoutCompat
+                android:layout_marginStart="4dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:id="@+id/iv_fragment_near_cost_up_arrow"
+                    android:background="@drawable/ic_up_arrow_nor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <ImageView
+                    android:layout_marginTop="1dp"
+                    android:id="@+id/iv_fragment_near_cost_down_arrow"
+                    android:background="@drawable/ic_down_arrow_nor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </android.support.v7.widget.LinearLayoutCompat>
+        </android.support.v7.widget.LinearLayoutCompat>
+        <!--费用排序结束-->
+        <!--费用排序开始-->
+        <android.support.v7.widget.LinearLayoutCompat
+            android:gravity="center"
+            android:id="@+id/ll_fragment_near_distance_ordering"
+            android:descendantFocusability="blocksDescendants"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_fragment_near_distance_order"
+                android:text="@string/distance_order"
+                android:textSize="14sp"
+                android:textColor="@color/black_666"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </android.support.v7.widget.LinearLayoutCompat>
+        <!--费用排序结束-->
+    </android.support.v7.widget.LinearLayoutCompat>
+    <!--排序选择栏结束-->
+    <View
+        android:background="@color/grey"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_fragment_near_activity_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
+</android.support.v7.widget.LinearLayoutCompat>

@@ -57,4 +57,12 @@ dependencies {
     implementation 'com.blankj:utilcode:1.9.8'
     //城市选择器依赖
     implementation project(':citypicker')
+    //material design 依赖
+    implementation 'com.android.support:design:26.1.0'
+    //BRVAH依赖
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.31'
+    //沉浸式状态栏依赖
+    implementation ('com.github.niorgai:StatusBarCompat:2.1.4', {
+        exclude group: 'com.android.support'
+    })
 }
