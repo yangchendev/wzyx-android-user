@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.allelink.citypicker.adapter.CityListAdapter;
 import com.allelink.citypicker.adapter.ResultListAdapter;
@@ -22,6 +23,11 @@ import com.allelink.citypicker.db.DBManager;
 import com.allelink.citypicker.model.City;
 import com.allelink.citypicker.model.LocateState;
 import com.allelink.citypicker.view.SideLetterBar;
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
+import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
+import com.baidu.mapapi.SDKInitializer;
 
 import java.util.List;
 
@@ -30,6 +36,7 @@ import java.util.List;
  */
 public class CityPickerActivity extends AppCompatActivity implements View.OnClickListener{
     public static final String KEY_PICKED_CITY = "picked_city";
+    private static final String TAG = "CityPickerActivity";
 
     private ListView mListView;
     private ListView mResultListView;
@@ -46,10 +53,18 @@ public class CityPickerActivity extends AppCompatActivity implements View.OnClic
     private List<City> mResultCities;
     private DBManager dbManager;
 
+    //定位相关
+    public LocationClient mLocationClient = null;
+    private MyLocationListener myListener = new MyLocationListener();
+    private double latitude;
+    private double longitude;
+    private String city;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SDKInitializer.initialize(getApplicationContext());
         setContentView(R.layout.cp_activity_city_list);
         //隐藏actionBar
         ActionBar actionBar = getSupportActionBar();
@@ -58,6 +73,15 @@ public class CityPickerActivity extends AppCompatActivity implements View.OnClic
         }
         initData();
         initView();
+
+        mLocationClient = new LocationClient(getApplicationContext());
+        //声明LocationClient类
+        mLocationClient.registerLocationListener(myListener);
+        //注册监听函数
+        initLocation();
+       // Log.d(TAG, "城市： "+city);
+        //Log.d(TAG, "经纬度： "+longitude+" "+latitude);
+
     }
 
 
@@ -165,6 +189,47 @@ public class CityPickerActivity extends AppCompatActivity implements View.OnClic
             finish();
         }else if(i == R.id.iv_search_back){
             finish();
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mLocationClient.start();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mLocationClient.stop();
+    }
+
+    //定位相关
+    private void initLocation() {
+        LocationClientOption option = new LocationClientOption();
+        option.setCoorType("BD09LL");
+        option.setIsNeedAddress(true);
+        option.setScanSpan(1000);
+        mLocationClient.setLocOption(option);
+    }
+
+    public class MyLocationListener implements BDLocationListener {
+        @Override
+        public void onReceiveLocation(BDLocation location){
+            //此处的BDLocation为定位结果信息类，通过它的各种get方法可获取定位相关的全部结果
+            //以下只列举部分获取经纬度相关（常用）的结果信息
+            //更多结果信息获取说明，请参照类参考中BDLocation类中的说明
+
+            latitude = location.getLatitude();    //获取纬度信息
+            longitude = location.getLongitude();    //获取经度信息
+            city = location.getCity();    //获取城市
+            Toast.makeText(CityPickerActivity.this, city, Toast.LENGTH_SHORT).show();
+            Toast.makeText(CityPickerActivity.this, longitude+" "+latitude, Toast.LENGTH_SHORT).show();
+             //radius = location.getRadius();    //获取定位精度，默认值为0.0f
+            String coorType = location.getCoorType();
+            //获取经纬度坐标类型，以LocationClientOption中设置过的坐标类型为准
+            int errorCode = location.getLocType();
+            //获取定位类型、定位错误返回码，具体信息可参照类参考中BDLocation类中的说明
         }
     }
 
