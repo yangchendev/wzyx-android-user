@@ -39,15 +39,39 @@ public class RestConstants {
      */
     public static final String CHECK_CODE_FOR_RESET_PASSWORD = "1";
     /**
-     * 请求用户信息的接口
+     * 请求用户信息的接口的地址
      */
     public static final String GET_USER_INFO_URL = BASE_URL + "alllink/user/getUserBasicInfo";
     /**
-     * 更新用户信息的接口
+     * 更新用户信息的接口的地址
      */
     public static final String UPDATE_USER_INFO_URL = BASE_URL + "alllink/user/updateUserInfo";
     /**
-     * 上传用户头像的接口
+     * 上传用户头像的接口的地址
      */
     public static final String UPLOAD_AVATAR_PIC_URL = BASE_URL + "alllink/user/uploadPic";
+    /**
+    * 请求默认活动列表信息的接口的地址
+    */
+    public static final String GET_DEFAULT_ACTIVITY_INFO_LIST_URL = BASE_URL + "activity/getDefaultActivityList";
+    /**
+     * 请求筛选后的活动列表信息的接口的地址
+     */
+    public static final String GET_ACTIVITY_INFO_LIST_URL = BASE_URL + "activity/getActivityList";
+    /**
+    * 请求某个活动具体信息的接口的地址
+    */
+    public static final String GET_ACTIVITY_DETAIL_INFO_URL = BASE_URL + "activity/getActivityInfo";
+    /**
+    * 活动报名接口
+    */
+    public static final String APPLY_ACTIVITY_URL = BASE_URL + "order/apply";
+    /**
+    * 获取未付款订单列表的接口的地址
+    */
+    public static final String GET_NON_PAY_LIST_URL = BASE_URL + "order/getNonPayList";
+    /**
+    * 删除订单的接口的地址
+    */
+    public static final String DELETE_ORDER_URL = BASE_URL + "order/deleteOrder";
 }

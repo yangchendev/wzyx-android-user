@@ -23,7 +23,7 @@
                 android:id="@+id/tv_fragment_near_position"
                 android:textSize="16sp"
                 android:layout_marginStart="10dp"
-                android:text="@string/position"
+                android:text="@string/locate"
                 android:textColor="@color/black_666"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />

@@ -5,12 +5,12 @@ import com.bumptech.glide.module.AppGlideModule;
 
 /**
  * TODO
+ *
  * @author yangc
  * @version TODO
- * @date 2017/12/7$
+ * @date 2017/12/8$
  * @email 1048027353@qq.com
  */
 @GlideModule
 public class MyAppGlideModule extends AppGlideModule {
-
 }

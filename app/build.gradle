@@ -55,8 +55,6 @@ dependencies {
     annotationProcessor "com.github.hotchemi:permissionsdispatcher-processor:3.0.1"
     //AndroidUtilCode依赖
     implementation 'com.blankj:utilcode:1.9.8'
-    //城市选择器依赖
-    implementation project(':citypicker')
     //material design 依赖
     implementation 'com.android.support:design:26.1.0'
     //BRVAH依赖
@@ -65,4 +63,7 @@ dependencies {
     implementation ('com.github.niorgai:StatusBarCompat:2.1.4', {
         exclude group: 'com.android.support'
     })
+    //城市选择器依赖
+    compile project(':citypicker')
+
 }

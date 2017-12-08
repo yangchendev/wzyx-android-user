@@ -29,6 +29,11 @@ dependencies {
     })
     implementation 'com.android.support:appcompat-v7:26.1.0'
     testCompile 'junit:junit:4.12'
+    implementation files('libs/BaiduLBS_Android.jar')
+    //沉浸式状态栏依赖
+    implementation ('com.github.niorgai:StatusBarCompat:2.1.4', {
+        exclude group: 'com.android.support'
+    })
 }
 
 

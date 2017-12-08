@@ -28,6 +28,7 @@ import butterknife.OnClick;
 public class MainActivity extends BaseActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final int FIRST = 0;
+    private com.allelink.citypicker.map.LocateListener mLocateListener = null;
     /**
     * UI
     */
@@ -56,6 +57,7 @@ public class MainActivity extends BaseActivity {
     private ForumFragment mForumFragment = null;
     private OrderFragment mOrderFragment = null;
     private MineFragment mMineFragment = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -156,6 +158,7 @@ public class MainActivity extends BaseActivity {
         ivMine.setImageResource(R.drawable.ic_mine_nor);
         tvMine.setTextColor(getResources().getColor(R.color.black_666));
     }
+
 
 
 }

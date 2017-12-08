@@ -100,6 +100,8 @@ public class NearFragment extends SupportFragment {
 
     private int mCostCount = 0;
 
+    private double lat = 0;
+    private double lng = 0;
     public static NearFragment newInstance() {
         Bundle args = new Bundle();
         NearFragment fragment = new NearFragment();
@@ -121,7 +123,13 @@ public class NearFragment extends SupportFragment {
         handleTabEvent();
         initData();
         bindAdapter();
+
     }
+    /**
+    * 获取定位信息
+    */
+
+
     /**
     * 初始化列表数据
     */
@@ -302,15 +310,21 @@ public class NearFragment extends SupportFragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == RESULT_OK){
-            switch (requestCode){
-                case REQUEST_CODE_PICK_CITY:
-                    tvPosition.setText(data.getStringExtra(CityPickerActivity.KEY_PICKED_CITY));
-                    break;
-                default:
-                    break;
+
+        if(requestCode == REQUEST_CODE_PICK_CITY){
+            if(resultCode == RESULT_OK){
+                //从CityPickerActivity获取位置信息
+                tvPosition.setText(data.getStringExtra(CityPickerActivity.KEY_PICKED_CITY));
+                lat = data.getDoubleExtra(CityPickerActivity.KEY_LAT, 0);
+                lng = data.getDoubleExtra(CityPickerActivity.KEY_LNG, 0);
+                LogUtil.d(TAG,"lat: "+lat+"\n"+"lng: "+lng);
+            }else {
+                tvPosition.setText(getResources().getString(R.string.locate));
+                lat = 0;
+                lng = 0;
             }
         }
+
     }
 
     private void generateTestData(){
@@ -324,9 +338,18 @@ public class NearFragment extends SupportFragment {
         }
     }
 
+
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onResume() {
+        super.onResume();
         StatusBarCompat.setStatusBarColor(_mActivity,getResources().getColor(R.color.white));
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (!hidden){
+            StatusBarCompat.setStatusBarColor(_mActivity,getResources().getColor(R.color.white));
+        }
     }
 }

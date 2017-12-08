@@ -104,4 +104,8 @@
     <string name="enroll_number">已有%s人报名</string>
     <string name="activity_cost">￥%s</string>
     <string name="activity_distance">%skm</string>
+    <string name="locate_permission_denied">定位权限未开启，程序将无法正常运行</string>
+    <string name="locate_permission_never_ask">永久拒绝定位权限，程序将无法正常运行</string>
+    <string name="locate_error">定位失败</string>
+    <string name="locate">定位</string>
 </resources>

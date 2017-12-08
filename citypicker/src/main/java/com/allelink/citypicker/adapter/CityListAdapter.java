@@ -108,7 +108,7 @@ public class CityListAdapter extends BaseAdapter {
         CityViewHolder holder;
         int viewType = getItemViewType(position);
         switch (viewType){
-            case 0:     //定位
+            case 0:
                 view = inflater.inflate(R.layout.cp_view_locate_city, parent, false);
                 ViewGroup container = (ViewGroup) view.findViewById(R.id.layout_locate);
                 TextView state = (TextView) view.findViewById(R.id.tv_located_city);
@@ -121,6 +121,8 @@ public class CityListAdapter extends BaseAdapter {
                         break;
                     case LocateState.SUCCESS:
                         state.setText(locatedCity);
+                        break;
+                    default:
                         break;
                 }
                 container.setOnClickListener(new View.OnClickListener() {
@@ -140,7 +142,7 @@ public class CityListAdapter extends BaseAdapter {
                     }
                 });
                 break;
-            case 1:     //热门
+            case 1:
                 view = inflater.inflate(R.layout.cp_view_hot_city, parent, false);
                 WrapHeightGridView gridView = (WrapHeightGridView) view.findViewById(R.id.gridview_hot_city);
                 final HotCityGridAdapter hotCityGridAdapter = new HotCityGridAdapter(mContext);
@@ -154,7 +156,7 @@ public class CityListAdapter extends BaseAdapter {
                     }
                 });
                 break;
-            case 2:     //所有
+            case 2:
                 if (view == null){
                     view = inflater.inflate(R.layout.cp_item_city_listview, parent, false);
                     holder = new CityViewHolder();
@@ -184,6 +186,8 @@ public class CityListAdapter extends BaseAdapter {
                         }
                     });
                 }
+                break;
+            default:
                 break;
         }
         return view;

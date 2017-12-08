@@ -1,1 +1,1 @@
-include ':app', ':citypicker'
+include ':app', ':citypicker', ':core'

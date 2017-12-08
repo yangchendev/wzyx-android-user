@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.allelink.citypicker.CityPickerActivity;
 import com.allelink.wzyx.R;
 import com.allelink.wzyx.activity.AccountSettingActivity;
 import com.allelink.wzyx.activity.SettingActivity;
@@ -82,6 +81,7 @@ public class MineFragment extends SupportFragment{
     @Override
     public void onResume() {
         super.onResume();
+        StatusBarCompat.setStatusBarColor(_mActivity,getResources().getColor(R.color.brands_color));
         //获取本地保存的昵称
         String nickname = WzyxPreference.getCustomAppProfile(WzyxPreference.KEY_NICKNAME);
         if(nickname.isEmpty()){
@@ -170,7 +170,6 @@ public class MineFragment extends SupportFragment{
     @OnClick(R.id.ll_mine_share_layout)
     void share(){
         LogUtil.d(TAG,"share");
-        ActivityUtils.startActivity(_mActivity,CityPickerActivity.class);
     }
     /**
      * 客服中心点击事件
@@ -217,9 +216,12 @@ public class MineFragment extends SupportFragment{
         super.onDestroy();
         mUnbinder.unbind();
     }
+
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        StatusBarCompat.setStatusBarColor(_mActivity,getResources().getColor(R.color.brands_color));
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if(!hidden){
+            StatusBarCompat.setStatusBarColor(_mActivity,getResources().getColor(R.color.brands_color));
+        }
     }
 }

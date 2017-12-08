@@ -5,6 +5,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.allelink.wzyx.utils.log.LogUtil;
+import com.baidu.mapapi.SDKInitializer;
 import com.blankj.utilcode.util.Utils;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
@@ -53,6 +54,7 @@ public class WzyxApplication extends Application {
                 .install();
         //AndroidUtilCode初始化
         Utils.init(this);
+
     }
     public static Context getContext(){
         return context;

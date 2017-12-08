@@ -1,14 +1,13 @@
 package com.allelink.wzyx.activity;
 
 import android.Manifest;
-import android.content.DialogInterface;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
 import android.widget.ImageView;
@@ -47,10 +46,9 @@ import butterknife.OnClick;
 import permissions.dispatcher.NeedsPermission;
 import permissions.dispatcher.OnNeverAskAgain;
 import permissions.dispatcher.OnPermissionDenied;
-import permissions.dispatcher.OnShowRationale;
-import permissions.dispatcher.PermissionRequest;
 import permissions.dispatcher.RuntimePermissions;
 import qiu.niorgai.StatusBarCompat;
+
 
 /**
  * 账号设置
@@ -122,7 +120,7 @@ public class AccountSettingActivity extends BaseActivity {
         //加载load动画
         WzyxLoader.showLoading(this);
         params.clear();
-        params.put("phoneNumber","15700178425");
+        params.put("phoneNumber",WzyxPreference.getCustomAppProfile(WzyxPreference.KEY_PHONE_NUMBER));
         GetUserInfoHandler.getUserInfo(params, new IGetUserInfoListener() {
             @Override
             public void onGetUserInfoSuccess(User user) {
@@ -466,39 +464,11 @@ public class AccountSettingActivity extends BaseActivity {
         ToastUtil.toastShort(this,getResources().getString(R.string.camera_permission_never_ask));
     }
 
-    /**
-     * 弹出对话框供用户选择
-     */
-    @OnShowRationale({Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE})
-    void onCameraRationale(PermissionRequest request) {
-        showRationaleDialog(request);
-    }
-
-    /**
-    * 选择对话框
-    */
-    private void showRationaleDialog(final PermissionRequest request) {
-        new AlertDialog.Builder(this)
-                .setPositiveButton("同意使用", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        request.proceed();
-                    }
-                })
-                .setNegativeButton("拒绝使用", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        request.cancel();
-                    }
-                })
-                .setCancelable(false)
-                .setMessage("权限管理")
-                .show();
-    }
 
     /**
     * 权限允许或拒绝时的回调
     */
+    @SuppressLint("NeedOnRequestPermissionsResult")
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
