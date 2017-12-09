@@ -7,6 +7,7 @@ import android.os.Bundle;
 import com.allelink.wzyx.R;
 import com.allelink.wzyx.activity.base.BaseActivity;
 import com.allelink.wzyx.app.AccountManager;
+import com.allelink.wzyx.app.GlideApp;
 import com.allelink.wzyx.app.WzyxApplication;
 import com.allelink.wzyx.ui.TitleBar;
 import com.allelink.wzyx.utils.activity.ActivityUtils;
@@ -109,6 +110,8 @@ public class SettingActivity extends BaseActivity {
         LogUtil.d(TAG,"logout");
         //退出登录清除用户数据
         WzyxPreference.clearAppPreferences();
+        //清除图片缓存
+        GlideApp.get(this).clearDiskCache();
         AccountManager.setSignState(false);
         //退出当前activity到登录activity并退出其他activity
         Intent intent = new Intent(SettingActivity.this,LoginActivity.class);

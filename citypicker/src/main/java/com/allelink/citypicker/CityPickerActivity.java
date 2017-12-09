@@ -108,7 +108,6 @@ public class CityPickerActivity extends AppCompatActivity implements View.OnClic
 
             @Override
             public void onLocateClick() {
-
                 mCityAdapter.updateLocateState(LocateState.SUCCESS, city);
             }
         });
@@ -181,7 +180,7 @@ public class CityPickerActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void backWithData(String city){
-        backWithData(city,0,0);
+        backWithData(city,latitude,longitude);
     }
     private void backWithData(String city,double lat,double lng){
         Intent data = new Intent();

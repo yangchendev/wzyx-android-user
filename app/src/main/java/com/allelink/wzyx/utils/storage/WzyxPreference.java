@@ -23,6 +23,7 @@ public class WzyxPreference {
     public static final String KEY_BIRTHDAY = "birthday";
     public static final String KEY_AVATAR_URL = "avatar_url";
     public static final String KEY_GENDER = "gender";
+    public static final String KEY_USER_ID = "userId";
     /**
     * 获取全局SharedPreferences
     */

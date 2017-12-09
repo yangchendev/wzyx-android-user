@@ -13,4 +13,6 @@
     <color name="brands_color_pressed">#80c8ff</color>
     <color name="warning">#b92020</color>
     <color name="price_color">#FC6636</color>
+    <color name="price_color_pressed">#ea7f5c</color>
+    <color name="black_e3">#E3E3E3</color>
 </resources>

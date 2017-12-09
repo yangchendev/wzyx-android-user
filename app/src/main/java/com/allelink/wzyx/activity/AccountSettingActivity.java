@@ -198,6 +198,7 @@ public class AccountSettingActivity extends BaseActivity {
         WzyxPreference.addCustomAppProfile(WzyxPreference.KEY_GENDER,user.getGender());
         WzyxPreference.addCustomAppProfile(WzyxPreference.KEY_AVATAR_URL,user.getAvatar());
         WzyxPreference.addCustomAppProfile(WzyxPreference.KEY_BIRTHDAY,user.getBirthday());
+        WzyxPreference.addCustomAppProfile(WzyxPreference.KEY_USER_ID,user.getUserId());
     }
 
     /**

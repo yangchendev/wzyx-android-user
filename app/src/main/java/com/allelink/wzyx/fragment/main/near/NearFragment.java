@@ -14,12 +14,19 @@ import android.widget.ImageView;
 
 import com.allelink.citypicker.CityPickerActivity;
 import com.allelink.wzyx.R;
+import com.allelink.wzyx.activity.ActivityInfoActivity;
 import com.allelink.wzyx.adapter.ActivityItemAdapter;
+import com.allelink.wzyx.app.activityinfo.ActivityInfoHandler;
+import com.allelink.wzyx.app.activityinfo.GetActivityInfoListener;
 import com.allelink.wzyx.model.ActivityItem;
+import com.allelink.wzyx.net.RestConstants;
+import com.allelink.wzyx.ui.loader.WzyxLoader;
 import com.allelink.wzyx.utils.log.LogUtil;
 import com.allelink.wzyx.utils.toast.ToastUtil;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
@@ -40,6 +47,7 @@ import qiu.niorgai.StatusBarCompat;
 
 public class NearFragment extends SupportFragment {
     private static final String TAG = "NearFragment";
+    private static final String ACTIVITY_ID = "activityId";
     private static final int REQUEST_CODE_PICK_CITY = 4001;
     /**
     * 排序类型
@@ -56,6 +64,28 @@ public class NearFragment extends SupportFragment {
             "音乐培训",
             "美术培训"
     };
+    /**
+    * 各种类型
+    */
+    private static final int ALL_TYPE = 0;
+    private static final int FOREIGN_LANGUAGE_TYPE = 1;
+    private static final int MUSIC_TYPE = 2;
+    private static final int ART_TYPE = 3;
+    /**
+    * 用户选取的活动类型 默认为所有类型
+    */
+    private int mSelectedActivityType = ALL_TYPE;
+    /**
+    * 各种排序类型
+    */
+    private static final int COMPREHENSIVE_RANKING_TYPE = 0;
+    private static final int DISTANCE_ASC_TYPE = 1;
+    private static final int COST_ASC_TYPE = 2;
+    private static final int COST_DESC_TYPE = 3;
+    /**
+    * 用户选择的排序类型
+    */
+    private int mSelectedRankingType = COMPREHENSIVE_RANKING_TYPE;
     private Unbinder mUnbinder = null;
     /**
     * UI
@@ -123,12 +153,23 @@ public class NearFragment extends SupportFragment {
         handleTabEvent();
         initData();
         bindAdapter();
-
+        initItemEvent();
     }
     /**
-    * 获取定位信息
+    * 列表项点击事件
     */
-
+    private void initItemEvent() {
+        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                //进入活动详情页面
+                Intent intent = new Intent(_mActivity, ActivityInfoActivity.class);
+                ActivityItem activityItem = (ActivityItem) adapter.getItem(position);
+                intent.putExtra(ACTIVITY_ID, activityItem.getActivityId());
+                startActivity(intent);
+            }
+        });
+    }
 
     /**
     * 初始化列表数据
@@ -146,7 +187,8 @@ public class NearFragment extends SupportFragment {
         rvActivityList.setLayoutManager(mLayoutManager);
         rvActivityList.setAdapter(mAdapter);
         mAdapter.bindToRecyclerView(rvActivityList);
-        generateTestData();
+        mAdapter.setEmptyView(R.layout.fragment_near_empty);
+        //generateTestData();
     }
 
     /**
@@ -156,7 +198,29 @@ public class NearFragment extends SupportFragment {
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                ToastUtil.toastShort(_mActivity,tab.getText());
+                //根据选择确定所选类型
+                if(mTabTitles[0].equals(tab.getText())){
+                    mSelectedActivityType = ALL_TYPE;
+                }else if(mTabTitles[1].equals(tab.getText())){
+                    mSelectedActivityType = FOREIGN_LANGUAGE_TYPE;
+                }else if(mTabTitles[2].equals(tab.getText())){
+                    mSelectedActivityType = MUSIC_TYPE;
+                }else if(mTabTitles[3].equals(tab.getText())){
+                    mSelectedActivityType = ART_TYPE;
+                }
+                mSelectedRankingType = COMPREHENSIVE_RANKING_TYPE;
+                //清除样式
+                clearSortStyle(COMPREHENSIVE_ORDERING);
+                clearSortStyle(DISTANCE_ORDERING);
+                clearSortStyle(COST_ORDERING);
+                //设置综合样式
+                tvComprehensivOrdering.setTextColor(getResources().getColor(R.color.brands_color));
+                LogUtil.d(TAG,"lat: "+lat+"\n"+"lng: "+lng);
+                if(lat == 0 || lng == 0){
+                    ToastUtil.toastShort(_mActivity,getResources().getString(R.string.get_activity_list_failure));
+                }else{
+                    getActivityListByType(mSelectedActivityType,mSelectedRankingType,lat,lng);
+                }
             }
 
             @Override
@@ -169,6 +233,45 @@ public class NearFragment extends SupportFragment {
 
             }
         });
+    }
+
+    /**
+     * 根据类型获取活动信息
+     * @param activityType 活动类型
+     * @param rankingType  排序类型
+     * @param lat 纬度
+     * @param lng 经度
+     */
+    private void getActivityListByType(int activityType, int rankingType, double lat, double lng) {
+        WzyxLoader.showLoading(_mActivity);
+        HashMap<String, Object> params = new HashMap<>();
+        //现阶段不需要
+        params.put("searchContent", "搜索内容");
+        params.put("distance","2");
+        //现阶段需要
+        params.put("lat", lat);
+        params.put("lng", lng);
+        params.put("activityType", activityType);
+        params.put("sortParams", rankingType);
+        //网络请求获取数据
+        ActivityInfoHandler.getActivityList(params, RestConstants.GET_ACTIVITY_INFO_LIST_URL
+                , new GetActivityInfoListener() {
+                    @Override
+                    public void onSuccess(List<ActivityItem> activityItems) {
+                        mActivityItems.clear();
+                        mActivityItems = activityItems;
+                        mAdapter.replaceData(mActivityItems);
+                        WzyxLoader.stopLoading();
+                    }
+                    @Override
+                    public void onFailure(String errorMessage) {
+                        mActivityItems.clear();
+                        mAdapter.replaceData(mActivityItems);
+                        WzyxLoader.stopLoading();
+                        ToastUtil.toastShort(_mActivity,getResources().getString(R.string.get_activity_list_failure));
+                    }
+                });
+
     }
 
     /**
@@ -220,6 +323,12 @@ public class NearFragment extends SupportFragment {
         tvComprehensivOrdering.setTextColor(getResources()
         .getColor(R.color.brands_color));
         //3.进行网络请求获取数据
+        mSelectedRankingType = COMPREHENSIVE_RANKING_TYPE;
+        if(lat == 0 || lng == 0){
+            ToastUtil.toastShort(_mActivity,getResources().getString(R.string.get_activity_list_failure));
+        }else{
+            getActivityListByType(mSelectedActivityType,mSelectedRankingType,lat,lng);
+        }
     }
     /**
     * 费用排序
@@ -238,11 +347,23 @@ public class NearFragment extends SupportFragment {
             ivCostUpArrow.setImageResource(R.drawable.ic_up_arrow_pressed);
             ivCostDownArrow.setImageResource(R.drawable.ic_down_arrow_nor);
             //3.进行网络请求更新
+            mSelectedRankingType = COST_ASC_TYPE;
+            if(lat == 0 || lng == 0){
+                ToastUtil.toastShort(_mActivity,getResources().getString(R.string.get_activity_list_failure));
+            }else{
+                getActivityListByType(mSelectedActivityType,mSelectedRankingType,lat,lng);
+            }
         }else if(mCostArrow == Arrow.UP){
             tvCostOrder.setTextColor(getResources().getColor(R.color.brands_color));
             ivCostUpArrow.setImageResource(R.drawable.ic_up_arrow_nor);
             ivCostDownArrow.setImageResource(R.drawable.ic_down_arrow_pressed);
             //3.进行网络请求更新
+            mSelectedRankingType = COST_DESC_TYPE;
+            if(lat == 0 || lng == 0){
+                ToastUtil.toastShort(_mActivity,getResources().getString(R.string.get_activity_list_failure));
+            }else{
+                getActivityListByType(mSelectedActivityType,mSelectedRankingType,lat,lng);
+            }
         }
     }
     /**
@@ -275,7 +396,12 @@ public class NearFragment extends SupportFragment {
         mCostCount = 0;
         //2.设置选中样式
         tvDistanceOrder.setTextColor(getResources().getColor(R.color.brands_color));
-
+        mSelectedRankingType = DISTANCE_ASC_TYPE;
+        if(lat == 0 || lng == 0){
+            ToastUtil.toastShort(_mActivity,getResources().getString(R.string.get_activity_list_failure));
+        }else{
+            getActivityListByType(mSelectedActivityType,mSelectedRankingType,lat,lng);
+        }
     }
     /**
     * 定位点击事件
@@ -318,13 +444,47 @@ public class NearFragment extends SupportFragment {
                 lat = data.getDoubleExtra(CityPickerActivity.KEY_LAT, 0);
                 lng = data.getDoubleExtra(CityPickerActivity.KEY_LNG, 0);
                 LogUtil.d(TAG,"lat: "+lat+"\n"+"lng: "+lng);
+                getActivityList(lat, lng);
             }else {
                 tvPosition.setText(getResources().getString(R.string.locate));
                 lat = 0;
                 lng = 0;
+                ToastUtil.toastShort(_mActivity,getResources().getString(R.string.get_activity_list_failure));
             }
         }
 
+    }
+
+    /**
+     * 通过网络请求获取活动列表
+     * @param lat 纬度
+     * @param lng 经度
+     */
+    private void getActivityList(double lat, double lng) {
+        //开启加载动画
+        WzyxLoader.showLoading(_mActivity);
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("lat", lat);
+        params.put("lng", lng);
+        ActivityInfoHandler.getActivityList(params, RestConstants.GET_DEFAULT_ACTIVITY_INFO_LIST_URL,
+                new GetActivityInfoListener() {
+                    @Override
+                    public void onSuccess(List<ActivityItem> activityItems) {
+                        mActivityItems.clear();
+                        mActivityItems = activityItems;
+                        //更新布局
+                        mAdapter.addData(mActivityItems);
+                        //停止加载动画
+                        WzyxLoader.stopLoading();
+                    }
+
+                    @Override
+                    public void onFailure(String errorMessage) {
+                        //停止加载动画
+                        WzyxLoader.stopLoading();
+                        ToastUtil.toastShort(_mActivity,getResources().getString(R.string.get_activity_list_failure));
+                    }
+                });
     }
 
     private void generateTestData(){

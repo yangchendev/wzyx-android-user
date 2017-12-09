@@ -86,7 +86,11 @@ public class GetUserInfoHandler {
                         }else{
                             user.setNickname(data.getString("nickname"));
                         }
-
+                        if(data.getString("userId") == null){
+                            user.setUserId("");
+                        }else{
+                            user.setUserId(data.getString("userId"));
+                        }
                         listener.onGetUserInfoSuccess(user);
                     }else if(ERROR.equals(userInfoResponse.getResult())){
                         //失败的回调

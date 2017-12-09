@@ -108,4 +108,13 @@
     <string name="locate_permission_never_ask">永久拒绝定位权限，程序将无法正常运行</string>
     <string name="locate_error">定位失败</string>
     <string name="locate">定位</string>
+    <string name="please_locate_first">请先点击定位按钮\n获取位置信息</string>
+    <string name="get_activity_list_failure">获取活动信息失败</string>
+    <string name="activity_info">活动详情</string>
+    <string name="RMB">￥</string>
+    <string name="enroll_activity">立即报名</string>
+    <string name="activity_load_failure">活动加载失败</string>
+    <string name="activity_intro_title">活动介绍</string>
+    <string name="activity_period">活动时间</string>
+    <string name="collect_success">收藏成功</string>
 </resources>

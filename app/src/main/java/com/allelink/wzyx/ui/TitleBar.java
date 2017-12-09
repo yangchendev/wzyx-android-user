@@ -117,7 +117,7 @@ public class TitleBar extends RelativeLayout{
             );
             leftParams.addRule(RelativeLayout.CENTER_VERTICAL);
             leftParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-            leftParams.setMargins(DensityUtil.dp2px(4),0,0,0);
+            leftParams.setMargins(DensityUtil.dp2px(10),0,0,0);
             //添加子view到父布局中
             addView(mLeftButton,leftParams);
         }

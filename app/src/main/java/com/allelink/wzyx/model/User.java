@@ -31,6 +31,10 @@ public class User {
     * 生日
     */
     private String birthday = null;
+    /**
+    * 用户Id
+    */
+    private String userId = null;
 
     public String getNickname() {
         return nickname;
@@ -72,9 +76,17 @@ public class User {
         this.birthday = birthday;
     }
 
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
     @Override
     public String toString() {
         return "昵称："+nickname+"\n"+"手机号："+phoneNumber+"\n"+"性别："+gender+"\n"+"生日："
-                +birthday+"\n"+"头像地址："+avatar;
+                +birthday+"\n"+"头像地址："+avatar+"\n"+"用户Id："+userId;
     }
 }

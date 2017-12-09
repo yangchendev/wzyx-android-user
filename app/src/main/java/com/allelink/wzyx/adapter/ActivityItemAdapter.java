@@ -28,9 +28,9 @@ public class ActivityItemAdapter extends BaseQuickAdapter<ActivityItem,BaseViewH
     @Override
     protected void convert(BaseViewHolder helper, ActivityItem item) {
         helper.setText(R.id.tv_fragment_near_item_activity_name, item.getActivityName());
-        helper.setText(R.id.tv_fragment_near_item_distance, item.getDistance());
-        helper.setText(R.id.tv_fragment_near_item_price, item.getCost());
-        helper.setText(R.id.tv_fragment_near_enroll_number, item.getEnrollNumber());
+        helper.setText(R.id.tv_fragment_near_item_distance, mContext.getResources().getString(R.string.activity_distance,item.getDistance()));
+        helper.setText(R.id.tv_fragment_near_item_price, mContext.getResources().getString(R.string.activity_cost,item.getCost()));
+        helper.setText(R.id.tv_fragment_near_enroll_number, mContext.getResources().getString(R.string.enroll_number,item.getEnrollNumber()));
         ImageView imageView = helper.getView(R.id.iv_fragment_near_item_pic);
         GlideApp.with(mContext)
                 .load(item.getImageUrl())
