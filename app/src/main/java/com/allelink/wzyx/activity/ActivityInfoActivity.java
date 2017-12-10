@@ -1,5 +1,6 @@
 package com.allelink.wzyx.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatTextView;
 import android.widget.Button;
@@ -12,6 +13,8 @@ import com.allelink.wzyx.model.ActivityDetailItem;
 import com.allelink.wzyx.ui.TitleBar;
 import com.allelink.wzyx.ui.banner.GlideImageLoader;
 import com.allelink.wzyx.ui.loader.WzyxLoader;
+import com.allelink.wzyx.utils.log.LogUtil;
+import com.allelink.wzyx.utils.storage.WzyxPreference;
 import com.allelink.wzyx.utils.toast.ToastUtil;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
@@ -34,6 +37,10 @@ import qiu.niorgai.StatusBarCompat;
 public class ActivityInfoActivity extends BaseActivity {
     private static final String TAG = "ActivityInfoActivity";
     private static final String ACTIVITY_ID = "activityId";
+    private static final String USER_ID = "userId";
+    private static final String SELLER_ID = "sellerId";
+    private static final String ACTIVITY_NAME = "activityName";
+    private static final String ACTIVITY_COST = "cost";
     /**
     * UI
     */
@@ -70,6 +77,7 @@ public class ActivityInfoActivity extends BaseActivity {
     private String mActivityEndTime = null;
     private String mActivityPrice = null;
     private String mImageUrl = null;
+    private ActivityDetailItem detailItem = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -124,6 +132,7 @@ public class ActivityInfoActivity extends BaseActivity {
                 WzyxLoader.stopLoading();
                 //设置数据到界面上
                 setActivityInfoToView(activityDetailItem);
+                detailItem = activityDetailItem;
                 //enable报名按钮
                 btnEnroll.setEnabled(true);
             }
@@ -168,7 +177,7 @@ public class ActivityInfoActivity extends BaseActivity {
     */
     private void initBanner() {
         //设置banner样式
-        banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
+        banner.setBannerStyle(BannerConfig.NUM_INDICATOR);
         //设置图片加载器
         banner.setImageLoader(new GlideImageLoader());
     }
@@ -178,8 +187,18 @@ public class ActivityInfoActivity extends BaseActivity {
     */
     @OnClick(R.id.btn_activity_info_enroll_activity)
     void enrollActivity(){
-
-
+        LogUtil.d(TAG,"enrollActivity");
+        if(detailItem != null){
+            Bundle bundle = new Bundle();
+            bundle.putString(ACTIVITY_ID,detailItem.getActivityId());
+            bundle.putString(USER_ID, WzyxPreference.getCustomAppProfile(WzyxPreference.KEY_USER_ID));
+            bundle.putString(SELLER_ID,detailItem.getSellerId());
+            bundle.putString(ACTIVITY_NAME,detailItem.getActivityName());
+            bundle.putString(ACTIVITY_COST,detailItem.getCost());
+            Intent intent = new Intent(ActivityInfoActivity.this, SubmitOrderActivity.class);
+            intent.putExtras(bundle);
+            startActivity(intent);
+        }
     }
 
     @Override

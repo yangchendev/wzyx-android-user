@@ -117,4 +117,8 @@
     <string name="activity_intro_title">活动介绍</string>
     <string name="activity_period">活动时间</string>
     <string name="collect_success">收藏成功</string>
+    <string name="submit_order">提交订单</string>
+    <string name="total_cost">总计</string>
+    <string name="submit_order_success">订单提交成功</string>
+    <string name="submit_order_failure">订单提交失败</string>
 </resources>

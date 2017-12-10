@@ -222,7 +222,7 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="10dp"
             android:text="@string/RMB"
-            android:textColor="@color/price_color"
+            android:textColor="@color/brands_color"
             android:textSize="16sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -231,7 +231,7 @@
             android:layout_toEndOf="@id/tv_activity_info_rmb"
             android:layout_centerVertical="true"
             tools:text="150"
-            android:textColor="@color/price_color"
+            android:textColor="@color/brands_color"
             android:textSize="24sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />

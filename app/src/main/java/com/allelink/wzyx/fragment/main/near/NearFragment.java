@@ -246,8 +246,8 @@ public class NearFragment extends SupportFragment {
         WzyxLoader.showLoading(_mActivity);
         HashMap<String, Object> params = new HashMap<>();
         //现阶段不需要
-        params.put("searchContent", "搜索内容");
-        params.put("distance","2");
+        //params.put("searchContent", "搜索内容");
+        params.put("distance","20000");
         //现阶段需要
         params.put("lat", lat);
         params.put("lng", lng);
