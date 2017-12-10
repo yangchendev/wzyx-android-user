@@ -5,6 +5,7 @@ import android.widget.ImageView;
 
 import com.allelink.wzyx.R;
 import com.allelink.wzyx.app.GlideApp;
+import com.allelink.wzyx.net.RestConstants;
 import com.youth.banner.loader.ImageLoader;
 
 /**
@@ -19,7 +20,7 @@ public class GlideImageLoader extends ImageLoader {
     public void displayImage(Context context, Object path, ImageView imageView) {
         //加载图片
         GlideApp.with(context)
-                .load(path)
+                .load(RestConstants.IMAGE_ROOT_URL+path)
                 .placeholder(R.drawable.activity_detail_default_pic)
                 .error(R.drawable.activity_detail_default_pic)
                 .into(imageView);

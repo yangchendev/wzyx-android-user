@@ -11,9 +11,12 @@ package com.allelink.wzyx.net;
 
 public class RestConstants {
     /**
+    * http://101.132.191.9:8083/
+    */
+    /**
     * 服务器主机的地址
     */
-    public static final String BASE_URL = "http://192.168.1.119:8080/";
+    public static final String BASE_URL = "http://101.132.191.9:8083/";
     /**
      * 注册的地址
      */
@@ -74,4 +77,8 @@ public class RestConstants {
     * 删除订单的接口的地址
     */
     public static final String DELETE_ORDER_URL = BASE_URL + "alllink/order/deleteOrder";
+    /**
+    * 服务器图片目录地址
+    */
+    public static final String IMAGE_ROOT_URL = BASE_URL + "pic/";
 }

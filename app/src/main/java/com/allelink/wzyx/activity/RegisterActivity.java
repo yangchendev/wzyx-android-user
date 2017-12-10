@@ -18,6 +18,7 @@ import com.allelink.wzyx.app.sign.register.IRegisterListener;
 import com.allelink.wzyx.app.sign.register.RegisterHandler;
 import com.allelink.wzyx.net.RestConstants;
 import com.allelink.wzyx.utils.activity.ActivityUtils;
+import com.allelink.wzyx.utils.encrypt.SHAUtil;
 import com.allelink.wzyx.utils.log.LogUtil;
 import com.allelink.wzyx.utils.regex.RegexUtils;
 import com.allelink.wzyx.utils.storage.WzyxPreference;
@@ -124,7 +125,7 @@ public class RegisterActivity extends BaseActivity {
         }
         params.clear();
         params.put("phoneNumber", mPhoneNumber);
-        params.put("password", mPassword);
+        params.put("password", SHAUtil.SHAEncode(mPassword));
         params.put("checkcode", mAuthCode);
         btnRegister.setText(getResources().getString(R.string.on_registering));
         btnRegister.setEnabled(false);

@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import com.allelink.wzyx.R;
 import com.allelink.wzyx.app.GlideApp;
 import com.allelink.wzyx.model.ActivityItem;
+import com.allelink.wzyx.net.RestConstants;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 
@@ -24,7 +25,6 @@ public class ActivityItemAdapter extends BaseQuickAdapter<ActivityItem,BaseViewH
         super(layoutResId, data);
     }
 
-
     @Override
     protected void convert(BaseViewHolder helper, ActivityItem item) {
         helper.setText(R.id.tv_fragment_near_item_activity_name, item.getActivityName());
@@ -33,7 +33,7 @@ public class ActivityItemAdapter extends BaseQuickAdapter<ActivityItem,BaseViewH
         helper.setText(R.id.tv_fragment_near_enroll_number, mContext.getResources().getString(R.string.enroll_number,item.getEnrollNumber()));
         ImageView imageView = helper.getView(R.id.iv_fragment_near_item_pic);
         GlideApp.with(mContext)
-                .load(item.getImageUrl())
+                .load(RestConstants.IMAGE_ROOT_URL+item.getImageUrl())
                 .placeholder(R.drawable.activity_default_pic)
                 .error(R.drawable.activity_default_pic)
                 .into(imageView);

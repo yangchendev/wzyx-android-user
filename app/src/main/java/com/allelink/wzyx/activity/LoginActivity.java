@@ -15,6 +15,7 @@ import com.allelink.wzyx.app.WzyxApplication;
 import com.allelink.wzyx.app.sign.signin.ISignInListener;
 import com.allelink.wzyx.app.sign.signin.SignInHandler;
 import com.allelink.wzyx.utils.activity.ActivityUtils;
+import com.allelink.wzyx.utils.encrypt.SHAUtil;
 import com.allelink.wzyx.utils.log.LogUtil;
 import com.allelink.wzyx.utils.regex.RegexUtils;
 import com.allelink.wzyx.utils.toast.ToastUtil;
@@ -100,7 +101,7 @@ public class LoginActivity extends BaseActivity {
         btnLogin.setEnabled(false);
         btnLogin.setText(getResources().getString(R.string.on_logining));
         params.put("phoneNumber", mPhoneNumber);
-        params.put("password", mPassword);
+        params.put("password", SHAUtil.SHAEncode(mPassword));
         SignInHandler.signIn(params, new ISignInListener() {
             @Override
             public void onSignInSuccess(String response) {

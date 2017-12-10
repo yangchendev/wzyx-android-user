@@ -8,6 +8,7 @@
     android:descendantFocusability="afterDescendants"
     android:id="@+id/ll_bottom_bar_layout"
     android:background="@color/white">
+
     <!--首页tab开始-->
     <android.support.v7.widget.LinearLayoutCompat
         android:descendantFocusability="blocksDescendants"
