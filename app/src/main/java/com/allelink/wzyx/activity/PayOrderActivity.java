@@ -2,18 +2,18 @@ package com.allelink.wzyx.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.allelink.wzyx.R;
+import com.allelink.wzyx.activity.base.BaseActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class PayOrderActivity extends AppCompatActivity {
+public class PayOrderActivity extends BaseActivity {
 
     //微信支付
     @BindView(R.id.rb_wechat_pay)
