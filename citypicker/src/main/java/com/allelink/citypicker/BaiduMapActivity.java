@@ -10,10 +10,13 @@ import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
+import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
+import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
+import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.map.TextureMapView;
 import com.baidu.mapapi.model.LatLng;
 
@@ -44,6 +47,7 @@ public class BaiduMapActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        mLocationClient.start();
     }
 
     @Override
@@ -62,6 +66,7 @@ public class BaiduMapActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         mMapView.onDestroy();
+        mLocationClient.unRegisterLocationListener(myLocationListener);
     }
 
     //定位相关函数
@@ -98,5 +103,13 @@ public class BaiduMapActivity extends AppCompatActivity {
                 isFirstIn=false;
             }
         }
+    }
+
+    private void addDestInfoOverlay(LatLng latLng1) {
+        mBaiduMap.clear();
+        OverlayOptions options=new MarkerOptions().position(latLng1)
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_place))
+                .zIndex(5);
+        mBaiduMap.addOverlay(options);
     }
 }

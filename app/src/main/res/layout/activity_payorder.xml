@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_eee"
+   >
+
+<android.support.v7.widget.LinearLayoutCompat
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <!--导航栏开始-->
+    <com.allelink.wzyx.ui.TitleBar
+        android:id="@+id/tb_account_setting"
+        app:titleText="@string/pay_order"
+        app:titleSize="6sp"
+        app:titleColor="@color/white"
+        app:leftButtonBackground="@drawable/btn_back_white_selector"
+        android:background="@color/brands_color"
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+    </com.allelink.wzyx.ui.TitleBar>
+    <!--导航栏结束-->
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="10dp"
+        android:background="@color/bg_eee" />
+    <!--活动费用和活动名称开始-->
+    <android.support.v7.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@color/white"
+        >
+        <ImageView
+            android:contentDescription="@string/pay_name"
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_pay"/>
+        <android.support.v7.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/dp_40"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/sp_14"
+                android:text="@string/pay_charge"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/sp_14"
+                android:text="@string/pay_name"
+                />
+        </android.support.v7.widget.LinearLayoutCompat>
+    </android.support.v7.widget.LinearLayoutCompat>
+    <!--活动费用和活动名称结束-->
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="10dp"
+        android:background="@color/bg_eee" />
+
+    <!--微信支付开始-->
+    <RelativeLayout
+        android:background="@drawable/layout_bg_selector"
+        android:id="@+id/rl_wechat_pay"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        >
+        <ImageView
+            android:id="@+id/iv_wechat_pay"
+            android:contentDescription="@string/wechat_pay"
+            android:layout_width="21dp"
+            android:layout_height="21dp"
+            android:src="@drawable/ic_wechat_pay"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="14dp"/>
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/wechat_pay"
+            android:layout_toEndOf="@id/iv_wechat_pay"
+            android:layout_marginStart="14dp"
+            android:textSize="16sp"
+            android:layout_centerVertical="true"
+            android:textColor="@color/black_333"
+            tools:ignore="RelativeOverlap" />
+        <RadioButton
+            android:id="@+id/rb_wechat_pay"
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
+            android:button="@null"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="10dp"/>
+    </RelativeLayout>
+    <!--微信支付结束-->
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:background="@color/bg_eee" />
+    <!--支付宝支付开始-->
+    <RelativeLayout
+        android:background="@drawable/layout_bg_selector"
+        android:id="@+id/rl_alipay"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:gravity="center_vertical">
+        <ImageView
+            android:id="@+id/iv_alipay"
+            android:contentDescription="@string/alipay"
+            android:layout_width="21dp"
+            android:layout_height="21dp"
+            android:src="@drawable/ic_alipay"
+            android:layout_marginStart="14dp"
+            android:layout_centerVertical="true"/>
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/alipay"
+            android:layout_toEndOf="@id/iv_alipay"
+            android:layout_marginStart="14dp"
+            android:textSize="16sp"
+            android:textColor="@color/black_333"
+            android:layout_centerVertical="true"/>
+        <RadioButton
+            android:id="@+id/rb_alipay"
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
+            android:button="@null"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="10dp"/>
+    </RelativeLayout>
+    <!--支付宝支付结束-->
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="10dp"
+        android:background="@color/bg_eee" />
+    <!--确认支付按钮开始-->
+</android.support.v7.widget.LinearLayoutCompat>
+    <Button
+        android:id="@+id/btn_pay_order"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:text="@string/wechat_pay"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_16"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/dp_4"
+        android:background="@color/brands_color"/>
+
+</RelativeLayout>

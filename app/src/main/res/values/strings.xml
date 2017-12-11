@@ -121,4 +121,10 @@
     <string name="total_cost">总计</string>
     <string name="submit_order_success">订单提交成功</string>
     <string name="submit_order_failure">订单提交失败</string>
+    <string name="wechat_pay">微信支付</string>
+    <string name="alipay">支付宝支付</string>
+    <string name="pay_order">支付订单</string>
+    <string name="pay_name">英孚教育</string>
+    <string name="pay_charge">￥125.0</string>
+
 </resources>
