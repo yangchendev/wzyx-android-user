@@ -84,12 +84,13 @@
             android:name=".activity.ActivityInfoActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
-        <activity android:name=".activity.SubmitOrderActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".activity.SubmitOrderActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".activity.PayOrderActivity"></activity>
     </application>
 
 </manifest>

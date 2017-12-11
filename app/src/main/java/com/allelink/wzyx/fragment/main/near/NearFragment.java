@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.allelink.citypicker.BaiduMapActivity;
 import com.allelink.citypicker.CityPickerActivity;
 import com.allelink.wzyx.R;
 import com.allelink.wzyx.activity.ActivityInfoActivity;
@@ -415,7 +416,9 @@ public class NearFragment extends SupportFragment {
     */
     @OnClick(R.id.iv_fragment_near_map)
     void mapMode(){
-        LogUtil.d(TAG,"mapMode");
+       // LogUtil.d(TAG,"mapMode");
+        Intent intent = new Intent(_mActivity, BaiduMapActivity.class);
+        startActivity(intent);
     }
     /**
     * 综合排序
