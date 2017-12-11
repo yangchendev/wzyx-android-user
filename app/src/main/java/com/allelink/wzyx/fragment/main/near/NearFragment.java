@@ -363,10 +363,11 @@ public class NearFragment extends SupportFragment {
                         //更新布局
                         if(type == REFRESH){
                             mAdapter.replaceData(mActivityItems);
+                            refreshlayout.finishRefresh(1000,true);
                         }else if(type == LOAD_MORE){
                             mAdapter.addData(mActivityItems);
+                            refreshlayout.finishLoadmore(1000, true);
                         }
-                        refreshlayout.finishRefresh(1000,true);
                     }
                     @Override
                     public void onFailure(String errorMessage) {
@@ -374,10 +375,11 @@ public class NearFragment extends SupportFragment {
                         //更新布局
                         if(type == REFRESH){
                             mAdapter.replaceData(mActivityItems);
+                            refreshlayout.finishRefresh(1000,true);
                         }else if(type == LOAD_MORE){
                             mAdapter.addData(mActivityItems);
+                            refreshlayout.finishLoadmore(1000, true);
                         }
-                        refreshlayout.finishRefresh(1000,false);
                     }
                 });
     }
@@ -624,17 +626,24 @@ public class NearFragment extends SupportFragment {
                         //更新布局
                         if(type == REFRESH){
                             mAdapter.replaceData(mActivityItems);
+                            refreshlayout.finishRefresh(1000,true);
                         }else if(type == LOAD_MORE){
                             mAdapter.addData(mActivityItems);
+                            refreshlayout.finishLoadmore(1000, true);
                         }
-                        //停止加载动画
-                        refreshlayout.finishRefresh(1000,true);
                     }
-
                     @Override
                     public void onFailure(String errorMessage) {
                         //停止加载动画
-                        refreshlayout.finishRefresh(1000,false);
+                        mActivityItems.clear();
+                        //更新布局
+                        if(type == REFRESH){
+                            mAdapter.replaceData(mActivityItems);
+                            refreshlayout.finishRefresh(1000,true);
+                        }else if(type == LOAD_MORE){
+                            mAdapter.addData(mActivityItems);
+                            refreshlayout.finishLoadmore(1000, true);
+                        }
                     }
                 });
     }

@@ -187,7 +187,6 @@ public class LoginActivity extends BaseActivity {
                     break;
                 case REQUEST_CODE_LOGOUT:
                     finishAllActivityExceptMine();
-
                     break;
                 default:
                     break;
