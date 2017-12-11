@@ -15,6 +15,7 @@ import android.widget.RelativeLayout;
 
 import com.allelink.wzyx.R;
 import com.allelink.wzyx.activity.base.BaseActivity;
+import com.allelink.wzyx.app.GlideApp;
 import com.allelink.wzyx.app.user.GetUserInfoHandler;
 import com.allelink.wzyx.app.user.IGetUserInfoListener;
 import com.allelink.wzyx.app.user.IUploadAvatarListener;
@@ -181,8 +182,10 @@ public class AccountSettingActivity extends BaseActivity {
             tvGender.setText(gender);
         }
         if(!avatar.isEmpty()){
-            Glide.with(AccountSettingActivity.this)
+            GlideApp.with(AccountSettingActivity.this)
                     .load(avatar)
+                    .placeholder(R.drawable.avatar_default)
+                    .error(R.drawable.avatar_default)
                     .into(ivAvatar);
         }
 

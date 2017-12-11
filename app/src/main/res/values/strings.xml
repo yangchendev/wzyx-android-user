@@ -121,10 +121,16 @@
     <string name="total_cost">总计</string>
     <string name="submit_order_success">订单提交成功</string>
     <string name="submit_order_failure">订单提交失败</string>
+<<<<<<< HEAD
     <string name="wechat_pay">微信支付</string>
     <string name="alipay">支付宝支付</string>
     <string name="pay_order">支付订单</string>
     <string name="pay_name">英孚教育</string>
     <string name="pay_charge">￥125.0</string>
 
+=======
+    <string name="empty">这里空空如也</string>
+    <string name="go_to_locate">去定位</string>
+    <string name="twice_back">再按一次退出万众艺兴</string>
+>>>>>>> 3dc2fade3e4ba0e1b7114a098e9be653eb7f3186
 </resources>

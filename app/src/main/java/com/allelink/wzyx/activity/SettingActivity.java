@@ -30,6 +30,7 @@ import qiu.niorgai.StatusBarCompat;
 public class SettingActivity extends BaseActivity {
     private static final String TAG = "SettingActivity";
     private static final int REQUEST_CODE_LOGOUT = 2002;
+    private static final String ACTION_FINISH = "ACTION_FINISH";
     /**
     * titleBar
     */
@@ -111,12 +112,19 @@ public class SettingActivity extends BaseActivity {
         //退出登录清除用户数据
         WzyxPreference.clearAppPreferences();
         //清除图片缓存
-        GlideApp.get(this).clearDiskCache();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                GlideApp.get(WzyxApplication.getContext()).clearDiskCache();
+            }
+        }).start();
         AccountManager.setSignState(false);
         //退出当前activity到登录activity并退出其他activity
         Intent intent = new Intent(SettingActivity.this,LoginActivity.class);
         setResult(RESULT_OK);
         startActivityForResult(intent,REQUEST_CODE_LOGOUT);
+        //发送广播finish掉首页
+        sendBroadcast(new Intent(ACTION_FINISH));
         ((WzyxApplication)getApplication()).finishSingleActivity(SettingActivity.this);
     }
 }

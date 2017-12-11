@@ -73,11 +73,15 @@ public class EditPasswordActivity extends BaseActivity {
         @Override
         public void onTick(long millisUntilFinished) {
             tvSendCode.setEnabled(false);
+            etCode.setEnabled(false);
+            etPhoneNumber.setEnabled(false);
             tvSendCode.setText(millisUntilFinished/1000 + "秒后重发");
         }
         @Override
         public void onFinish() {
             tvSendCode.setEnabled(true);
+            etPhoneNumber.setEnabled(true);
+            etCode.setEnabled(true);
             tvSendCode.setText(getResources().getString(R.string.send_code));
         }
     };
@@ -123,6 +127,8 @@ public class EditPasswordActivity extends BaseActivity {
         if(!checkPhoneNumber(mPhoneNumber)){
             mCountDownTimer.cancel();
             tvSendCode.setEnabled(true);
+            etCode.setEnabled(true);
+            etPhoneNumber.setEnabled(true);
             tvSendCode.setText(getResources().getString(R.string.send_code));
             return;
         }
@@ -142,6 +148,8 @@ public class EditPasswordActivity extends BaseActivity {
                 //发送失败恢复按钮状态
                 mCountDownTimer.cancel();
                 tvSendCode.setEnabled(true);
+                etCode.setEnabled(true);
+                etPhoneNumber.setEnabled(true);
                 tvSendCode.setText(getResources().getString(R.string.send_code));
             }
         });
@@ -167,6 +175,9 @@ public class EditPasswordActivity extends BaseActivity {
         params.put("checkcode", mAuthCode);
         btnConfirm.setText(getResources().getString(R.string.password_altering));
         btnConfirm.setEnabled(false);
+        etCode.setEnabled(false);
+        etPhoneNumber.setEnabled(false);
+        etPassword.setEnabled(false);
         RegisterHandler.resetPassword(params, new IRegisterListener() {
             //成功回调
             @Override
@@ -188,6 +199,9 @@ public class EditPasswordActivity extends BaseActivity {
             public void onRegisterFailure(String error) {
                 LogUtil.d(TAG,error);
                 btnConfirm.setEnabled(true);
+                etCode.setEnabled(true);
+                etPassword.setEnabled(true);
+                etPhoneNumber.setEnabled(true);
                 btnConfirm.setText(getResources().getString(R.string.confirm));
                 ToastUtil.toastShort(EditPasswordActivity.this,getResources().getString(R.string.alter_password_failure));
                 mCountDownTimer.cancel();

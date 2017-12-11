@@ -22,7 +22,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import me.yokeyword.fragmentation.SupportFragment;
-import qiu.niorgai.StatusBarCompat;
 
 /**
  * @author yangc
@@ -81,7 +80,6 @@ public class MineFragment extends SupportFragment{
     @Override
     public void onResume() {
         super.onResume();
-        StatusBarCompat.setStatusBarColor(_mActivity,getResources().getColor(R.color.brands_color));
         //获取本地保存的昵称
         String nickname = WzyxPreference.getCustomAppProfile(WzyxPreference.KEY_NICKNAME);
         if(nickname.isEmpty()){
@@ -217,11 +215,5 @@ public class MineFragment extends SupportFragment{
         mUnbinder.unbind();
     }
 
-    @Override
-    public void onHiddenChanged(boolean hidden) {
-        super.onHiddenChanged(hidden);
-        if(!hidden){
-            StatusBarCompat.setStatusBarColor(_mActivity,getResources().getColor(R.color.brands_color));
-        }
-    }
+
 }

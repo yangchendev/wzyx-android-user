@@ -18,6 +18,7 @@ import com.allelink.wzyx.utils.activity.ActivityUtils;
 import com.allelink.wzyx.utils.encrypt.SHAUtil;
 import com.allelink.wzyx.utils.log.LogUtil;
 import com.allelink.wzyx.utils.regex.RegexUtils;
+import com.allelink.wzyx.utils.storage.WzyxPreference;
 import com.allelink.wzyx.utils.toast.ToastUtil;
 
 import butterknife.BindView;
@@ -99,6 +100,8 @@ public class LoginActivity extends BaseActivity {
         }
         //在按钮上显示“登录中...”来提示用户
         btnLogin.setEnabled(false);
+        etPassword.setEnabled(false);
+        etPhoneNumber.setEnabled(false);
         btnLogin.setText(getResources().getString(R.string.on_logining));
         params.put("phoneNumber", mPhoneNumber);
         params.put("password", SHAUtil.SHAEncode(mPassword));
@@ -110,15 +113,18 @@ public class LoginActivity extends BaseActivity {
                 btnLogin.setEnabled(true);
                 btnLogin.setText(getResources().getString(R.string.login));
                 AccountManager.setSignState(true);
+                WzyxPreference.addCustomAppProfile(WzyxPreference.KEY_PHONE_NUMBER,mPhoneNumber);
                 ToastUtil.toastShort(LoginActivity.this,getResources().getString(R.string.sign_in_success));
                 ActivityUtils.startActivity(LoginActivity.this,MainActivity.class);
-                LoginActivity.this.finish();
+                ((WzyxApplication)getApplication()).finishSingleActivity(LoginActivity.this);
             }
             @Override
             public void onSignInFailure(String error) {
                 LogUtil.d(TAG,error);
                 //登录失败后取消按钮提示
                 btnLogin.setEnabled(true);
+                etPassword.setEnabled(true);
+                etPhoneNumber.setEnabled(true);
                 btnLogin.setText(getResources().getString(R.string.login));
                 ToastUtil.toastShort(LoginActivity.this,error);
             }
@@ -181,6 +187,7 @@ public class LoginActivity extends BaseActivity {
                     break;
                 case REQUEST_CODE_LOGOUT:
                     finishAllActivityExceptMine();
+
                     break;
                 default:
                     break;

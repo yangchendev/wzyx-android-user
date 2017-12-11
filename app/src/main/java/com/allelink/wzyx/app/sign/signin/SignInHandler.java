@@ -48,8 +48,8 @@ public class SignInHandler {
                 //网络请求成功的回调
                 CommonResponse commonResponse = null;
                 String responseString = response.body();
+                LogUtil.json(TAG,responseString);
                 if(!TextUtils.isEmpty(responseString) && response.isSuccessful()){
-                    LogUtil.json(TAG,responseString);
                     //将服务器返回的信息转换成类
                     commonResponse = JSON.parseObject(responseString, CommonResponse.class);
                     //登录成功

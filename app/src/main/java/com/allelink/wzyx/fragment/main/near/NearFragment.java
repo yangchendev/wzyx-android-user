@@ -7,16 +7,19 @@ import android.support.design.widget.TabLayout;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.allelink.citypicker.BaiduMapActivity;
 import com.allelink.citypicker.CityPickerActivity;
 import com.allelink.wzyx.R;
 import com.allelink.wzyx.activity.ActivityInfoActivity;
 import com.allelink.wzyx.adapter.ActivityItemAdapter;
+import com.allelink.wzyx.app.WzyxApplication;
 import com.allelink.wzyx.app.activityinfo.ActivityInfoHandler;
 import com.allelink.wzyx.app.activityinfo.GetActivityInfoListener;
 import com.allelink.wzyx.model.ActivityItem;
@@ -24,7 +27,16 @@ import com.allelink.wzyx.net.RestConstants;
 import com.allelink.wzyx.ui.loader.WzyxLoader;
 import com.allelink.wzyx.utils.log.LogUtil;
 import com.allelink.wzyx.utils.toast.ToastUtil;
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
+import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
+import com.baidu.mapapi.SDKInitializer;
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,7 +47,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import me.yokeyword.fragmentation.SupportFragment;
-import qiu.niorgai.StatusBarCompat;
 
 /**
  * @author yangc
@@ -50,6 +61,11 @@ public class NearFragment extends SupportFragment {
     private static final String TAG = "NearFragment";
     private static final String ACTIVITY_ID = "activityId";
     private static final int REQUEST_CODE_PICK_CITY = 4001;
+    private static final int SHOW = 1;
+    private static final int HIDE = 2;
+    private boolean isFirstLoading = true;
+    private static int REFRESH = 3;
+    private static int LOAD_MORE = 4;
     /**
     * 排序类型
     */
@@ -107,6 +123,10 @@ public class NearFragment extends SupportFragment {
     RecyclerView rvActivityList = null;
     @BindView(R.id.tv_fragment_near_position)
     AppCompatTextView tvPosition = null;
+    @BindView(R.id.include_locate_failure)
+    RelativeLayout layoutLocateFailure = null;
+    @BindView(R.id.srl_fragment_near)
+    SmartRefreshLayout refreshLayout = null;
     /**
     * 适配器
     */
@@ -130,9 +150,15 @@ public class NearFragment extends SupportFragment {
     private Arrow mCostArrow = Arrow.NORMAL;
 
     private int mCostCount = 0;
-
+    /**
+    * 定位相关
+    */
     private double lat = 0;
     private double lng = 0;
+    private String city = null;
+    private LocationClient mLocationClient = null;
+    private MyLocationListener myListener = new MyLocationListener();
+
     public static NearFragment newInstance() {
         Bundle args = new Bundle();
         NearFragment fragment = new NearFragment();
@@ -142,6 +168,8 @@ public class NearFragment extends SupportFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        //初始化百度地图SDK
+        SDKInitializer.initialize(WzyxApplication.getContext());
         View view = inflater.inflate(R.layout.fragment_near, container, false);
         mUnbinder = ButterKnife.bind(this, view);
         return view;
@@ -155,7 +183,42 @@ public class NearFragment extends SupportFragment {
         initData();
         bindAdapter();
         initItemEvent();
+        //声明LocationClient类
+        mLocationClient = new LocationClient(WzyxApplication.getContext());
+        //注册监听函数
+        mLocationClient.registerLocationListener(myListener);
+        initLocation();
+        initRefresh();
     }
+    /**
+    * 初始化下拉刷新事件
+    */
+    private void initRefresh() {
+        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                if(isFirstLoading){
+                    getActivityList(lat,lng,refreshlayout,REFRESH);
+                    isFirstLoading = false;
+                }else{
+                    getActivityListByType(mSelectedActivityType,mSelectedRankingType,lat,lng,refreshlayout,REFRESH);
+                }
+            }
+        });
+        refreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
+            @Override
+            public void onLoadmore(RefreshLayout refreshlayout) {
+                if(isFirstLoading){
+                    getActivityList(lat,lng,refreshlayout,LOAD_MORE);
+                    isFirstLoading = false;
+                }else{
+                    getActivityListByType(mSelectedActivityType,mSelectedRankingType,lat,lng,refreshlayout,LOAD_MORE);
+                }
+            }
+        });
+
+    }
+
     /**
     * 列表项点击事件
     */
@@ -272,9 +335,53 @@ public class NearFragment extends SupportFragment {
                         ToastUtil.toastShort(_mActivity,getResources().getString(R.string.get_activity_list_failure));
                     }
                 });
-
     }
-
+    /**
+     * 根据类型获取活动信息
+     * @param activityType 活动类型
+     * @param rankingType  排序类型
+     * @param lat 纬度
+     * @param lng 经度
+     * @param refreshlayout 下拉刷新
+     */
+    private void getActivityListByType(int activityType, int rankingType, double lat, double lng, final RefreshLayout refreshlayout, final int type) {
+        HashMap<String, Object> params = new HashMap<>();
+        //现阶段不需要
+        //params.put("searchContent", "搜索内容");
+        params.put("distance","20000");
+        //现阶段需要
+        params.put("lat", lat);
+        params.put("lng", lng);
+        params.put("activityType", activityType);
+        params.put("sortParams", rankingType);
+        //网络请求获取数据
+        ActivityInfoHandler.getActivityList(params, RestConstants.GET_ACTIVITY_INFO_LIST_URL
+                , new GetActivityInfoListener() {
+                    @Override
+                    public void onSuccess(List<ActivityItem> activityItems) {
+                        mActivityItems.clear();
+                        mActivityItems = activityItems;
+                        //更新布局
+                        if(type == REFRESH){
+                            mAdapter.replaceData(mActivityItems);
+                        }else if(type == LOAD_MORE){
+                            mAdapter.addData(mActivityItems);
+                        }
+                        refreshlayout.finishRefresh(1000,true);
+                    }
+                    @Override
+                    public void onFailure(String errorMessage) {
+                        mActivityItems.clear();
+                        //更新布局
+                        if(type == REFRESH){
+                            mAdapter.replaceData(mActivityItems);
+                        }else if(type == LOAD_MORE){
+                            mAdapter.addData(mActivityItems);
+                        }
+                        refreshlayout.finishRefresh(1000,false);
+                    }
+                });
+    }
     /**
     * 初始化tab标签数据
     */
@@ -328,8 +435,10 @@ public class NearFragment extends SupportFragment {
         //3.进行网络请求获取数据
         mSelectedRankingType = COMPREHENSIVE_RANKING_TYPE;
         if(lat == 0 || lng == 0){
-            ToastUtil.toastShort(_mActivity,getResources().getString(R.string.get_activity_list_failure));
+            ToastUtil.toastShort(_mActivity,getResources().getString(R.string.locate_error));
+            showAndHideActivityList(HIDE);
         }else{
+            showAndHideActivityList(SHOW);
             getActivityListByType(mSelectedActivityType,mSelectedRankingType,lat,lng);
         }
     }
@@ -352,8 +461,10 @@ public class NearFragment extends SupportFragment {
             //3.进行网络请求更新
             mSelectedRankingType = COST_ASC_TYPE;
             if(lat == 0 || lng == 0){
-                ToastUtil.toastShort(_mActivity,getResources().getString(R.string.get_activity_list_failure));
+                ToastUtil.toastShort(_mActivity,getResources().getString(R.string.locate_error));
+                showAndHideActivityList(HIDE);
             }else{
+                showAndHideActivityList(SHOW);
                 getActivityListByType(mSelectedActivityType,mSelectedRankingType,lat,lng);
             }
         }else if(mCostArrow == Arrow.UP){
@@ -363,8 +474,10 @@ public class NearFragment extends SupportFragment {
             //3.进行网络请求更新
             mSelectedRankingType = COST_DESC_TYPE;
             if(lat == 0 || lng == 0){
-                ToastUtil.toastShort(_mActivity,getResources().getString(R.string.get_activity_list_failure));
+                ToastUtil.toastShort(_mActivity,getResources().getString(R.string.locate_error));
+                showAndHideActivityList(HIDE);
             }else{
+                showAndHideActivityList(SHOW);
                 getActivityListByType(mSelectedActivityType,mSelectedRankingType,lat,lng);
             }
         }
@@ -401,8 +514,10 @@ public class NearFragment extends SupportFragment {
         tvDistanceOrder.setTextColor(getResources().getColor(R.color.brands_color));
         mSelectedRankingType = DISTANCE_ASC_TYPE;
         if(lat == 0 || lng == 0){
-            ToastUtil.toastShort(_mActivity,getResources().getString(R.string.get_activity_list_failure));
+            ToastUtil.toastShort(_mActivity,getResources().getString(R.string.locate_error));
+            showAndHideActivityList(HIDE);
         }else{
+            showAndHideActivityList(SHOW);
             getActivityListByType(mSelectedActivityType,mSelectedRankingType,lat,lng);
         }
     }
@@ -447,12 +562,15 @@ public class NearFragment extends SupportFragment {
                 lat = data.getDoubleExtra(CityPickerActivity.KEY_LAT, 0);
                 lng = data.getDoubleExtra(CityPickerActivity.KEY_LNG, 0);
                 LogUtil.d(TAG,"lat: "+lat+"\n"+"lng: "+lng);
+                showAndHideActivityList(SHOW);
                 getActivityList(lat, lng);
             }else {
                 tvPosition.setText(getResources().getString(R.string.locate));
                 lat = 0;
                 lng = 0;
-                ToastUtil.toastShort(_mActivity,getResources().getString(R.string.get_activity_list_failure));
+                //定位失败
+                showAndHideActivityList(HIDE);
+                ToastUtil.toastShort(_mActivity,getResources().getString(R.string.locate_error));
             }
         }
 
@@ -476,7 +594,7 @@ public class NearFragment extends SupportFragment {
                         mActivityItems.clear();
                         mActivityItems = activityItems;
                         //更新布局
-                        mAdapter.addData(mActivityItems);
+                        mAdapter.replaceData(mActivityItems);
                         //停止加载动画
                         WzyxLoader.stopLoading();
                     }
@@ -490,6 +608,39 @@ public class NearFragment extends SupportFragment {
                 });
     }
 
+    /**
+     * 通过网络请求获取活动列表
+     * @param lat 纬度
+     * @param lng 经度
+     * @param refreshlayout 下拉刷新
+     */
+    private void getActivityList(double lat, double lng, final RefreshLayout refreshlayout, final int type) {
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("lat", lat);
+        params.put("lng", lng);
+        ActivityInfoHandler.getActivityList(params, RestConstants.GET_DEFAULT_ACTIVITY_INFO_LIST_URL,
+                new GetActivityInfoListener() {
+                    @Override
+                    public void onSuccess(List<ActivityItem> activityItems) {
+                        mActivityItems.clear();
+                        mActivityItems = activityItems;
+                        //更新布局
+                        if(type == REFRESH){
+                            mAdapter.replaceData(mActivityItems);
+                        }else if(type == LOAD_MORE){
+                            mAdapter.addData(mActivityItems);
+                        }
+                        //停止加载动画
+                        refreshlayout.finishRefresh(1000,true);
+                    }
+
+                    @Override
+                    public void onFailure(String errorMessage) {
+                        //停止加载动画
+                        refreshlayout.finishRefresh(1000,false);
+                    }
+                });
+    }
     private void generateTestData(){
         for(int i = 0; i < 15; i++){
             ActivityItem activityItem = new ActivityItem();
@@ -500,19 +651,82 @@ public class NearFragment extends SupportFragment {
             mActivityItems.add(activityItem);
         }
     }
+    /**
+     * 定位初始化
+     */
+    private void initLocation() {
+        LocationClientOption option = new LocationClientOption();
+        option.setCoorType("BD09LL");
+        option.setIsNeedAddress(true);
+        option.setScanSpan(10*60*1000);
+        mLocationClient.setLocOption(option);
+    }
+    /**
+    * 定位信息回调
+    */
+    public class MyLocationListener implements BDLocationListener {
+        @Override
+        public void onReceiveLocation(BDLocation location){
+            lat = location.getLatitude();
+            lng = location.getLongitude();
+            city = location.getCity();
+            if(city != null){
+                //定位成功，更新定位状态
+                tvPosition.setText(city.substring(0,city.length()-1));
+                showAndHideActivityList(SHOW);
+                if(isFirstLoading){
+                    getActivityList(lat,lng);
+                    isFirstLoading = false;
+                }else {
+                    getActivityListByType(mSelectedActivityType,mSelectedRankingType,lat,lng);
+                }
 
-
+            }else {
+                //定位失败
+                showAndHideActivityList(HIDE);
+            }
+            Log.d(TAG, city);
+        }
+    }
+    /**
+    * 隐藏或显示活动列表和定位失败界面
+    */
+    private void showAndHideActivityList(int isShow){
+        switch (isShow){
+            case SHOW:
+                refreshLayout.setVisibility(View.VISIBLE);
+                rvActivityList.setVisibility(View.VISIBLE);
+                layoutLocateFailure.setVisibility(View.GONE);
+                break;
+            case HIDE:
+                refreshLayout.setVisibility(View.GONE);
+                rvActivityList.setVisibility(View.GONE);
+                layoutLocateFailure.setVisibility(View.VISIBLE);
+                break;
+            default:
+                break;
+        }
+    }
+    /**
+    * 定位失败界面点击定位按钮事件
+    */
+    @OnClick(R.id.btn_locate_failure_locate)
+    void cityPicker(){
+        locatePosition();
+    }
     @Override
-    public void onResume() {
-        super.onResume();
-        StatusBarCompat.setStatusBarColor(_mActivity,getResources().getColor(R.color.white));
+    public void onStart() {
+        super.onStart();
+        mLocationClient.start();
     }
 
+    /**
+    * fragment销毁时停止监听位置信息
+    */
     @Override
-    public void onHiddenChanged(boolean hidden) {
-        super.onHiddenChanged(hidden);
-        if (!hidden){
-            StatusBarCompat.setStatusBarColor(_mActivity,getResources().getColor(R.color.white));
-        }
+    public void onDestroy() {
+        super.onDestroy();
+        mLocationClient.stop();
+        mLocationClient.unRegisterLocationListener(myListener);
     }
 }
