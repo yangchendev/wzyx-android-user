@@ -1,17 +1,30 @@
 package com.allelink.wzyx.activity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
+import android.view.KeyEvent;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.allelink.wzyx.R;
 import com.allelink.wzyx.activity.base.BaseActivity;
+import com.allelink.wzyx.app.WzyxApplication;
+import com.allelink.wzyx.app.user.GetUserInfoHandler;
+import com.allelink.wzyx.app.user.IGetUserInfoListener;
 import com.allelink.wzyx.fragment.main.forum.ForumFragment;
 import com.allelink.wzyx.fragment.main.home.HomeFragment;
 import com.allelink.wzyx.fragment.main.mine.MineFragment;
 import com.allelink.wzyx.fragment.main.near.NearFragment;
 import com.allelink.wzyx.fragment.main.order.OrderFragment;
+import com.allelink.wzyx.model.User;
+import com.allelink.wzyx.ui.loader.WzyxLoader;
+import com.allelink.wzyx.utils.log.LogUtil;
+import com.allelink.wzyx.utils.storage.WzyxPreference;
+import com.allelink.wzyx.utils.toast.ToastUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,7 +41,9 @@ import butterknife.OnClick;
 public class MainActivity extends BaseActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final int FIRST = 0;
-    private com.allelink.citypicker.map.LocateListener mLocateListener = null;
+    private long mExitTime = 0;
+    private static final int EXIT_TIME = 2000;
+    private static String ACTION_FINISH = "ACTION_FINISH";
     /**
     * UI
     */
@@ -72,6 +87,46 @@ public class MainActivity extends BaseActivity {
         initFragment();
         ivHome.setImageResource(R.drawable.ic_home_pressed);
         tvHome.setTextColor(getResources().getColor(R.color.brands_color));
+        //请求用户信息
+        initUserInfo();
+        //注册finish广播
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(ACTION_FINISH);
+        registerReceiver(mFinishReceiver, filter);
+    }
+    /**
+    * 请求用户信息
+    */
+    private void initUserInfo() {
+        //加载动画开始
+        WzyxLoader.showLoading(MainActivity.this);
+        params.clear();
+        params.put("phoneNumber", WzyxPreference.getCustomAppProfile(WzyxPreference.KEY_PHONE_NUMBER));
+        GetUserInfoHandler.getUserInfo(params, new IGetUserInfoListener() {
+            @Override
+            public void onGetUserInfoSuccess(User user) {
+                WzyxLoader.stopLoading();
+                storeUserInfo(user);
+            }
+
+            @Override
+            public void onGetUserInfoFailure(String error) {
+                WzyxLoader.stopLoading();
+                ToastUtil.toastShort(MainActivity.this,getResources().getString(R.string.get_user_info_failure));
+            }
+        });
+    }
+    /**
+     * 存储用户信息到本地
+     * @param user 用户实体类
+     */
+    private void storeUserInfo(User user) {
+        WzyxPreference.addCustomAppProfile(WzyxPreference.KEY_PHONE_NUMBER,user.getPhoneNumber());
+        WzyxPreference.addCustomAppProfile(WzyxPreference.KEY_NICKNAME,user.getNickname());
+        WzyxPreference.addCustomAppProfile(WzyxPreference.KEY_GENDER,user.getGender());
+        WzyxPreference.addCustomAppProfile(WzyxPreference.KEY_AVATAR_URL,user.getAvatar());
+        WzyxPreference.addCustomAppProfile(WzyxPreference.KEY_BIRTHDAY,user.getBirthday());
+        WzyxPreference.addCustomAppProfile(WzyxPreference.KEY_USER_ID,user.getUserId());
     }
     /**
     * 初始化fragment
@@ -159,6 +214,43 @@ public class MainActivity extends BaseActivity {
         tvMine.setTextColor(getResources().getColor(R.color.black_666));
     }
 
+    /**
+    * 广播接收器
+    */
+    public BroadcastReceiver mFinishReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if(ACTION_FINISH.equals(intent.getAction())){
+                LogUtil.d(TAG,intent.getAction());
+                ((WzyxApplication)getApplication()).finishSingleActivity(MainActivity.this);
+                System.gc();
+            }
+        }
+    };
 
-
+    /**
+    * 应用销毁时取消注册广播
+    */
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(mFinishReceiver);
+    }
+    /**
+    * 按两次退出应用
+    */
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN){
+            if(System.currentTimeMillis() - mExitTime > EXIT_TIME){
+                ToastUtil.toastShort(MainActivity.this,getResources().getString(R.string.twice_back));
+                mExitTime = System.currentTimeMillis();
+            }else {
+                ((WzyxApplication)getApplication()).finishSingleActivity(MainActivity.this);
+                System.gc();
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 }

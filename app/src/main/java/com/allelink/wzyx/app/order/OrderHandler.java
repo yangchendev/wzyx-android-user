@@ -160,8 +160,8 @@ public class OrderHandler {
                 String responseString = response.body();
                 String result;
                 String message;
+                LogUtil.json(TAG,responseString);
                 if(!TextUtils.isEmpty(responseString) && response.isSuccessful()){
-                    LogUtil.json(TAG,responseString);
                     JSONObject jsonObject = JSON.parseObject(responseString);
                     result = jsonObject.getString("result");
                     message = jsonObject.getString("message");

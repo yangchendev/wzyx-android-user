@@ -12,6 +12,7 @@ import android.widget.Button;
 import com.allelink.wzyx.R;
 import com.allelink.wzyx.activity.base.BaseActivity;
 import com.allelink.wzyx.app.AccountManager;
+import com.allelink.wzyx.app.WzyxApplication;
 import com.allelink.wzyx.app.sign.checkcode.CheckCodeHandler;
 import com.allelink.wzyx.app.sign.checkcode.ICheckCodeSendListener;
 import com.allelink.wzyx.app.sign.register.IRegisterListener;
@@ -77,11 +78,15 @@ public class RegisterActivity extends BaseActivity {
         @Override
         public void onTick(long millisUntilFinished) {
             tvSendCode.setEnabled(false);
+            etPhoneNumber.setEnabled(false);
+            etCode.setEnabled(false);
             tvSendCode.setText(millisUntilFinished/1000 + "秒后重发");
         }
         @Override
         public void onFinish() {
             tvSendCode.setEnabled(true);
+            etCode.setEnabled(true);
+            etPhoneNumber.setEnabled(true);
             tvSendCode.setText(getResources().getString(R.string.send_code));
         }
     };
@@ -129,6 +134,9 @@ public class RegisterActivity extends BaseActivity {
         params.put("checkcode", mAuthCode);
         btnRegister.setText(getResources().getString(R.string.on_registering));
         btnRegister.setEnabled(false);
+        etCode.setEnabled(false);
+        etPassword.setEnabled(false);
+        etPhoneNumber.setEnabled(false);
         RegisterHandler.register(params, new IRegisterListener() {
             @Override
             public void onRegisterSuccess(String response) {
@@ -142,12 +150,15 @@ public class RegisterActivity extends BaseActivity {
                 //保存已注册的手机号
                 WzyxPreference.addCustomAppProfile(WzyxPreference.KEY_PHONE_NUMBER,mPhoneNumber);
                 ActivityUtils.startActivity(RegisterActivity.this,MainActivity.class);
-                RegisterActivity.this.finish();
+                ((WzyxApplication)getApplication()).finishSingleActivity(RegisterActivity.this);
             }
             @Override
             public void onRegisterFailure(String error) {
                 LogUtil.d(TAG,error);
                 btnRegister.setEnabled(true);
+                etCode.setEnabled(true);
+                etPassword.setEnabled(true);
+                etPhoneNumber.setEnabled(true);
                 btnRegister.setText(getResources().getString(R.string.register));
                 ToastUtil.toastShort(RegisterActivity.this,error);
                 mCountDownTimer.cancel();
@@ -166,6 +177,8 @@ public class RegisterActivity extends BaseActivity {
         if(!checkPhoneNumber(mPhoneNumber)){
             mCountDownTimer.cancel();
             tvSendCode.setEnabled(true);
+            etPhoneNumber.setEnabled(true);
+            etPhoneNumber.setEnabled(true);
             tvSendCode.setText(getResources().getString(R.string.send_code));
             return;
         }
@@ -185,6 +198,8 @@ public class RegisterActivity extends BaseActivity {
                 //发送失败恢复按钮状态
                 mCountDownTimer.cancel();
                 tvSendCode.setEnabled(true);
+                etCode.setEnabled(true);
+                etPhoneNumber.setEnabled(true);
                 tvSendCode.setText(getResources().getString(R.string.send_code));
             }
         });

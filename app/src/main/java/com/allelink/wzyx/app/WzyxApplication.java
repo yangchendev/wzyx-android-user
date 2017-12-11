@@ -5,7 +5,6 @@ import android.app.Application;
 import android.content.Context;
 
 import com.allelink.wzyx.utils.log.LogUtil;
-import com.baidu.mapapi.SDKInitializer;
 import com.blankj.utilcode.util.Utils;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
@@ -90,6 +89,7 @@ public class WzyxApplication extends Application {
         }
         activityList.clear();
         android.os.Process.killProcess(android.os.Process.myPid());
+
     }
 
     /**
@@ -101,7 +101,7 @@ public class WzyxApplication extends Application {
             if(ac == activity){
                 //如果是当前的activity，不做任何处理
             }else if(!ac.isFinishing()){
-                activityList.remove(ac);
+                //activityList.remove(ac);
                 ac.finish();
             }
         }

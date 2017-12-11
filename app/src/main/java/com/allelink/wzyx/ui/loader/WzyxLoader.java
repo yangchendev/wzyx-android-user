@@ -27,7 +27,7 @@ public class WzyxLoader {
 
     private static final ArrayList<AppCompatDialog> LOADERS = new ArrayList<>();
 
-    private static final String DEFAULT_LOADER = LoaderStyle.BallClipRotateMultipleIndicator.name();
+    private static final String DEFAULT_LOADER = LoaderStyle.BallScaleMultipleIndicator.name();
 
     public static void showLoading(Context context, Enum<LoaderStyle> type) {
         showLoading(context, type.name());

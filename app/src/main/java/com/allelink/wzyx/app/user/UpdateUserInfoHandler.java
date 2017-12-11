@@ -41,8 +41,9 @@ public class UpdateUserInfoHandler {
             public void onResponse(Call<String> call, Response<String> response) {
                 CommonResponse commonResponse = null;
                 String responseString  = response.body();
+                LogUtil.json(TAG,responseString);
                 if(!TextUtils.isEmpty(responseString) && response.isSuccessful()){
-                    LogUtil.json(TAG,responseString);
+
                     commonResponse = JSON.parseObject(responseString, CommonResponse.class);
                     if(SUCCESS.equals(commonResponse.getResult())){
                         //成功的回调

@@ -52,8 +52,9 @@ public class GetUserInfoHandler {
                 User user = new User();
                 UserInfoResponse userInfoResponse = new UserInfoResponse();
                 String responseString  = response.body();
+                LogUtil.json(TAG,responseString);
                 if(!TextUtils.isEmpty(responseString) && response.isSuccessful()){
-                    LogUtil.json(TAG,responseString);
+
                     JSONObject jsonObject = JSONObject.parseObject(responseString);
                     JSONObject data = jsonObject.getJSONObject("data");
                     userInfoResponse.setMessage(jsonObject.getString("message"));

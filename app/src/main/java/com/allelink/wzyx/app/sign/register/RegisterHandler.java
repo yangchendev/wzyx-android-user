@@ -48,8 +48,9 @@ public class RegisterHandler {
                 //网络请求成功的回调
                 CommonResponse commonResponse = null;
                 String responseString = response.body();
+                LogUtil.json(TAG,responseString);
                 if(!TextUtils.isEmpty(responseString) && response.isSuccessful()){
-                    LogUtil.json(TAG,responseString);
+
                     commonResponse = JSON.parseObject(responseString, CommonResponse.class);
                     if(SUCCESS.equals(commonResponse.getResult())){
                         //注册成功的回调

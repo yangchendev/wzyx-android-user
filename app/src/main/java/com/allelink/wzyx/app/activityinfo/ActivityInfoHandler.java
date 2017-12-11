@@ -53,8 +53,8 @@ public class ActivityInfoHandler {
                 String result;
                 String message;
                 List<ActivityItem> activityItems = null;
+                LogUtil.json(TAG,responseString);
                 if(!TextUtils.isEmpty(responseString) && response.isSuccessful()){
-                    LogUtil.json(TAG,responseString);
                     JSONObject jsonObject = JSON.parseObject(responseString);
                     result = jsonObject.getString("result");
                     message = jsonObject.getString("message");
@@ -66,12 +66,14 @@ public class ActivityInfoHandler {
                     }else if(ERROR.equals(result)){
                         if(listener != null){
                             listener.onFailure(message);
+                            LogUtil.d(TAG,message);
                         }
                     }
                 }else{
                     try {
                         if (listener != null) {
                             listener.onFailure(response.errorBody().string());
+                            LogUtil.d(TAG,response.errorBody().string());
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -83,6 +85,7 @@ public class ActivityInfoHandler {
             public void onFailure(Call<String> call, Throwable t) {
                 if(listener != null){
                     listener.onFailure(t.getMessage());
+                    LogUtil.d(TAG,t.getMessage());
                 }
             }
         });
