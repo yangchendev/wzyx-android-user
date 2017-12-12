@@ -139,8 +139,10 @@ public class AccountSettingActivity extends BaseActivity {
                 }
                 if(!user.getAvatar().isEmpty()){
                     //设置头像
-                    Glide.with(AccountSettingActivity.this)
+                    GlideApp.with(AccountSettingActivity.this)
                             .load(user.getAvatar())
+                            .error(R.drawable.avatar_default)
+                            .placeholder(R.drawable.avatar_default)
                             .into(ivAvatar);
                     LogUtil.d(TAG,user.getAvatar());
                 }
