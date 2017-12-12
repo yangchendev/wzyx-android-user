@@ -190,6 +190,13 @@ public class NearFragment extends SupportFragment {
         initLocation();
         initRefresh();
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mLocationClient.start();
+    }
+
     /**
     * 初始化下拉刷新事件
     */
@@ -294,7 +301,29 @@ public class NearFragment extends SupportFragment {
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-
+                //根据选择确定所选类型
+                if(mTabTitles[0].equals(tab.getText())){
+                    mSelectedActivityType = ALL_TYPE;
+                }else if(mTabTitles[1].equals(tab.getText())){
+                    mSelectedActivityType = FOREIGN_LANGUAGE_TYPE;
+                }else if(mTabTitles[2].equals(tab.getText())){
+                    mSelectedActivityType = MUSIC_TYPE;
+                }else if(mTabTitles[3].equals(tab.getText())){
+                    mSelectedActivityType = ART_TYPE;
+                }
+                mSelectedRankingType = COMPREHENSIVE_RANKING_TYPE;
+                //清除样式
+                clearSortStyle(COMPREHENSIVE_ORDERING);
+                clearSortStyle(DISTANCE_ORDERING);
+                clearSortStyle(COST_ORDERING);
+                //设置综合样式
+                tvComprehensivOrdering.setTextColor(getResources().getColor(R.color.brands_color));
+                LogUtil.d(TAG,"lat: "+lat+"\n"+"lng: "+lng);
+                if(lat == 0 || lng == 0){
+                    ToastUtil.toastShort(_mActivity,getResources().getString(R.string.get_activity_list_failure));
+                }else{
+                    getActivityListByType(mSelectedActivityType,mSelectedRankingType,lat,lng);
+                }
             }
         });
     }
@@ -311,11 +340,15 @@ public class NearFragment extends SupportFragment {
         HashMap<String, Object> params = new HashMap<>();
         //现阶段不需要
         //params.put("searchContent", "搜索内容");
-        params.put("distance","20000");
+        params.put("distance","2000000000");
         //现阶段需要
         params.put("lat", lat);
         params.put("lng", lng);
-        params.put("activityType", activityType);
+        if(activityType == 0){
+            params.put("activityType", null);
+        }else{
+            params.put("activityType", activityType);
+        }
         params.put("sortParams", rankingType);
         //网络请求获取数据
         ActivityInfoHandler.getActivityList(params, RestConstants.GET_ACTIVITY_INFO_LIST_URL
@@ -348,11 +381,15 @@ public class NearFragment extends SupportFragment {
         HashMap<String, Object> params = new HashMap<>();
         //现阶段不需要
         //params.put("searchContent", "搜索内容");
-        params.put("distance","20000");
+        params.put("distance","2000000000");
         //现阶段需要
         params.put("lat", lat);
         params.put("lng", lng);
-        params.put("activityType", activityType);
+        if(activityType == 0){
+            params.put("activityType", null);
+        }else{
+            params.put("activityType", activityType);
+        }
         params.put("sortParams", rankingType);
         //网络请求获取数据
         ActivityInfoHandler.getActivityList(params, RestConstants.GET_ACTIVITY_INFO_LIST_URL
@@ -679,7 +716,7 @@ public class NearFragment extends SupportFragment {
             lat = location.getLatitude();
             lng = location.getLongitude();
             city = location.getCity();
-            if(city != null){
+            if(!city.isEmpty()){
                 //定位成功，更新定位状态
                 tvPosition.setText(city.substring(0,city.length()-1));
                 showAndHideActivityList(SHOW);
@@ -689,8 +726,8 @@ public class NearFragment extends SupportFragment {
                 }else {
                     getActivityListByType(mSelectedActivityType,mSelectedRankingType,lat,lng);
                 }
-
             }else {
+                tvPosition.setText(getResources().getString(R.string.locate));
                 //定位失败
                 showAndHideActivityList(HIDE);
             }
@@ -723,11 +760,11 @@ public class NearFragment extends SupportFragment {
     void cityPicker(){
         locatePosition();
     }
-    @Override
-    public void onStart() {
-        super.onStart();
-        mLocationClient.start();
-    }
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//        mLocationClient.start();
+//    }
 
     /**
     * fragment销毁时停止监听位置信息

@@ -73,7 +73,7 @@ public class EditPasswordActivity extends BaseActivity {
         @Override
         public void onTick(long millisUntilFinished) {
             tvSendCode.setEnabled(false);
-            etCode.setEnabled(false);
+            etCode.setEnabled(true);
             etPhoneNumber.setEnabled(false);
             tvSendCode.setText(millisUntilFinished/1000 + "秒后重发");
         }
@@ -140,6 +140,7 @@ public class EditPasswordActivity extends BaseActivity {
             @Override
             public void onCheckCodeSendSuccess(String response) {
                 ToastUtil.toastShort(EditPasswordActivity.this,getResources().getString(R.string.code_send_success));
+                etCode.setEnabled(true);
             }
 
             @Override

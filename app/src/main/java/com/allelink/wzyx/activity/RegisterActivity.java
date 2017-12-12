@@ -79,7 +79,7 @@ public class RegisterActivity extends BaseActivity {
         public void onTick(long millisUntilFinished) {
             tvSendCode.setEnabled(false);
             etPhoneNumber.setEnabled(false);
-            etCode.setEnabled(false);
+            etCode.setEnabled(true);
             tvSendCode.setText(millisUntilFinished/1000 + "秒后重发");
         }
         @Override
@@ -189,6 +189,7 @@ public class RegisterActivity extends BaseActivity {
         CheckCodeHandler.sendCheckCode(params, new ICheckCodeSendListener() {
             @Override
             public void onCheckCodeSendSuccess(String response) {
+                etCode.setEnabled(true);
                 ToastUtil.toastShort(RegisterActivity.this,getResources().getString(R.string.code_send_success));
             }
 

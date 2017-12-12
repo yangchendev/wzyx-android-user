@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/WZYX.iml" filepath="$PROJECT_DIR$/WZYX.iml" />
       <module fileurl="file://D:\Android\AndroidStudioProjects\WeMade\WZYX.iml" filepath="D:\Android\AndroidStudioProjects\WeMade\WZYX.iml" />
+      <module fileurl="file://$PROJECT_DIR$/WeMade.iml" filepath="$PROJECT_DIR$/WeMade.iml" />
       <module fileurl="file://I:\AndroidWorkSpace\WZYX\WeMade.iml" filepath="I:\AndroidWorkSpace\WZYX\WeMade.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/citypicker/citypicker.iml" filepath="$PROJECT_DIR$/citypicker/citypicker.iml" />

@@ -12,7 +12,6 @@ import com.allelink.wzyx.app.order.OrderHandler;
 import com.allelink.wzyx.app.order.OrderListener;
 import com.allelink.wzyx.ui.TitleBar;
 import com.allelink.wzyx.ui.loader.WzyxLoader;
-import com.allelink.wzyx.utils.activity.ActivityUtils;
 import com.allelink.wzyx.utils.toast.ToastUtil;
 
 import butterknife.BindView;
@@ -121,7 +120,10 @@ public class SubmitOrderActivity extends BaseActivity {
             public void onSuccess() {
                 WzyxLoader.stopLoading();
                 ToastUtil.toastShort(SubmitOrderActivity.this,getResources().getString(R.string.submit_order_success));
-                ActivityUtils.startActivity(SubmitOrderActivity.this,PayOrderActivity.class);
+                Intent intent = new Intent(SubmitOrderActivity.this, PayOrderActivity.class);
+                intent.putExtra(ACTIVITY_COST, mActivityCost);
+                intent.putExtra(ACTIVITY_NAME, mActivityName);
+                startActivity(intent);
             }
 
             @Override

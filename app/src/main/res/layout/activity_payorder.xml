@@ -15,12 +15,12 @@
 
     <!--导航栏开始-->
     <com.allelink.wzyx.ui.TitleBar
-        android:id="@+id/tb_account_setting"
+        android:id="@+id/tb_activity_pay_order"
         app:titleText="@string/pay_order"
         app:titleSize="6sp"
-        app:titleColor="@color/white"
-        app:leftButtonBackground="@drawable/btn_back_white_selector"
-        android:background="@color/brands_color"
+        app:titleColor="@color/black_333"
+        app:leftButtonBackground="@drawable/btn_back_blue_selector"
+        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="48dp">
     </com.allelink.wzyx.ui.TitleBar>
@@ -44,23 +44,31 @@
             android:layout_gravity="center_vertical"
             android:src="@drawable/ic_pay"/>
         <android.support.v7.widget.LinearLayoutCompat
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginStart="@dimen/dp_40"
-            android:orientation="vertical"
+            android:layout_marginStart="30dp"
+            android:orientation="horizontal"
             >
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/black_666"
+                android:id="@+id/tv_activity_pay_order_activity_name"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/sp_14"
-                android:text="@string/pay_charge"
+                android:textSize="16sp"
+                android:text="@string/pay_name"
                 />
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:gravity="end"
+                android:layout_weight="1"
+                android:textColor="@color/brands_color"
+                android:id="@+id/tv_activity_pay_order_cost"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/sp_14"
-                android:text="@string/pay_name"
+                android:textSize="20sp"
+                android:text="@string/pay_charge"
                 />
         </android.support.v7.widget.LinearLayoutCompat>
     </android.support.v7.widget.LinearLayoutCompat>
@@ -73,30 +81,30 @@
     <!--微信支付开始-->
     <RelativeLayout
         android:background="@drawable/layout_bg_selector"
-        android:id="@+id/rl_wechat_pay"
+        android:id="@+id/rl_activity_pay_order_we_chat_pay"
         android:layout_width="match_parent"
-        android:layout_height="44dp"
+        android:layout_height="48dp"
         >
         <ImageView
-            android:id="@+id/iv_wechat_pay"
+            android:id="@+id/iv_activity_pay_order_we_chat_pay"
             android:contentDescription="@string/wechat_pay"
             android:layout_width="21dp"
             android:layout_height="21dp"
             android:src="@drawable/ic_wechat_pay"
             android:layout_centerVertical="true"
-            android:layout_marginStart="14dp"/>
+            android:layout_marginStart="10dp"/>
         <android.support.v7.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/wechat_pay"
-            android:layout_toEndOf="@id/iv_wechat_pay"
-            android:layout_marginStart="14dp"
+            android:layout_toEndOf="@id/iv_activity_pay_order_we_chat_pay"
+            android:layout_marginStart="20dp"
             android:textSize="16sp"
             android:layout_centerVertical="true"
             android:textColor="@color/black_333"
             tools:ignore="RelativeOverlap" />
         <RadioButton
-            android:id="@+id/rb_wechat_pay"
+            android:id="@+id/rb_activity_pay_order_wechat_pay"
             android:layout_width="@dimen/dp_40"
             android:layout_height="@dimen/dp_40"
             android:button="@null"
@@ -111,29 +119,29 @@
     <!--支付宝支付开始-->
     <RelativeLayout
         android:background="@drawable/layout_bg_selector"
-        android:id="@+id/rl_alipay"
+        android:id="@+id/rl_activity_pay_order_alipay"
         android:layout_width="match_parent"
-        android:layout_height="44dp"
+        android:layout_height="48dp"
         android:gravity="center_vertical">
         <ImageView
-            android:id="@+id/iv_alipay"
+            android:id="@+id/iv_activity_pay_order_alipay"
             android:contentDescription="@string/alipay"
             android:layout_width="21dp"
             android:layout_height="21dp"
             android:src="@drawable/ic_alipay"
-            android:layout_marginStart="14dp"
+            android:layout_marginStart="10dp"
             android:layout_centerVertical="true"/>
         <android.support.v7.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/alipay"
-            android:layout_toEndOf="@id/iv_alipay"
-            android:layout_marginStart="14dp"
+            android:layout_toEndOf="@id/iv_activity_pay_order_alipay"
+            android:layout_marginStart="20dp"
             android:textSize="16sp"
             android:textColor="@color/black_333"
             android:layout_centerVertical="true"/>
         <RadioButton
-            android:id="@+id/rb_alipay"
+            android:id="@+id/rb_iv_activity_pay_order_alipay"
             android:layout_width="@dimen/dp_40"
             android:layout_height="@dimen/dp_40"
             android:button="@null"
@@ -148,14 +156,13 @@
     <!--确认支付按钮开始-->
 </android.support.v7.widget.LinearLayoutCompat>
     <Button
-        android:id="@+id/btn_pay_order"
+        android:id="@+id/btn_activity_pay_order_pay"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_40"
-        android:text="@string/wechat_pay"
+        android:layout_height="48dp"
+        android:text="@string/pay"
         android:textColor="@color/white"
         android:textSize="@dimen/sp_16"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/dp_4"
-        android:background="@color/brands_color"/>
+        android:background="@drawable/btn_submit_order_selector"/>
 
 </RelativeLayout>
