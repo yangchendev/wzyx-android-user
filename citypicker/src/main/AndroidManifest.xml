@@ -36,7 +36,7 @@
         android:supportsRtl="true">
             <meta-data
                 android:name="com.baidu.lbsapi.API_KEY"
-                android:value="Ry3GmMLqAsKNGehgaBXpD1VZDOfo7xGi" />
+                android:value="LvgvOn3XvyNA3navMbubnxYQTt2YKbLk" />
         <activity
             android:name=".CityPickerActivity"
             android:launchMode="singleTask"

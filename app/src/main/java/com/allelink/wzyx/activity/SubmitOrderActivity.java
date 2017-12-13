@@ -112,7 +112,7 @@ public class SubmitOrderActivity extends BaseActivity {
     void submitOrder(){
         params.clear();
         WzyxLoader.showLoading(this);
-        params.put(USER_ID, "1");
+        params.put(USER_ID, mUserId);
         params.put(SELLER_ID, mSellerId);
         params.put(ACTIVITY_ID, mActivityId);
         OrderHandler.apply(params, new OrderListener() {

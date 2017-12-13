@@ -159,6 +159,8 @@ public class ActivityInfoActivity extends BaseActivity {
         mActivityEndTime = activityDetailItem.getEndTime();
         mActivityPrice = activityDetailItem.getCost();
         mImageUrl = activityDetailItem.getImageUrl();
+        mImageUrl = "1,2,3,4";
+        //TODO
         imageUrls = mImageUrl.split(",");
         //设置到界面上
         banner.setImages(Arrays.asList(imageUrls));

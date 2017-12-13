@@ -342,8 +342,8 @@ public class NearFragment extends SupportFragment {
         //params.put("searchContent", "搜索内容");
         params.put("distance","2000000000");
         //现阶段需要
-        params.put("lat", lat);
-        params.put("lng", lng);
+        params.put("lat",String.valueOf(lat));
+        params.put("lng", String.valueOf(lng));
         if(activityType == 0){
             params.put("activityType", null);
         }else{
@@ -383,8 +383,8 @@ public class NearFragment extends SupportFragment {
         //params.put("searchContent", "搜索内容");
         params.put("distance","2000000000");
         //现阶段需要
-        params.put("lat", lat);
-        params.put("lng", lng);
+        params.put("lat",String.valueOf(lat));
+        params.put("lng", String.valueOf(lng));
         if(activityType == 0){
             params.put("activityType", null);
         }else{
@@ -624,8 +624,8 @@ public class NearFragment extends SupportFragment {
         //开启加载动画
         WzyxLoader.showLoading(_mActivity);
         HashMap<String, Object> params = new HashMap<>();
-        params.put("lat", lat);
-        params.put("lng", lng);
+        params.put("lat",String.valueOf(lat));
+        params.put("lng", String.valueOf(lng));
         ActivityInfoHandler.getActivityList(params, RestConstants.GET_DEFAULT_ACTIVITY_INFO_LIST_URL,
                 new GetActivityInfoListener() {
                     @Override
@@ -655,8 +655,8 @@ public class NearFragment extends SupportFragment {
      */
     private void getActivityList(double lat, double lng, final RefreshLayout refreshlayout, final int type) {
         HashMap<String, Object> params = new HashMap<>();
-        params.put("lat", lat);
-        params.put("lng", lng);
+        params.put("lat",String.valueOf(lat));
+        params.put("lng", String.valueOf(lng));
         ActivityInfoHandler.getActivityList(params, RestConstants.GET_DEFAULT_ACTIVITY_INFO_LIST_URL,
                 new GetActivityInfoListener() {
                     @Override

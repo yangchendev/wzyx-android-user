@@ -16,7 +16,7 @@ public class RestConstants {
     /**
     * 服务器主机的地址
     */
-    public static final String BASE_URL = "http://101.132.191.9:8083/";
+    public static final String BASE_URL = "http://10.82.60.115:8083/";
     /**
      * 注册的地址
      */
@@ -81,4 +81,8 @@ public class RestConstants {
     * 服务器图片目录地址
     */
     public static final String IMAGE_ROOT_URL = BASE_URL + "pic/";
+    /**
+    * 支付宝支付获取订单信息的地址
+    */
+    public static final String ALI_PAY_GET_ORDER_INFO_URL = BASE_URL + "";
 }

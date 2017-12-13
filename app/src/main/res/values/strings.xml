@@ -129,5 +129,5 @@
     <string name="empty">这里空空如也</string>
     <string name="go_to_locate">去定位</string>
     <string name="twice_back">再按一次退出万众艺兴</string>
-    <string name="pay">立即支付</string>
+    <string name="pay">确认支付</string>
 </resources>

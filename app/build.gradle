@@ -68,6 +68,7 @@ dependencies {
     //下拉刷新依赖
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.3'
     //城市选择器依赖
-    compile project(':citypicker')
-
+    implementation project(':citypicker')
+    //支付宝支付依赖
+    implementation files('libs/alipaySdk-20170922.jar')
 }
