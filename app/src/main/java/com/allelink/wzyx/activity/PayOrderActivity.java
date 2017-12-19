@@ -8,14 +8,20 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alipay.sdk.app.EnvUtils;
 import com.allelink.wzyx.R;
 import com.allelink.wzyx.activity.base.BaseActivity;
 import com.allelink.wzyx.app.WzyxApplication;
+import com.allelink.wzyx.pay.alipay.AliPay;
+import com.allelink.wzyx.pay.alipay.IAliPayResultListener;
 import com.allelink.wzyx.ui.TitleBar;
+import com.allelink.wzyx.utils.log.LogUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import qiu.niorgai.StatusBarCompat;
+
 /**
  * 订单支付
  * @author sjscode
@@ -24,10 +30,11 @@ import butterknife.OnClick;
  * @email yangchendev@qq.com
  */
 
-public class PayOrderActivity extends BaseActivity {
+public class PayOrderActivity extends BaseActivity implements IAliPayResultListener{
     private static final String TAG = "PayOrderActivity";
     private static final String ACTIVITY_NAME = "activityName";
     private static final String ACTIVITY_COST = "cost";
+    private static final String ORDER_ID = "orderId";
     /**
     * UI
     */
@@ -52,10 +59,14 @@ public class PayOrderActivity extends BaseActivity {
     */
     private String mActivityCost = null;
     private String mActivityName = null;
+    private String mOrderId = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //设置支付宝沙箱环境
+        EnvUtils.setEnv(EnvUtils.EnvEnum.SANDBOX);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payorder);
+        StatusBarCompat.setStatusBarColor(this,getResources().getColor(R.color.white));
         //隐藏actionBar
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -89,6 +100,7 @@ public class PayOrderActivity extends BaseActivity {
         rbAliPay.setButtonDrawable(R.drawable.btn_payorder_selector);
         mActivityCost = intent.getStringExtra(ACTIVITY_COST);
         mActivityName = intent.getStringExtra(ACTIVITY_NAME);
+        mOrderId = intent.getStringExtra(ORDER_ID);
         tvCost.setText(getResources().getString(R.string.activity_cost,mActivityCost));
         tvActivityName.setText(mActivityName);
         //默认微信支付
@@ -119,7 +131,44 @@ public class PayOrderActivity extends BaseActivity {
         if(rbAliPay.isChecked())
         {
             Toast.makeText(this,"支付宝支付",Toast.LENGTH_SHORT).show();
+            startAliPay();
         }
     }
 
+    /**
+    * 开始支付宝支付
+    */
+    private void startAliPay() {
+        AliPay.create(PayOrderActivity.this)
+                .setOrderId(mOrderId)
+                .setSubject(mActivityName)
+                .setTotalAmount(mActivityCost)
+                .setPayResultListener(PayOrderActivity.this)
+                .aliPay();
+    }
+
+    @Override
+    public void onAliPaySuccess() {
+        LogUtil.d(TAG,"支付成功");
+    }
+
+    @Override
+    public void onAliPaying() {
+        LogUtil.d(TAG,"支付中...");
+    }
+
+    @Override
+    public void onAliPayFail() {
+        LogUtil.d(TAG,"支付失败");
+    }
+
+    @Override
+    public void onAliPayCancel() {
+        LogUtil.d(TAG,"支付取消");
+    }
+
+    @Override
+    public void onAliPayConnectError() {
+        LogUtil.d(TAG,"网络连接错误");
+    }
 }

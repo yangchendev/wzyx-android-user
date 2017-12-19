@@ -37,6 +37,7 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
+            android:exported="true"
             android:name=".activity.SplashActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"

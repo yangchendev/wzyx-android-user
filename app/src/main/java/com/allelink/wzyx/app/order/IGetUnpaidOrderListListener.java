@@ -11,7 +11,7 @@ import java.util.List;
  * @date 2017/12/9
  * @email yangchendev@qq.com
  */
-public interface GetUnpaidOrderListListener {
+public interface IGetUnpaidOrderListListener {
 
     /**
      * 成功回调

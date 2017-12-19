@@ -11,22 +11,22 @@ public interface IAliPayResultListener {
     /**
     * 支付成功
     */
-    void onPaySuccess();
+    void onAliPaySuccess();
     /**
     * 支付中
     */
-    void onPaying();
+    void onAliPaying();
     /**
     * 支付失败
     */
-    void onPayFail();
+    void onAliPayFail();
     /**
     * 支付取消
     */
-    void onPayCancel();
+    void onAliPayCancel();
     /**
     * 网络连接错误
     */
-    void onPayConnectError();
+    void onAliPayConnectError();
 
 }

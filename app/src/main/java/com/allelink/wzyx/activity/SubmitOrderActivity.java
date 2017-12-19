@@ -9,7 +9,7 @@ import com.allelink.wzyx.R;
 import com.allelink.wzyx.activity.base.BaseActivity;
 import com.allelink.wzyx.app.WzyxApplication;
 import com.allelink.wzyx.app.order.OrderHandler;
-import com.allelink.wzyx.app.order.OrderListener;
+import com.allelink.wzyx.app.order.IOrderListener;
 import com.allelink.wzyx.ui.TitleBar;
 import com.allelink.wzyx.ui.loader.WzyxLoader;
 import com.allelink.wzyx.utils.toast.ToastUtil;
@@ -34,6 +34,7 @@ public class SubmitOrderActivity extends BaseActivity {
     private static final String SELLER_ID = "sellerId";
     private static final String ACTIVITY_NAME = "activityName";
     private static final String ACTIVITY_COST = "cost";
+    private static final String ORDER_ID = "orderId";
     /**
     * UI
     */
@@ -104,6 +105,7 @@ public class SubmitOrderActivity extends BaseActivity {
         mSellerId = bundle.getString(SELLER_ID);
         mActivityName = bundle.getString(ACTIVITY_NAME);
         mActivityCost = bundle.getString(ACTIVITY_COST);
+
     }
     /**
     * 提交订单事件
@@ -115,14 +117,15 @@ public class SubmitOrderActivity extends BaseActivity {
         params.put(USER_ID, mUserId);
         params.put(SELLER_ID, mSellerId);
         params.put(ACTIVITY_ID, mActivityId);
-        OrderHandler.apply(params, new OrderListener() {
+        OrderHandler.apply(params, new IOrderListener() {
             @Override
-            public void onSuccess() {
+            public void onSuccess(String orderId) {
                 WzyxLoader.stopLoading();
                 ToastUtil.toastShort(SubmitOrderActivity.this,getResources().getString(R.string.submit_order_success));
                 Intent intent = new Intent(SubmitOrderActivity.this, PayOrderActivity.class);
                 intent.putExtra(ACTIVITY_COST, mActivityCost);
                 intent.putExtra(ACTIVITY_NAME, mActivityName);
+                intent.putExtra(ORDER_ID, orderId);
                 startActivity(intent);
             }
 

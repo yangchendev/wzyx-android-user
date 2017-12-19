@@ -716,22 +716,26 @@ public class NearFragment extends SupportFragment {
             lat = location.getLatitude();
             lng = location.getLongitude();
             city = location.getCity();
-            if(!city.isEmpty()){
-                //定位成功，更新定位状态
-                tvPosition.setText(city.substring(0,city.length()-1));
-                showAndHideActivityList(SHOW);
-                if(isFirstLoading){
-                    getActivityList(lat,lng);
-                    isFirstLoading = false;
+            if(city != null){
+                Log.d(TAG, city);
+                if(!city.isEmpty()){
+                    //定位成功，更新定位状态
+                    tvPosition.setText(city.substring(0,city.length()-1));
+                    showAndHideActivityList(SHOW);
+                    if(isFirstLoading){
+                        getActivityList(lat,lng);
+                        isFirstLoading = false;
+                    }else {
+                        getActivityListByType(mSelectedActivityType,mSelectedRankingType,lat,lng);
+                    }
                 }else {
-                    getActivityListByType(mSelectedActivityType,mSelectedRankingType,lat,lng);
+                    tvPosition.setText(getResources().getString(R.string.locate));
+                    //定位失败
+                    showAndHideActivityList(HIDE);
                 }
-            }else {
-                tvPosition.setText(getResources().getString(R.string.locate));
-                //定位失败
-                showAndHideActivityList(HIDE);
             }
-            Log.d(TAG, city);
+
+
         }
     }
     /**

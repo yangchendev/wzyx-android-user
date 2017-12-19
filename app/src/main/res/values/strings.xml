@@ -130,4 +130,5 @@
     <string name="go_to_locate">去定位</string>
     <string name="twice_back">再按一次退出万众艺兴</string>
     <string name="pay">确认支付</string>
+    <string name="get_order_info_failure">获取订单信息失败</string>
 </resources>

@@ -246,7 +246,9 @@ public class CityPickerActivity extends AppCompatActivity implements View.OnClic
             latitude = location.getLatitude();
             longitude = location.getLongitude();
             city = location.getCity();
+
             if(city != null){
+                Log.d(TAG, city);
                 //更新定位状态
                 mCityAdapter.updateLocateState(LocateState.SUCCESS,city.substring(0,city.length()-1));
                 locateSuccess = true;
@@ -254,7 +256,7 @@ public class CityPickerActivity extends AppCompatActivity implements View.OnClic
                 mCityAdapter.updateLocateState(LocateState.FAILED,null);
                 locateSuccess = false;
             }
-            Log.d(TAG, city);
+
         }
     }
 

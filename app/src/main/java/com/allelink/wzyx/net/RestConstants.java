@@ -12,11 +12,12 @@ package com.allelink.wzyx.net;
 public class RestConstants {
     /**
     * http://101.132.191.9:8083/
+     * http://192.168.1.105:8086/
     */
     /**
     * 服务器主机的地址
     */
-    public static final String BASE_URL = "http://10.82.60.115:8083/";
+    public static final String BASE_URL = "http://101.132.191.9:8083/";
     /**
      * 注册的地址
      */
@@ -84,5 +85,5 @@ public class RestConstants {
     /**
     * 支付宝支付获取订单信息的地址
     */
-    public static final String ALI_PAY_GET_ORDER_INFO_URL = BASE_URL + "";
+    public static final String ALI_PAY_GET_ORDER_STRING_URL = BASE_URL + "alllink/pay/getAliPayOrderInfo";
 }

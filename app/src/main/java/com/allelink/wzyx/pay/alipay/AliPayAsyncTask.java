@@ -41,29 +41,29 @@ public class AliPayAsyncTask extends AsyncTask<String,Void,String> {
         LogUtil.d("alipay_result",resultInfo);
         LogUtil.d("alipay_result_status",resultStatus);
         switch (resultStatus){
-            case AliPayConstants.AL_PAY_STATUS_SUCCESS:
+            case AliPayConstants.ALI_PAY_STATUS_SUCCESS:
                 if(LISTENER != null){
-                    LISTENER.onPaySuccess();
+                    LISTENER.onAliPaySuccess();
                 }
                 break;
-            case AliPayConstants.AL_PAY_STATUS_FAIL:
+            case AliPayConstants.ALI_PAY_STATUS_FAIL:
                 if (LISTENER != null) {
-                    LISTENER.onPayFail();
+                    LISTENER.onAliPayFail();
                 }
                 break;
-            case AliPayConstants.AL_PAY_STATUS_PAYING:
+            case AliPayConstants.ALI_PAY_STATUS_PAYING:
                 if (LISTENER != null) {
-                    LISTENER.onPaying();
+                    LISTENER.onAliPaying();
                 }
                 break;
-            case AliPayConstants.AL_PAY_STATUS_CANCEL:
+            case AliPayConstants.ALI_PAY_STATUS_CANCEL:
                 if (LISTENER != null) {
-                    LISTENER.onPayCancel();
+                    LISTENER.onAliPayCancel();
                 }
                 break;
-            case AliPayConstants.AL_PAY_STATUS_CONNECT_ERROR:
+            case AliPayConstants.ALI_PAY_STATUS_CONNECT_ERROR:
                 if (LISTENER != null) {
-                    LISTENER.onPayConnectError();
+                    LISTENER.onAliPayConnectError();
                 }
                 break;
             default:

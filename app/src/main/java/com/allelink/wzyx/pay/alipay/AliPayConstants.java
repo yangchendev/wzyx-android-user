@@ -15,21 +15,21 @@ public final class AliPayConstants {
     /**
      * 订单支付成功
      */
-    public static final String AL_PAY_STATUS_SUCCESS = "9000";
+    public static final String ALI_PAY_STATUS_SUCCESS = "9000";
     /**
      * 订单处理中
      */
-    public static final String AL_PAY_STATUS_PAYING = "8000";
+    public static final String ALI_PAY_STATUS_PAYING = "8000";
     /**
      * 订单支付失败
      */
-    public static final String AL_PAY_STATUS_FAIL = "4000";
+    public static final String ALI_PAY_STATUS_FAIL = "4000";
     /**
      * 用户取消
      */
-    public static final String AL_PAY_STATUS_CANCEL = "6001";
+    public static final String ALI_PAY_STATUS_CANCEL = "6001";
     /**
      * 支付网络错误
      */
-    public static final String AL_PAY_STATUS_CONNECT_ERROR = "6002";
+    public static final String ALI_PAY_STATUS_CONNECT_ERROR = "6002";
 }

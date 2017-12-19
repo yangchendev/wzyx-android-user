@@ -7,11 +7,12 @@ package com.allelink.wzyx.app.order;
  * @date 2017/12/9
  * @email yangchendev@qq.com
  */
-public interface OrderListener {
+public interface IOrderListener {
     /**
      * 成功回调
+     * @param orderId 订单号
      */
-    void onSuccess();
+    void onSuccess(String orderId);
 
     /**
      * 失败回调
