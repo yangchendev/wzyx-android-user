@@ -24,7 +24,14 @@ public class OrderItem {
     * 花费金额
     */
     private String cost = null;
-
+    /**
+    * 订单状态
+    */
+    private String orderState = null;
+    /**
+    * 订单图片
+    */
+    private String imageUrl = null;
     public String getOrderId() {
         return orderId;
     }
@@ -55,5 +62,21 @@ public class OrderItem {
 
     public void setCost(String cost) {
         this.cost = cost;
+    }
+
+    public String getOrderState() {
+        return orderState;
+    }
+
+    public void setOrderState(String orderState) {
+        this.orderState = orderState;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

@@ -85,5 +85,5 @@ public class RestConstants {
     /**
     * 支付宝支付获取订单信息的地址
     */
-    public static final String ALI_PAY_GET_ORDER_STRING_URL = BASE_URL + "alllink/pay/getAliPayOrderInfo";
+    public static final String ALI_PAY_GET_ORDER_STRING_URL = BASE_URL + "alllink/alipay/payApp";
 }

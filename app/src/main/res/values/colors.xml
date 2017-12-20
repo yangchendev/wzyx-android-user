@@ -15,4 +15,8 @@
     <color name="price_color">#FC6636</color>
     <color name="price_color_pressed">#ea7f5c</color>
     <color name="black_e3">#E3E3E3</color>
+    <color name="pay">#FF3860</color>
+    <color name="pay_pressed">#ff6483</color>
+    <color name="canceled">#FD9003</color>
+    <color name="canceled_pressed">#f7a841</color>
 </resources>

@@ -224,7 +224,7 @@ public class OrderHandler {
                     message = jsonObject.getString("message");
                     if(SUCCESS.equals(result)){
                         if(listener != null){
-                            orderInfo = jsonObject.getJSONObject("data").getString("orderInfo");
+                            orderInfo = jsonObject.getString("data");
                             listener.onSuccess(orderInfo);
                         }
                     }else if(ERROR.equals(result)){

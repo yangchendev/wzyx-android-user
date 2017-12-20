@@ -79,9 +79,9 @@ public class AliPay {
         //1.通过服务器获取签名后的订单信息
         WzyxLoader.showLoading(mActivity);
         HashMap<String, Object> params = new HashMap<>();
-        params.put("out_trade_no", mOrderId);
+        params.put("orderIdStr", mOrderId);
         params.put("subject", mSubject);
-        params.put("total_amount", mTotalAmount);
+        params.put("totalAmount", mTotalAmount);
         OrderHandler.getAliPayOrderInfo(params, new IAliPayOrderInfoListener() {
             @Override
             public void onSuccess(String orderInfo) {

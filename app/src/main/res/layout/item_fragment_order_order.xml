@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.LinearLayoutCompat xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:layout_marginTop="10dp"
+    android:id="@+id/ll_item_fragment_order"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+        <!--不同订单类型的颜色指示器开始-->
+        <View
+            android:layout_centerVertical="true"
+            android:background="@color/brands_color"
+            android:id="@+id/view_item_fragment_order"
+            android:layout_width="4dp"
+            android:layout_height="24dp"/>
+        <!--不同订单类型的颜色指示器结束-->
+        <TextView
+            android:textColor="@color/black_333"
+            android:textSize="12sp"
+            tools:text="订单号：11121712347895"
+            android:layout_centerVertical="true"
+            android:id="@+id/tv_item_fragment_order_order_id"
+            android:layout_marginStart="6dp"
+            android:layout_toEndOf="@id/view_item_fragment_order"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_item_fragment_order_order_state"
+            android:textSize="12sp"
+            android:textColor="@color/brands_color"
+            tools:text="已完成"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="10dp"
+            android:layout_alignParentEnd="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <View
+        android:background="@color/grey"
+        android:layout_marginStart="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+    <!--订单信息开始-->
+    <android.support.v7.widget.LinearLayoutCompat
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+        <!--订单图片开始-->
+        <ImageView
+            tools:ignore="contentDescription"
+            android:background="@drawable/activity_default_pic"
+            android:id="@+id/iv_fragment_order_item_pic"
+            android:layout_marginStart="10dp"
+            android:layout_gravity="center_vertical"
+            android:layout_width="80dp"
+            android:layout_height="80dp" />
+        <!--订单图片结束-->
+        <android.support.v7.widget.LinearLayoutCompat
+            android:orientation="vertical"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="10dp"
+            android:layout_gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="80dp">
+            <TextView
+                android:id="@+id/tv_item_fragment_order_order_name"
+                tools:text="边学边采舞蹈培训中心"
+                android:textColor="@color/black_333"
+                android:textSize="16sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tv_item_fragment_order_create_time"
+                tools:text="2017-12-18 16:12"
+                android:textSize="12sp"
+                android:textColor="@color/black_999"
+                android:layout_marginTop="4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </android.support.v7.widget.LinearLayoutCompat>
+        <!--活动信息结束-->
+    </android.support.v7.widget.LinearLayoutCompat>
+    <View
+        android:background="@color/grey"
+        android:layout_marginStart="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+        <TextView
+            android:id="@+id/tv_item_fragment_order_total_tip"
+            android:text="@string/total_cost"
+            android:textSize="12sp"
+            android:textColor="@color/black_666"
+            android:layout_marginStart="10dp"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_item_fragment_order_total_cost"
+            android:textColor="@color/brands_color"
+            android:text="@string/activity_cost"
+            android:textSize="20sp"
+            android:layout_marginStart="4dp"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/tv_item_fragment_order_total_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/btn_item_fragment_order_right"
+            android:background="@drawable/btn_refund_border"
+            android:textColor="@color/brands_color"
+            android:textSize="12sp"
+            tools:text="退款"
+            android:layout_marginEnd="10dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:layout_width="70dp"
+            android:layout_height="24dp" />
+        <Button
+            android:visibility="gone"
+            android:layout_marginEnd="30dp"
+            android:layout_toStartOf="@id/btn_item_fragment_order_right"
+            android:id="@+id/btn_item_fragment_order_left"
+            android:background="@drawable/btn_comment_border"
+            android:textColor="@color/canceled"
+            android:textSize="12sp"
+            tools:text="去评价"
+            android:layout_centerVertical="true"
+            android:layout_width="70dp"
+            android:layout_height="24dp" />
+    </RelativeLayout>
+</android.support.v7.widget.LinearLayoutCompat>

@@ -73,14 +73,14 @@ public class NearFragment extends SupportFragment {
     private static final int COST_ORDERING = 1;
     private static final int DISTANCE_ORDERING = 2;
     /**
-    * tab标签数据
-    */
+     * tab标签数据
+     */
     private String[] mTabTitles = new String[]{
-            "所有类型",
-            "外语培训",
-            "音乐培训",
-            "美术培训"
-    };
+                    "所有类型",
+                    "外语培训",
+                    "音乐培训",
+                    "美术培训"
+            };
     /**
     * 各种类型
     */

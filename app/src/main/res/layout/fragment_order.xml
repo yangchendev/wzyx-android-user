@@ -1,9 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/grey"
     android:layout_height="match_parent">
-    <TextView
-        android:text="@string/fragment_order"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-</RelativeLayout>
+    <!--顶部导航栏开始-->
+    <com.allelink.wzyx.ui.TitleBar
+        android:id="@+id/tb_fragment_order"
+        app:titleColor="@color/black_333"
+        app:titleSize="6sp"
+        app:titleText="@string/my_order"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+    </com.allelink.wzyx.ui.TitleBar>
+    <!--顶部导航栏结束-->
+    <!--订单类型选择栏开始-->
+    <android.support.design.widget.TabLayout
+        app:tabTextColor="@color/black_999"
+        app:tabSelectedTextColor="@color/brands_color"
+        app:tabIndicatorColor="@color/brands_color"
+        app:tabIndicatorHeight="1dp"
+        android:id="@+id/tab_fragment_order_tab_layout"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="36dp">
+    </android.support.design.widget.TabLayout>
+    <!--订单类型选择栏结束-->
+    <!--订单列表开始-->
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/srl_fragment_order"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <com.scwang.smartrefresh.layout.header.ClassicsHeader
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <com.scwang.smartrefresh.layout.footer.ClassicsFooter
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_fragment_order_order_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </android.support.v7.widget.RecyclerView>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+    <!--订单列表结束-->
+</android.support.v7.widget.LinearLayoutCompat>
