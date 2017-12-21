@@ -14,6 +14,7 @@
         android:layout_height="56dp"
         layout="@layout/bottom_bar"/>
     <!--底部导航栏结束-->
+
     <!--fragment容器开始-->
     <FrameLayout
         android:layout_above="@id/include_main_bottom_bar"

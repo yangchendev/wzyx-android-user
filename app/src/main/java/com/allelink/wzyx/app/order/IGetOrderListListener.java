@@ -5,17 +5,17 @@ import com.allelink.wzyx.model.OrderItem;
 import java.util.List;
 
 /**
- * 获取未付款订单集合接口
+ * 获取订单集合接口
  * @author yangc
  * @version 1.0
  * @date 2017/12/9
  * @email yangchendev@qq.com
  */
-public interface IGetUnpaidOrderListListener {
+public interface IGetOrderListListener {
 
     /**
      * 成功回调
-     * @param orderItems 未付款订单列表集合
+     * @param orderItems 订单列表集合
      */
     void onSuccess(List<OrderItem> orderItems);
 

@@ -38,7 +38,7 @@ public class AliPayAsyncTask extends AsyncTask<String,Void,String> {
         final PayResult payResult = new PayResult(result);
         final String resultInfo = payResult.getResult();
         final String resultStatus = payResult.getResultStatus();
-        LogUtil.d("alipay_result",resultInfo);
+        LogUtil.json("alipay_result",resultInfo);
         LogUtil.d("alipay_result_status",resultStatus);
         switch (resultStatus){
             case AliPayConstants.ALI_PAY_STATUS_SUCCESS:

@@ -88,16 +88,16 @@ public class OrderHandler {
 
     /**
      * 获取未付款订单集合
-     * @param params 请求参数 （用户Id）
+     * @param params 请求参数 （用户Id,订单状态）
      * @param listener 回调接口
      */
-    public static void getUnpaidOrderList(HashMap<String,Object> params,final IGetUnpaidOrderListListener listener){
+    public static void getOrderList(HashMap<String,Object> params,final IGetOrderListListener listener){
         //将请求参数转换成json格式
         String jsonString = JSON.toJSONString(params);
         LogUtil.json(TAG,jsonString);
         RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"),jsonString);
         //post 提交json格式的数据
-        Call<String> call = RestCreator.getRestService().postRaw(RestConstants.GET_UNPAID_ORDER_LIST_URL, body);
+        Call<String> call = RestCreator.getRestService().postRaw(RestConstants.GET_ORDER_LIST_URL, body);
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {

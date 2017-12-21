@@ -73,7 +73,7 @@ public class RestConstants {
     /**
     * 获取未付款订单列表的接口的地址
     */
-    public static final String GET_UNPAID_ORDER_LIST_URL = BASE_URL + "alllink/order/getNonPayList";
+    public static final String GET_ORDER_LIST_URL = BASE_URL + "alllink/order/getOrderList";
     /**
     * 删除订单的接口的地址
     */

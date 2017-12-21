@@ -11,7 +11,7 @@ public class OrderItem {
     /**
     * 订单Id
     */
-    private String orderId = null;
+    private String orderIdStr = null;
     /**
     * 活动名称
     */
@@ -32,12 +32,12 @@ public class OrderItem {
     * 订单图片
     */
     private String imageUrl = null;
-    public String getOrderId() {
-        return orderId;
+    public String getOrderIdStr() {
+        return orderIdStr;
     }
 
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
+    public void setOrderIdStr(String orderIdStr) {
+        this.orderIdStr = orderIdStr;
     }
 
     public String getActivityName() {

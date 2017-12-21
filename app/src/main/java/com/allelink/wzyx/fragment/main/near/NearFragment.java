@@ -413,10 +413,10 @@ public class NearFragment extends SupportFragment {
                         //更新布局
                         if(type == REFRESH){
                             mAdapter.replaceData(mActivityItems);
-                            refreshlayout.finishRefresh(1000,true);
+                            refreshlayout.finishRefresh(1000,false);
                         }else if(type == LOAD_MORE){
                             mAdapter.addData(mActivityItems);
-                            refreshlayout.finishLoadmore(1000, true);
+                            refreshlayout.finishLoadmore(1000, false);
                         }
                     }
                 });
@@ -430,7 +430,7 @@ public class NearFragment extends SupportFragment {
             TabLayout.Tab tab = tabLayout.newTab();
             //设置标题
             tab.setText(mTabTitles[i]);
-            //添加tab到tablayout
+            //添加tab到tabLayout
             tabLayout.addTab(tab);
         }
     }

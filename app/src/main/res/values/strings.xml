@@ -137,4 +137,6 @@
     <string name="completed">已完成</string>
     <string name="canceled">已取消</string>
     <string name="order_id">订单号：%s</string>
+    <string name="order_empty">还没有订单哦～</string>
+    <string name="wait_for_pay">待支付</string>
 </resources>

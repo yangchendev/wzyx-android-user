@@ -53,9 +53,10 @@ public class OrderItemAdapter extends BaseQuickAdapter<OrderItem,BaseViewHolder>
             //未付款
             case ORDER_UNPAID:
                 orderStateView.setBackgroundColor(mContext.getResources().getColor(R.color.pay));
-                tvOrderState.setText(mContext.getResources().getString(R.string.go_to_pay));
+                tvOrderState.setText(mContext.getResources().getString(R.string.wait_for_pay));
                 tvOrderState.setTextColor(mContext.getResources().getColor(R.color.pay));
                 tvOrderCost.setTextColor(mContext.getResources().getColor(R.color.pay));
+                btnRight.setVisibility(View.VISIBLE);
                 btnRight.setText(mContext.getResources().getString(R.string.go_to_pay));
                 btnRight.setTextColor(mContext.getResources().getColor(R.color.pay));
                 btnRight.setBackground(mContext.getResources().getDrawable(R.drawable.btn_pay_border));
@@ -66,6 +67,7 @@ public class OrderItemAdapter extends BaseQuickAdapter<OrderItem,BaseViewHolder>
                 tvOrderState.setText(mContext.getResources().getString(R.string.completed));
                 tvOrderState.setTextColor(mContext.getResources().getColor(R.color.brands_color));
                 tvOrderCost.setTextColor(mContext.getResources().getColor(R.color.brands_color));
+                btnRight.setVisibility(View.VISIBLE);
                 btnRight.setText(mContext.getResources().getString(R.string.refund));
                 btnRight.setTextColor(mContext.getResources().getColor(R.color.brands_color));
                 btnRight.setBackground(mContext.getResources().getDrawable(R.drawable.btn_refund_border));
@@ -83,7 +85,7 @@ public class OrderItemAdapter extends BaseQuickAdapter<OrderItem,BaseViewHolder>
         //设置订单费用
         tvOrderCost.setText(mContext.getResources().getString(R.string.activity_cost,item.getCost()));
         //设置订单号
-        helper.setText(R.id.tv_item_fragment_order_order_id, mContext.getResources().getString(R.string.order_id));
+        helper.setText(R.id.tv_item_fragment_order_order_id, mContext.getResources().getString(R.string.order_id,item.getOrderIdStr()));
         //设置订单图片
         ImageView imageView = helper.getView(R.id.iv_fragment_order_item_pic);
         GlideApp.with(mContext)

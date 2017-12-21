@@ -6,15 +6,19 @@
     android:background="@color/grey"
     android:layout_height="match_parent">
     <!--顶部导航栏开始-->
-    <com.allelink.wzyx.ui.TitleBar
-        android:id="@+id/tb_fragment_order"
-        app:titleColor="@color/black_333"
-        app:titleSize="6sp"
-        app:titleText="@string/my_order"
+    <RelativeLayout
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="48dp">
-    </com.allelink.wzyx.ui.TitleBar>
+        <TextView
+            android:textSize="16sp"
+            android:textColor="@color/black_333"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"
+            android:text="@string/my_order"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
     <!--顶部导航栏结束-->
     <!--订单类型选择栏开始-->
     <android.support.design.widget.TabLayout
@@ -28,6 +32,7 @@
         android:layout_height="36dp">
     </android.support.design.widget.TabLayout>
     <!--订单类型选择栏结束-->
+
     <!--订单列表开始-->
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/srl_fragment_order"
