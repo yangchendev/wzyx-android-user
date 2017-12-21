@@ -1,5 +1,6 @@
 package com.allelink.wzyx.fragment.main.order;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.allelink.wzyx.R;
+import com.allelink.wzyx.activity.PayOrderActivity;
 import com.allelink.wzyx.adapter.OrderItemAdapter;
 import com.allelink.wzyx.app.order.IGetOrderListListener;
 import com.allelink.wzyx.app.order.OrderHandler;
@@ -32,6 +34,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import me.yokeyword.fragmentation.SupportFragment;
+import qiu.niorgai.StatusBarCompat;
 
 /**
  * @author yangc
@@ -45,6 +48,9 @@ import me.yokeyword.fragmentation.SupportFragment;
 public class OrderFragment extends SupportFragment{
     private static final String TAG = OrderFragment.class.getSimpleName();
     private Unbinder mUnbinder = null;
+    private static final String ACTIVITY_NAME = "activityName";
+    private static final String ACTIVITY_COST = "cost";
+    private static final String ORDER_ID = "orderId";
     /**
      * tab标签数据
      */
@@ -111,12 +117,16 @@ public class OrderFragment extends SupportFragment{
         bindAdapter();
         initItemChildEvent();
         initRefreshEvent();
-
     }
-
+    /**
+    * 在fragment可见时调用
+    */
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onSupportVisible() {
+        super.onSupportVisible();
+        LogUtil.d(TAG,"订单页可见");
+        //设置沉浸式状态栏
+        StatusBarCompat.setStatusBarColor(_mActivity,getResources().getColor(R.color.white));
         getOrderList(mOrderState);
     }
 
@@ -153,6 +163,11 @@ public class OrderFragment extends SupportFragment{
                 }else if(orderState.equals(String.valueOf(ORDER_UNPAID))){
                     //去付款
                     LogUtil.d(TAG,"去付款");
+                    Intent intent = new Intent(_mActivity, PayOrderActivity.class);
+                    intent.putExtra(ACTIVITY_COST, orderItem.getCost());
+                    intent.putExtra(ACTIVITY_NAME, orderItem.getActivityName());
+                    intent.putExtra(ORDER_ID, orderItem.getOrderIdStr());
+                    startActivity(intent);
                 }
             }
         });

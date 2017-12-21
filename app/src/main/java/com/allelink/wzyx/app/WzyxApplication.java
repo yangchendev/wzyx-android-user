@@ -10,7 +10,10 @@ import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import me.yokeyword.fragmentation.BuildConfig;
 import me.yokeyword.fragmentation.Fragmentation;
@@ -31,6 +34,10 @@ public class WzyxApplication extends Application {
     * activity集合，用来统一管理activity
     */
     private List<Activity> activityList = new ArrayList<>();
+    /**
+    * 要销毁的activity
+    */
+    private static Map<String,Activity> destroyActivityMap = new HashMap<>();
     private static Context context;
     @Override
     public void onCreate() {
@@ -103,6 +110,31 @@ public class WzyxApplication extends Application {
             }else if(!ac.isFinishing()){
                 //activityList.remove(ac);
                 ac.finish();
+
+            }
+        }
+    }
+
+    /**
+     * 添加需要销毁的activity
+     * @param activity activity
+     * @param activityName  name
+     */
+    public static void addDestroyActivity(Activity activity,String activityName){
+        destroyActivityMap.put(activityName, activity);
+    }
+
+    /**
+     * 销毁指定的activity
+     * @param activityName name
+     */
+    public static void destroyActivity(String activityName){
+        Set<String> keySet = destroyActivityMap.keySet();
+        if(keySet.size() > 0){
+            for(String key : keySet){
+                if(activityName.equals(key)){
+                    destroyActivityMap.get(key).finish();
+                }
             }
         }
     }

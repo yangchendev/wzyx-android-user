@@ -7,6 +7,7 @@ import android.widget.Button;
 
 import com.allelink.wzyx.R;
 import com.allelink.wzyx.activity.base.BaseActivity;
+import com.allelink.wzyx.app.WzyxApplication;
 import com.allelink.wzyx.app.activityinfo.ActivityInfoHandler;
 import com.allelink.wzyx.app.activityinfo.GetOneActivityDetailInfoListener;
 import com.allelink.wzyx.model.ActivityDetailItem;
@@ -82,6 +83,7 @@ public class ActivityInfoActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info);
+        WzyxApplication.addDestroyActivity(this,"ActivityInfoActivity");
         StatusBarCompat.setStatusBarColor(this,getResources().getColor(R.color.white));
         //隐藏actionBar
         android.app.ActionBar actionBar = getActionBar();

@@ -22,6 +22,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import me.yokeyword.fragmentation.SupportFragment;
+import qiu.niorgai.StatusBarCompat;
 
 /**
  * @author yangc
@@ -74,12 +75,12 @@ public class MineFragment extends SupportFragment{
         return view;
     }
 
-    /**
-    * 每次进入fragment时进行用户数据的加载
-    */
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onSupportVisible() {
+        super.onSupportVisible();
+        LogUtil.d(TAG,"我的页面可见");
+        //设置沉浸式状态栏
+        StatusBarCompat.setStatusBarColor(_mActivity,getResources().getColor(R.color.brands_color));
         //获取本地保存的昵称
         String nickname = WzyxPreference.getCustomAppProfile(WzyxPreference.KEY_NICKNAME);
         if(nickname.isEmpty()){
@@ -97,6 +98,7 @@ public class MineFragment extends SupportFragment{
                     .into(ivAvatar);
         }
     }
+
 
     /**
     * 设置按钮点击事件

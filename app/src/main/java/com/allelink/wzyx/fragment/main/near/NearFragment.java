@@ -47,6 +47,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import me.yokeyword.fragmentation.SupportFragment;
+import qiu.niorgai.StatusBarCompat;
 
 /**
  * @author yangc
@@ -190,10 +191,15 @@ public class NearFragment extends SupportFragment {
         initLocation();
         initRefresh();
     }
-
+    /**
+    * 在附近页可见时在去定位
+    */
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onSupportVisible() {
+        super.onSupportVisible();
+        LogUtil.d(TAG,"附近页可见");
+        //设置沉浸式状态栏
+        StatusBarCompat.setStatusBarColor(_mActivity,getResources().getColor(R.color.white));
         mLocationClient.start();
     }
 

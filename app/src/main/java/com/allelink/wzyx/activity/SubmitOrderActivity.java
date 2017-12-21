@@ -58,6 +58,7 @@ public class SubmitOrderActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_submit_order);
+        WzyxApplication.addDestroyActivity(this,"SubmitOrderActivity");
         StatusBarCompat.setStatusBarColor(this,getResources().getColor(R.color.white));
         //隐藏actionBar
         android.app.ActionBar actionBar = getActionBar();

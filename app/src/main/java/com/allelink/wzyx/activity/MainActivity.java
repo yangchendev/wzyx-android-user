@@ -44,6 +44,8 @@ public class MainActivity extends BaseActivity {
     private long mExitTime = 0;
     private static final int EXIT_TIME = 2000;
     private static String ACTION_FINISH = "ACTION_FINISH";
+    private static final int REQUEST_CODE_PAY_SUCCESS = 9000;
+
     /**
     * UI
     */
@@ -132,6 +134,7 @@ public class MainActivity extends BaseActivity {
     * 初始化fragment
     */
     private void initFragment() {
+
         mHomeFragment = HomeFragment.newInstance();
         mNearFragment = NearFragment.newInstance();
         mForumFragment = ForumFragment.newInstance();
@@ -252,5 +255,14 @@ public class MainActivity extends BaseActivity {
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        int requestCode = intent.getIntExtra("pay_success",0);
+        if(requestCode == REQUEST_CODE_PAY_SUCCESS){
+            selectOrderFragment();
+        }
     }
 }

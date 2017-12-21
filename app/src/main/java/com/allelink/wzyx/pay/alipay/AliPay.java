@@ -87,7 +87,7 @@ public class AliPay {
             public void onSuccess(String orderInfo) {
                 WzyxLoader.stopLoading();
                 //2.获取成功后发起支付宝支付
-                LogUtil.d("orderInfo",orderInfo);
+                LogUtil.json("orderInfo",orderInfo);
                 final AliPayAsyncTask aliPayAsyncTask = new AliPayAsyncTask(mActivity, mIAliPayResultListener);
                 aliPayAsyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, orderInfo);
             }

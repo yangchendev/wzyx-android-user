@@ -139,4 +139,6 @@
     <string name="order_id">订单号：%s</string>
     <string name="order_empty">还没有订单哦～</string>
     <string name="wait_for_pay">待支付</string>
+    <string name="pay_success">支付成功</string>
+    <string name="pay_failure">支付失败</string>
 </resources>

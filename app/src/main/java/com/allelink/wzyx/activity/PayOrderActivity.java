@@ -6,7 +6,6 @@ import android.support.v7.app.ActionBar;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.alipay.sdk.app.EnvUtils;
 import com.allelink.wzyx.R;
@@ -16,6 +15,7 @@ import com.allelink.wzyx.pay.alipay.AliPay;
 import com.allelink.wzyx.pay.alipay.IAliPayResultListener;
 import com.allelink.wzyx.ui.TitleBar;
 import com.allelink.wzyx.utils.log.LogUtil;
+import com.allelink.wzyx.utils.toast.ToastUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,6 +35,7 @@ public class PayOrderActivity extends BaseActivity implements IAliPayResultListe
     private static final String ACTIVITY_NAME = "activityName";
     private static final String ACTIVITY_COST = "cost";
     private static final String ORDER_ID = "orderId";
+    private static final int REQUEST_CODE_PAY_SUCCESS = 9000;
     /**
     * UI
     */
@@ -125,12 +126,12 @@ public class PayOrderActivity extends BaseActivity implements IAliPayResultListe
     {
         //微信支付
         if(rbWechatPay.isChecked()){
-            Toast.makeText(this,"微信支付",Toast.LENGTH_SHORT).show();
+
         }
         //支付宝支付
         if(rbAliPay.isChecked())
         {
-            Toast.makeText(this,"支付宝支付",Toast.LENGTH_SHORT).show();
+            //开始支付宝支付
             startAliPay();
         }
     }
@@ -146,10 +147,21 @@ public class PayOrderActivity extends BaseActivity implements IAliPayResultListe
                 .setPayResultListener(PayOrderActivity.this)
                 .aliPay();
     }
-
+    /**
+     * 支付宝支付状态，获取支付状态后都要向服务器发送该订单的状态
+     */
     @Override
     public void onAliPaySuccess() {
+        ToastUtil.toastShort(PayOrderActivity.this,getResources().getString(R.string.pay_success));
         LogUtil.d(TAG,"支付成功");
+        WzyxApplication.destroyActivity("SubmitOrderActivity");
+        WzyxApplication.destroyActivity("ActivityInfoActivity");
+        Intent intent = new Intent(PayOrderActivity.this, MainActivity.class);
+        intent.putExtra("pay_success", REQUEST_CODE_PAY_SUCCESS);
+        startActivity(intent);
+        ((WzyxApplication)getApplication()).finishSingleActivity(PayOrderActivity.this);
+
+
     }
 
     @Override
@@ -159,16 +171,21 @@ public class PayOrderActivity extends BaseActivity implements IAliPayResultListe
 
     @Override
     public void onAliPayFail() {
+        ToastUtil.toastShort(PayOrderActivity.this,getResources().getString(R.string.pay_failure));
         LogUtil.d(TAG,"支付失败");
+
     }
 
     @Override
     public void onAliPayCancel() {
+        ToastUtil.toastShort(PayOrderActivity.this,getResources().getString(R.string.pay_failure));
         LogUtil.d(TAG,"支付取消");
+
     }
 
     @Override
     public void onAliPayConnectError() {
+        ToastUtil.toastShort(PayOrderActivity.this,getResources().getString(R.string.pay_failure));
         LogUtil.d(TAG,"网络连接错误");
     }
 }
