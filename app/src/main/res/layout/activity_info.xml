@@ -237,7 +237,7 @@
             android:layout_height="wrap_content" />
         <Button
             style="@style/Widget.AppCompat.Button.Borderless"
-            android:background="@drawable/btn_enroll_selector"
+            android:background="@drawable/btn_blue_selector"
             android:id="@+id/btn_activity_info_enroll_activity"
             android:text="@string/enroll_activity"
             android:textColor="@color/white"

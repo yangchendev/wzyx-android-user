@@ -77,7 +77,7 @@ public class RestConstants {
     /**
     * 删除订单的接口的地址
     */
-    public static final String DELETE_ORDER_URL = BASE_URL + "alllink/order/deleteOrder";
+    public static final String DELETE_ORDER_URL = BASE_URL + "alllink/order/modifyOrderState";
     /**
     * 服务器图片目录地址
     */
@@ -86,4 +86,12 @@ public class RestConstants {
     * 支付宝支付获取订单信息的地址
     */
     public static final String ALI_PAY_GET_ORDER_STRING_URL = BASE_URL + "alllink/alipay/payApp";
+    /**
+    * 通知后台订单支付成功
+    */
+    public static final String NOTIFY_UPDATE_ORDER_INFO_URL = BASE_URL+"alllink/alipay/updateOrderInfo";
+    /**
+    * 申请退款地址
+    */
+    public static final String APPLY_REFUND_URL = BASE_URL+"alllink/pay/refundCheck";
 }

@@ -1,21 +1,21 @@
-package com.allelink.wzyx.app.order;
+package com.allelink.wzyx.app.pay;
 
 /**
- * 活动报名回调接口
+ * 退款回调
  * @author yangc
  * @version 1.0
- * @date 2017/12/9
+ * @date 2017/12/22
  * @email yangchendev@qq.com
  */
-public interface IOrderListener {
+public interface IRefundListener {
     /**
      * 成功回调
-     * @param orderId 订单号
      */
-    void onSuccess(String orderId);
+    void onSuccess();
     /**
      * 失败回调
      * @param errorMessage 错误信息
      */
     void onFailure(String errorMessage);
+
 }

@@ -11,9 +11,12 @@ import com.alipay.sdk.app.EnvUtils;
 import com.allelink.wzyx.R;
 import com.allelink.wzyx.activity.base.BaseActivity;
 import com.allelink.wzyx.app.WzyxApplication;
+import com.allelink.wzyx.app.order.IOrderListener;
+import com.allelink.wzyx.app.order.OrderHandler;
 import com.allelink.wzyx.pay.alipay.AliPay;
 import com.allelink.wzyx.pay.alipay.IAliPayResultListener;
 import com.allelink.wzyx.ui.TitleBar;
+import com.allelink.wzyx.ui.loader.WzyxLoader;
 import com.allelink.wzyx.utils.log.LogUtil;
 import com.allelink.wzyx.utils.toast.ToastUtil;
 
@@ -152,16 +155,34 @@ public class PayOrderActivity extends BaseActivity implements IAliPayResultListe
      */
     @Override
     public void onAliPaySuccess() {
-        ToastUtil.toastShort(PayOrderActivity.this,getResources().getString(R.string.pay_success));
         LogUtil.d(TAG,"支付成功");
+        //通知服务器支付成功
+        updateOrderInfo();
         WzyxApplication.destroyActivity("SubmitOrderActivity");
         WzyxApplication.destroyActivity("ActivityInfoActivity");
         Intent intent = new Intent(PayOrderActivity.this, MainActivity.class);
         intent.putExtra("pay_success", REQUEST_CODE_PAY_SUCCESS);
         startActivity(intent);
         ((WzyxApplication)getApplication()).finishSingleActivity(PayOrderActivity.this);
-
-
+    }
+    /**
+    * 通知服务器支付成功
+    */
+    private void updateOrderInfo() {
+        WzyxLoader.showLoading(PayOrderActivity.this);
+        params.clear();
+        params.put("orderIdStr", mOrderId);
+        OrderHandler.updateOrderInfo(params, new IOrderListener() {
+            @Override
+            public void onSuccess(String orderId) {
+                WzyxLoader.stopLoading();
+                ToastUtil.toastShort(PayOrderActivity.this,getResources().getString(R.string.pay_success));
+            }
+            @Override
+            public void onFailure(String errorMessage) {
+                WzyxLoader.stopLoading();
+            }
+        });
     }
 
     @Override

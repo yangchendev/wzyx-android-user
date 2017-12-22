@@ -10,7 +10,7 @@ import com.allelink.wzyx.R;
 import com.allelink.wzyx.app.GlideApp;
 import com.allelink.wzyx.model.OrderItem;
 import com.allelink.wzyx.net.RestConstants;
-import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.BaseItemDraggableAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 
 import java.util.List;
@@ -22,7 +22,7 @@ import java.util.List;
  * @date 2017/12/20
  * @email yangchendev@qq.com
  */
-public class OrderItemAdapter extends BaseQuickAdapter<OrderItem,BaseViewHolder>{
+public class OrderItemAdapter extends BaseItemDraggableAdapter<OrderItem,BaseViewHolder> {
     /**
     * 未付款
     */
@@ -35,6 +35,15 @@ public class OrderItemAdapter extends BaseQuickAdapter<OrderItem,BaseViewHolder>
     * 已取消
     */
     private static final String ORDER_CANCELED = "-1";
+    /**
+    * 订单退款审核中
+    */
+    private static final String ORDER_REFUND_APPLYING = "2";
+    /**
+    * 订单已退款
+    */
+    private static final String ORDER_REFUND_SUCCESS = "3";
+
     public OrderItemAdapter(int layoutResId, @Nullable List<OrderItem> data) {
         super(layoutResId, data);
     }
@@ -79,6 +88,20 @@ public class OrderItemAdapter extends BaseQuickAdapter<OrderItem,BaseViewHolder>
                 tvOrderCost.setTextColor(mContext.getResources().getColor(R.color.canceled));
                 btnRight.setVisibility(View.GONE);
                 break;
+            case ORDER_REFUND_APPLYING:
+                orderStateView.setBackgroundColor(mContext.getResources().getColor(R.color.brands_color));
+                tvOrderState.setText(mContext.getResources().getString(R.string.refunding));
+                tvOrderState.setTextColor(mContext.getResources().getColor(R.color.brands_color));
+                tvOrderCost.setTextColor(mContext.getResources().getColor(R.color.brands_color));
+                btnRight.setVisibility(View.GONE);
+                break;
+            case ORDER_REFUND_SUCCESS:
+                orderStateView.setBackgroundColor(mContext.getResources().getColor(R.color.brands_color));
+                tvOrderState.setText(mContext.getResources().getString(R.string.refund_success));
+                tvOrderState.setTextColor(mContext.getResources().getColor(R.color.brands_color));
+                tvOrderCost.setTextColor(mContext.getResources().getColor(R.color.brands_color));
+                btnRight.setVisibility(View.GONE);
+                break;
             default:
                 break;
         }
@@ -99,5 +122,6 @@ public class OrderItemAdapter extends BaseQuickAdapter<OrderItem,BaseViewHolder>
         helper.setText(R.id.tv_item_fragment_order_create_time,item.getCreateTime());
         //绑定需要实现点击的按钮
         helper.addOnClickListener(R.id.btn_item_fragment_order_right);
+        helper.addOnClickListener(R.id.ll_right);
     }
 }

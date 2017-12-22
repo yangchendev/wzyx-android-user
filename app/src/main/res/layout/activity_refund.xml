@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grey"
+    tools:context="com.allelink.wzyx.activity.RefundActivity">
+    <android.support.v7.widget.LinearLayoutCompat
+        android:id="@+id/ll_activity_refund"
+        android:background="@color/grey"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <!--导航栏开始-->
+        <com.allelink.wzyx.ui.TitleBar
+            android:background="@color/white"
+            android:id="@+id/tb_activity_refund"
+            app:titleSize="6sp"
+            app:titleColor="@color/black_333"
+            app:titleText="@string/refund"
+            app:leftButtonBackground="@drawable/btn_back_blue_selector"
+            android:layout_width="match_parent"
+            android:layout_height="48dp">
+        </com.allelink.wzyx.ui.TitleBar>
+        <!--导航栏结束-->
+        <!--退款金额开始-->
+        <TextView
+            android:text="@string/refund_money"
+            android:textColor="@color/black_666"
+            android:textSize="14sp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+            <TextView
+                android:id="@+id/tv_activity_refund_money"
+                android:layout_marginStart="10dp"
+                android:layout_gravity="center_vertical"
+                android:textSize="20sp"
+                android:textColor="@color/brands_color"
+                tools:text="￥100.00"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <!--退款金额结束-->
+        <!--退款说明开始-->
+        <TextView
+            android:text="@string/refund_desc"
+            android:textColor="@color/black_666"
+            android:textSize="14sp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/et_activity_refund_refund_desc"
+            android:textColor="@color/black_999"
+            android:textSize="14sp"
+            android:gravity="start"
+            android:hint="@string/refund_hint"
+            android:padding="10dp"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="90dp" />
+        <!--退款说明结束-->
+        <!--退款按钮开始-->
+        <Button
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="30dp"
+            android:id="@+id/btn_activity_refund_submit_apply"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:text="@string/submit_apply"
+            android:background="@drawable/btn_blue_selector"
+            android:layout_width="match_parent"
+            android:layout_height="48dp" />
+        <!--退款按钮结束-->
+    </android.support.v7.widget.LinearLayoutCompat>
+
+</RelativeLayout>

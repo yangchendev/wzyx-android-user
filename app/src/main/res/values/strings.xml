@@ -141,4 +141,15 @@
     <string name="wait_for_pay">待支付</string>
     <string name="pay_success">支付成功</string>
     <string name="pay_failure">支付失败</string>
+    <string name="refund_money">退款金额</string>
+    <string name="refund_desc">退款说明</string>
+    <string name="refund_hint">填写退款说明，让我们更好的改正</string>
+    <string name="submit_apply">提交申请</string>
+    <string name="delete">删除</string>
+    <string name="order_delete_success">订单删除成功</string>
+    <string name="order_delete_failure">订单删除失败</string>
+    <string name="apply_refund_success">退款申请成功</string>
+    <string name="apply_refund_failure">退款申请失败</string>
+    <string name="refunding">退款中</string>
+    <string name="refund_success">退款成功</string>
 </resources>

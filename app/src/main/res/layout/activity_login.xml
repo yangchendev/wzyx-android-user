@@ -134,6 +134,7 @@
 
     <!--跳过登录，方便调试-->
     <TextView
+        android:visibility="gone"
         android:id="@+id/tv_login_skip"
         android:layout_marginTop="20dp"
         android:textSize="14sp"

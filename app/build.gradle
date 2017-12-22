@@ -7,7 +7,7 @@ android {
         minSdkVersion 19
         targetSdkVersion 26
         versionCode 1
-        versionName "1.2.0.0"
+        versionName "1.0.0.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -67,6 +67,8 @@ dependencies {
     implementation 'com.youth.banner:banner:1.4.10'
     //下拉刷新依赖
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.3'
+    //左滑删除依赖
+    implementation 'com.github.anzaizai:EasySwipeMenuLayout:1.1.2'
     //城市选择器依赖
     implementation project(':citypicker')
     //支付宝支付依赖

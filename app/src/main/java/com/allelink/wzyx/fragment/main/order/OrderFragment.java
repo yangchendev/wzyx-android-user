@@ -12,8 +12,10 @@ import android.view.ViewGroup;
 
 import com.allelink.wzyx.R;
 import com.allelink.wzyx.activity.PayOrderActivity;
+import com.allelink.wzyx.activity.RefundActivity;
 import com.allelink.wzyx.adapter.OrderItemAdapter;
 import com.allelink.wzyx.app.order.IGetOrderListListener;
+import com.allelink.wzyx.app.order.IOrderListener;
 import com.allelink.wzyx.app.order.OrderHandler;
 import com.allelink.wzyx.model.OrderItem;
 import com.allelink.wzyx.ui.loader.WzyxLoader;
@@ -56,9 +58,9 @@ public class OrderFragment extends SupportFragment{
      */
     private String[] mTabTitles = new String[]{
             "全部",
-            "已完成",
             "待付款",
-            "已取消"
+            "已完成",
+            "退款中",
     };
     /**
     * UI
@@ -84,10 +86,12 @@ public class OrderFragment extends SupportFragment{
     /**
      * 各种类型
      */
-    private static final int ORDER_ALL = 2;
+    private static final int ORDER_ALL = 6;
     private static final int ORDER_COMPLETED = 1;
     private static final int ORDER_UNPAID = 0;
     private static final int ORDER_CANCELED = -1;
+    private static final int ORDER_REFUNDING = 2;
+    private static final int ORDER_REFUND_SUCCESS = 3;
     /**
     * 订单的状态
     */
@@ -154,20 +158,49 @@ public class OrderFragment extends SupportFragment{
     private void initItemChildEvent() {
         mAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
-            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, final int position) {
                 OrderItem orderItem = (OrderItem) adapter.getItem(position);
-                String orderState = orderItem.getOrderState();
-                if(orderState.equals(String.valueOf(ORDER_COMPLETED))){
-                    //退款
-                    LogUtil.d(TAG,"退款");
-                }else if(orderState.equals(String.valueOf(ORDER_UNPAID))){
-                    //去付款
-                    LogUtil.d(TAG,"去付款");
-                    Intent intent = new Intent(_mActivity, PayOrderActivity.class);
-                    intent.putExtra(ACTIVITY_COST, orderItem.getCost());
-                    intent.putExtra(ACTIVITY_NAME, orderItem.getActivityName());
-                    intent.putExtra(ORDER_ID, orderItem.getOrderIdStr());
-                    startActivity(intent);
+                switch (view.getId()){
+                    case R.id.ll_right:
+                        WzyxLoader.showLoading(_mActivity);
+                        HashMap<String, Object> params = new HashMap<>();
+                        params.put("orderIdStr", orderItem.getOrderIdStr());
+                        params.put("orderState",-2);
+                        OrderHandler.delete(params, new IOrderListener() {
+                            @Override
+                            public void onSuccess(String orderId) {
+                                WzyxLoader.stopLoading();
+                                ToastUtil.toastShort(_mActivity,getResources().getString(R.string.order_delete_success));
+                                mAdapter.remove(position);
+                            }
+                            @Override
+                            public void onFailure(String errorMessage) {
+                                WzyxLoader.stopLoading();
+                                ToastUtil.toastShort(_mActivity,getResources().getString(R.string.order_delete_failure));
+                            }
+                        });
+                        break;
+                    case R.id.btn_item_fragment_order_right:
+                        String orderState = orderItem.getOrderState();
+                        if(orderState.equals(String.valueOf(ORDER_COMPLETED))){
+                            //退款
+                            LogUtil.d(TAG,"退款");
+                            Intent intent = new Intent(_mActivity, RefundActivity.class);
+                            intent.putExtra(ACTIVITY_COST, orderItem.getCost());
+                            intent.putExtra(ORDER_ID, orderItem.getOrderIdStr());
+                            startActivity(intent);
+                        }else if(orderState.equals(String.valueOf(ORDER_UNPAID))){
+                            //去付款
+                            LogUtil.d(TAG,"去付款");
+                            Intent intent = new Intent(_mActivity, PayOrderActivity.class);
+                            intent.putExtra(ACTIVITY_COST, orderItem.getCost());
+                            intent.putExtra(ACTIVITY_NAME, orderItem.getActivityName());
+                            intent.putExtra(ORDER_ID, orderItem.getOrderIdStr());
+                            startActivity(intent);
+                        }
+                        break;
+                    default:
+                        break;
                 }
             }
         });
@@ -203,11 +236,11 @@ public class OrderFragment extends SupportFragment{
                 if(mTabTitles[0].equals(tab.getText())){
                     mOrderState = ORDER_ALL;
                 }else if(mTabTitles[1].equals(tab.getText())){
-                    mOrderState = ORDER_COMPLETED;
-                }else if(mTabTitles[2].equals(tab.getText())){
                     mOrderState = ORDER_UNPAID;
+                }else if(mTabTitles[2].equals(tab.getText())){
+                    mOrderState = ORDER_COMPLETED;
                 }else if(mTabTitles[3].equals(tab.getText())){
-                    mOrderState = ORDER_CANCELED;
+                    mOrderState = ORDER_REFUNDING;
                 }
                 //获取订单信息
                 getOrderList(mOrderState);
@@ -223,18 +256,17 @@ public class OrderFragment extends SupportFragment{
                 if(mTabTitles[0].equals(tab.getText())){
                     mOrderState = ORDER_ALL;
                 }else if(mTabTitles[1].equals(tab.getText())){
-                    mOrderState = ORDER_COMPLETED;
-                }else if(mTabTitles[2].equals(tab.getText())){
                     mOrderState = ORDER_UNPAID;
+                }else if(mTabTitles[2].equals(tab.getText())){
+                    mOrderState = ORDER_COMPLETED;
                 }else if(mTabTitles[3].equals(tab.getText())){
-                    mOrderState = ORDER_CANCELED;
+                    mOrderState = ORDER_REFUNDING;
                 }
                 //获取订单信息
                 getOrderList(mOrderState);
             }
         });
     }
-
 
     /**
     * 初始化tabLayout的tab数据
@@ -260,7 +292,9 @@ public class OrderFragment extends SupportFragment{
         WzyxLoader.showLoading(_mActivity);
         HashMap<String, Object> params = new HashMap<>();
         params.put(WzyxPreference.KEY_USER_ID, WzyxPreference.getCustomAppProfile(WzyxPreference.KEY_USER_ID));
-        params.put("orderState", orderState);
+        if(orderState != 6){
+            params.put("orderState", orderState);
+        }
         OrderHandler.getOrderList(params, new IGetOrderListListener() {
             @Override
             public void onSuccess(List<OrderItem> orderItems) {
@@ -285,7 +319,9 @@ public class OrderFragment extends SupportFragment{
         WzyxLoader.showLoading(_mActivity);
         HashMap<String, Object> params = new HashMap<>();
         params.put(WzyxPreference.KEY_USER_ID, WzyxPreference.getCustomAppProfile(WzyxPreference.KEY_USER_ID));
-        params.put("orderState", orderState);
+        if(orderState != 6){
+            params.put("orderState", orderState);
+        }
         OrderHandler.getOrderList(params, new IGetOrderListListener() {
             @Override
             public void onSuccess(List<OrderItem> orderItems) {
@@ -295,7 +331,7 @@ public class OrderFragment extends SupportFragment{
                     mAdapter.replaceData(mOrderItems);
                     refreshLayout.finishRefresh(1000,true);
                 }else if(type == LOAD_MORE){
-                    mAdapter.addData(mOrderItems);
+                    mAdapter.replaceData(mOrderItems);
                     refreshLayout.finishLoadmore(1000,true);
                 }
             }
@@ -312,6 +348,7 @@ public class OrderFragment extends SupportFragment{
             }
         });
     }
+
     /**
     * 测试数据用于模拟
     */

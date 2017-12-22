@@ -245,8 +245,8 @@ public class CityPickerActivity extends AppCompatActivity implements View.OnClic
         public void onReceiveLocation(BDLocation location){
             latitude = location.getLatitude();
             longitude = location.getLongitude();
+            Log.d(TAG, "onReceiveLocation: "+latitude+" "+longitude);
             city = location.getCity();
-
             if(city != null){
                 Log.d(TAG, city);
                 //更新定位状态

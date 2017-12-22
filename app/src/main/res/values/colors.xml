@@ -19,4 +19,7 @@
     <color name="pay_pressed">#ff6483</color>
     <color name="canceled">#FD9003</color>
     <color name="canceled_pressed">#f7a841</color>
+    <color name="delete">#FF0000</color>
+    <color name="delete_pressed">#e42525</color>
+
 </resources>

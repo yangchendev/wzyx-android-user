@@ -409,7 +409,7 @@ public class NearFragment extends SupportFragment {
                             mAdapter.replaceData(mActivityItems);
                             refreshlayout.finishRefresh(1000,true);
                         }else if(type == LOAD_MORE){
-                            mAdapter.addData(mActivityItems);
+                            mAdapter.replaceData(mActivityItems);
                             refreshlayout.finishLoadmore(1000, true);
                         }
                     }
@@ -421,7 +421,7 @@ public class NearFragment extends SupportFragment {
                             mAdapter.replaceData(mActivityItems);
                             refreshlayout.finishRefresh(1000,false);
                         }else if(type == LOAD_MORE){
-                            mAdapter.addData(mActivityItems);
+                            mAdapter.replaceData(mActivityItems);
                             refreshlayout.finishLoadmore(1000, false);
                         }
                     }
@@ -674,7 +674,7 @@ public class NearFragment extends SupportFragment {
                             mAdapter.replaceData(mActivityItems);
                             refreshlayout.finishRefresh(1000,true);
                         }else if(type == LOAD_MORE){
-                            mAdapter.addData(mActivityItems);
+                            mAdapter.replaceData(mActivityItems);
                             refreshlayout.finishLoadmore(1000, true);
                         }
                     }
@@ -687,7 +687,7 @@ public class NearFragment extends SupportFragment {
                             mAdapter.replaceData(mActivityItems);
                             refreshlayout.finishRefresh(1000,true);
                         }else if(type == LOAD_MORE){
-                            mAdapter.addData(mActivityItems);
+                            mAdapter.replaceData(mActivityItems);
                             refreshlayout.finishLoadmore(1000, true);
                         }
                     }

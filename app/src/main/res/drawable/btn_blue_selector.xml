@@ -12,4 +12,5 @@
             <solid android:color="@color/brands_color_pressed"/>
         </shape>
     </item>
+
 </selector>

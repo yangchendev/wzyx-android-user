@@ -24,7 +24,7 @@
         style="@style/Widget.AppCompat.Button.Borderless"
         android:textSize="16sp"
         android:textColor="@color/white"
-        android:background="@drawable/btn_enroll_selector"
+        android:background="@drawable/btn_blue_selector"
         android:layout_marginTop="8dp"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/tv_locate_failure"
