@@ -150,23 +150,49 @@
             </RelativeLayout>
         </android.support.v7.widget.LinearLayoutCompat>
         <LinearLayout
-            android:descendantFocusability="blocksDescendants"
-            android:gravity="center"
-            android:background="@drawable/btn_delete_selector"
-            android:orientation="vertical"
             android:id="@+id/ll_right"
-            android:layout_width="80dp"
+            android:orientation="horizontal"
+            android:layout_width="160dp"
             android:layout_height="match_parent">
-            <TextView
+            <LinearLayout
+                android:id="@+id/ll_right_cancel"
+                android:descendantFocusability="blocksDescendants"
                 android:gravity="center"
-                android:textSize="18sp"
-                android:textColor="@color/white"
-                android:layout_gravity="center"
-                android:text="@string/delete"
-                android:id="@+id/tv_item_fragment_order_delete"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:background="@drawable/btn_cancel_selector"
+                android:orientation="vertical"
+                android:layout_width="80dp"
+                android:layout_height="match_parent">
+                <TextView
+                    android:gravity="center"
+                    android:textSize="18sp"
+                    android:textColor="@color/white"
+                    android:layout_gravity="center"
+                    android:text="@string/cancel"
+                    android:id="@+id/tv_item_fragment_order_cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_right_delete"
+                android:descendantFocusability="blocksDescendants"
+                android:gravity="center"
+                android:background="@drawable/btn_delete_selector"
+                android:orientation="vertical"
+                android:layout_width="80dp"
+                android:layout_height="match_parent">
+                <TextView
+                    android:gravity="center"
+                    android:textSize="18sp"
+                    android:textColor="@color/white"
+                    android:layout_gravity="center"
+                    android:text="@string/delete"
+                    android:id="@+id/tv_item_fragment_order_delete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
         </LinearLayout>
+
     </com.guanaj.easyswipemenulibrary.EasySwipeMenuLayout>
 
 

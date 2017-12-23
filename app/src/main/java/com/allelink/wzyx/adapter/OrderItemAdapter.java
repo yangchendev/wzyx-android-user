@@ -30,7 +30,7 @@ public class OrderItemAdapter extends BaseItemDraggableAdapter<OrderItem,BaseVie
     /**
     * 已完成
     */
-    private static final String ORDER_COMPLETED = "1";
+    private static final String ORDER_PAID = "1";
     /**
     * 已取消
     */
@@ -43,7 +43,10 @@ public class OrderItemAdapter extends BaseItemDraggableAdapter<OrderItem,BaseVie
     * 订单已退款
     */
     private static final String ORDER_REFUND_SUCCESS = "3";
-
+    /**
+    * 订单已完成
+    */
+    private static final String ORDER_COMPETED = "5";
     public OrderItemAdapter(int layoutResId, @Nullable List<OrderItem> data) {
         super(layoutResId, data);
     }
@@ -70,10 +73,10 @@ public class OrderItemAdapter extends BaseItemDraggableAdapter<OrderItem,BaseVie
                 btnRight.setTextColor(mContext.getResources().getColor(R.color.pay));
                 btnRight.setBackground(mContext.getResources().getDrawable(R.drawable.btn_pay_border));
                 break;
-            //已完成
-            case ORDER_COMPLETED:
+            //已支付
+            case ORDER_PAID:
                 orderStateView.setBackgroundColor(mContext.getResources().getColor(R.color.brands_color));
-                tvOrderState.setText(mContext.getResources().getString(R.string.completed));
+                tvOrderState.setText(mContext.getResources().getString(R.string.paid));
                 tvOrderState.setTextColor(mContext.getResources().getColor(R.color.brands_color));
                 tvOrderCost.setTextColor(mContext.getResources().getColor(R.color.brands_color));
                 btnRight.setVisibility(View.VISIBLE);
@@ -81,6 +84,7 @@ public class OrderItemAdapter extends BaseItemDraggableAdapter<OrderItem,BaseVie
                 btnRight.setTextColor(mContext.getResources().getColor(R.color.brands_color));
                 btnRight.setBackground(mContext.getResources().getDrawable(R.drawable.btn_refund_border));
                 break;
+            //已取消
             case ORDER_CANCELED:
                 orderStateView.setBackgroundColor(mContext.getResources().getColor(R.color.canceled));
                 tvOrderState.setText(mContext.getResources().getString(R.string.canceled));
@@ -88,6 +92,7 @@ public class OrderItemAdapter extends BaseItemDraggableAdapter<OrderItem,BaseVie
                 tvOrderCost.setTextColor(mContext.getResources().getColor(R.color.canceled));
                 btnRight.setVisibility(View.GONE);
                 break;
+            //退款中
             case ORDER_REFUND_APPLYING:
                 orderStateView.setBackgroundColor(mContext.getResources().getColor(R.color.brands_color));
                 tvOrderState.setText(mContext.getResources().getString(R.string.refunding));
@@ -95,9 +100,18 @@ public class OrderItemAdapter extends BaseItemDraggableAdapter<OrderItem,BaseVie
                 tvOrderCost.setTextColor(mContext.getResources().getColor(R.color.brands_color));
                 btnRight.setVisibility(View.GONE);
                 break;
+            //退款成功
             case ORDER_REFUND_SUCCESS:
                 orderStateView.setBackgroundColor(mContext.getResources().getColor(R.color.brands_color));
                 tvOrderState.setText(mContext.getResources().getString(R.string.refund_success));
+                tvOrderState.setTextColor(mContext.getResources().getColor(R.color.brands_color));
+                tvOrderCost.setTextColor(mContext.getResources().getColor(R.color.brands_color));
+                btnRight.setVisibility(View.GONE);
+                break;
+            //已完成
+            case ORDER_COMPETED:
+                orderStateView.setBackgroundColor(mContext.getResources().getColor(R.color.brands_color));
+                tvOrderState.setText(mContext.getResources().getString(R.string.completed));
                 tvOrderState.setTextColor(mContext.getResources().getColor(R.color.brands_color));
                 tvOrderCost.setTextColor(mContext.getResources().getColor(R.color.brands_color));
                 btnRight.setVisibility(View.GONE);
@@ -112,7 +126,7 @@ public class OrderItemAdapter extends BaseItemDraggableAdapter<OrderItem,BaseVie
         //设置订单图片
         ImageView imageView = helper.getView(R.id.iv_fragment_order_item_pic);
         GlideApp.with(mContext)
-                .load(RestConstants.IMAGE_ROOT_URL+item.getImageUrl())
+                .load(RestConstants.IMAGE_ROOT_URL+item.getImageUrl().replace("\\","/"))
                 .placeholder(R.drawable.activity_default_pic)
                 .error(R.drawable.activity_default_pic)
                 .into(imageView);
@@ -122,6 +136,7 @@ public class OrderItemAdapter extends BaseItemDraggableAdapter<OrderItem,BaseVie
         helper.setText(R.id.tv_item_fragment_order_create_time,item.getCreateTime());
         //绑定需要实现点击的按钮
         helper.addOnClickListener(R.id.btn_item_fragment_order_right);
-        helper.addOnClickListener(R.id.ll_right);
+        helper.addOnClickListener(R.id.ll_right_delete);
+        helper.addOnClickListener(R.id.ll_right_cancel);
     }
 }

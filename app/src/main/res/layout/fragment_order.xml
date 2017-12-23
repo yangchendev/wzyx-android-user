@@ -22,6 +22,7 @@
     <!--顶部导航栏结束-->
     <!--订单类型选择栏开始-->
     <android.support.design.widget.TabLayout
+
         app:tabTextColor="@color/black_999"
         app:tabSelectedTextColor="@color/brands_color"
         app:tabIndicatorColor="@color/brands_color"

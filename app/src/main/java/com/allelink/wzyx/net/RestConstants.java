@@ -81,7 +81,7 @@ public class RestConstants {
     /**
     * 服务器图片目录地址
     */
-    public static final String IMAGE_ROOT_URL = BASE_URL + "pic/";
+    public static final String IMAGE_ROOT_URL = BASE_URL ;
     /**
     * 支付宝支付获取订单信息的地址
     */

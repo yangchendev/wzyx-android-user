@@ -135,9 +135,10 @@
     <string name="go_to_pay">去支付</string>
     <string name="refund">退款</string>
     <string name="completed">已完成</string>
+    <string name="paid">已支付</string>
     <string name="canceled">已取消</string>
     <string name="order_id">订单号：%s</string>
-    <string name="order_empty">还没有订单哦～</string>
+    <string name="order_empty">还没有该类型订单哦～</string>
     <string name="wait_for_pay">待支付</string>
     <string name="pay_success">支付成功</string>
     <string name="pay_failure">支付失败</string>
@@ -152,4 +153,12 @@
     <string name="apply_refund_failure">退款申请失败</string>
     <string name="refunding">退款中</string>
     <string name="refund_success">退款成功</string>
+    <string name="confirm_delete_order">你确定要删除该订单吗？</string>
+    <string name="confirm_cancel_order">你确定要取消该订单吗？</string>
+    <string name="confirm_delete_order_tip">订单删除后将不可恢复</string>
+    <string name="confirm_cancel_order_tip">订单取消后将不可恢复</string>
+    <string name="order_cannot_delete">该订单不可删除</string>
+    <string name="order_cannot_cancel">该订单不可取消</string>
+    <string name="order_cancel_success">订单取消成功</string>
+    <string name="order_cancel_failure">订单取消失败</string>
 </resources>

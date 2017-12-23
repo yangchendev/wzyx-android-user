@@ -2,6 +2,8 @@ package com.allelink.wzyx.fragment.main.order;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,6 +20,8 @@ import com.allelink.wzyx.app.order.IGetOrderListListener;
 import com.allelink.wzyx.app.order.IOrderListener;
 import com.allelink.wzyx.app.order.OrderHandler;
 import com.allelink.wzyx.model.OrderItem;
+import com.allelink.wzyx.ui.dialog.DialogManager;
+import com.allelink.wzyx.ui.dialog.IDialogListener;
 import com.allelink.wzyx.ui.loader.WzyxLoader;
 import com.allelink.wzyx.utils.log.LogUtil;
 import com.allelink.wzyx.utils.storage.WzyxPreference;
@@ -59,8 +63,9 @@ public class OrderFragment extends SupportFragment{
     private String[] mTabTitles = new String[]{
             "全部",
             "待付款",
-            "已完成",
+            "已付款",
             "退款中",
+            "已完成"
     };
     /**
     * UI
@@ -87,17 +92,21 @@ public class OrderFragment extends SupportFragment{
      * 各种类型
      */
     private static final int ORDER_ALL = 6;
-    private static final int ORDER_COMPLETED = 1;
+    private static final int ORDER_PAID = 1;
     private static final int ORDER_UNPAID = 0;
     private static final int ORDER_CANCELED = -1;
     private static final int ORDER_REFUNDING = 2;
     private static final int ORDER_REFUND_SUCCESS = 3;
+    private static final int ORDER_COMPLETED = 5;
     /**
     * 订单的状态
     */
     private int mOrderState = ORDER_ALL;
     private static int REFRESH = 3;
     private static int LOAD_MORE = 4;
+
+    private OrderItem mOrderItem = null;
+    private int mPosition;
     public static OrderFragment newInstance() {
         Bundle args = new Bundle();
         OrderFragment fragment = new OrderFragment();
@@ -120,8 +129,10 @@ public class OrderFragment extends SupportFragment{
         initListData();
         bindAdapter();
         initItemChildEvent();
+        initItemEvent();
         initRefreshEvent();
     }
+
     /**
     * 在fragment可见时调用
     */
@@ -160,29 +171,44 @@ public class OrderFragment extends SupportFragment{
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, final int position) {
                 OrderItem orderItem = (OrderItem) adapter.getItem(position);
+                mOrderItem = orderItem;
+                mPosition = position;
+                String orderState = orderItem.getOrderState();
                 switch (view.getId()){
-                    case R.id.ll_right:
-                        WzyxLoader.showLoading(_mActivity);
-                        HashMap<String, Object> params = new HashMap<>();
-                        params.put("orderIdStr", orderItem.getOrderIdStr());
-                        params.put("orderState",-2);
-                        OrderHandler.delete(params, new IOrderListener() {
-                            @Override
-                            public void onSuccess(String orderId) {
-                                WzyxLoader.stopLoading();
-                                ToastUtil.toastShort(_mActivity,getResources().getString(R.string.order_delete_success));
-                                mAdapter.remove(position);
-                            }
-                            @Override
-                            public void onFailure(String errorMessage) {
-                                WzyxLoader.stopLoading();
-                                ToastUtil.toastShort(_mActivity,getResources().getString(R.string.order_delete_failure));
-                            }
-                        });
+                    //订单删除
+                    case R.id.ll_right_delete:
+                        //待付款和退款中的订单都不能删除
+                        if(orderState.equals(String.valueOf(ORDER_UNPAID))
+                                || orderState.equals(String.valueOf(ORDER_REFUNDING))){
+                            ToastUtil.toastShort(_mActivity,getString(R.string.order_cannot_delete));
+                        }else{
+                            showDialog(R.layout.dialog_common,
+                                    R.id.btn_dialog_confirm,"确定",
+                                    R.id.btn_dialog_cancel,"取消",
+                                    R.id.tv_dialog_title,getString(R.string.confirm_delete_order),
+                                    R.id.tv_dialog_content,getString(R.string.confirm_delete_order_tip),
+                                    orderDeleteListener);
+                        }
+                        break;
+                    //订单取消
+                    case R.id.ll_right_cancel:
+                        //已付款订单,退款成功订单和已完成订单不可取消
+                        if(orderState.equals(String.valueOf(ORDER_PAID))
+                                || orderState.equals(String.valueOf(ORDER_REFUND_SUCCESS))
+                                || orderState.equals(String.valueOf(ORDER_COMPLETED))){
+                            ToastUtil.toastShort(_mActivity,getString(R.string.order_cannot_cancel));
+                        }else{
+                            showDialog(R.layout.dialog_common,
+                                    R.id.btn_dialog_confirm,"确定",
+                                    R.id.btn_dialog_cancel,"取消",
+                                    R.id.tv_dialog_title,getString(R.string.confirm_cancel_order),
+                                    R.id.tv_dialog_content,getString(R.string.confirm_cancel_order_tip),
+                                    orderCancelListener);
+                        }
                         break;
                     case R.id.btn_item_fragment_order_right:
-                        String orderState = orderItem.getOrderState();
-                        if(orderState.equals(String.valueOf(ORDER_COMPLETED))){
+
+                        if(orderState.equals(String.valueOf(ORDER_PAID))){
                             //退款
                             LogUtil.d(TAG,"退款");
                             Intent intent = new Intent(_mActivity, RefundActivity.class);
@@ -207,6 +233,17 @@ public class OrderFragment extends SupportFragment{
     }
 
     /**
+    * 列表项点击事件
+    */
+    private void initItemEvent() {
+        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                LogUtil.d(TAG,position+"");
+            }
+        });
+    }
+    /**
     * 将RecyclerView和adapter绑定
     */
     private void bindAdapter() {
@@ -215,7 +252,7 @@ public class OrderFragment extends SupportFragment{
         recyclerView.setAdapter(mAdapter);
         mAdapter.bindToRecyclerView(recyclerView);
         mAdapter.setEmptyView(R.layout.fragment_order_empty);
-        //generateTestData();
+
     }
 
     /**
@@ -238,9 +275,11 @@ public class OrderFragment extends SupportFragment{
                 }else if(mTabTitles[1].equals(tab.getText())){
                     mOrderState = ORDER_UNPAID;
                 }else if(mTabTitles[2].equals(tab.getText())){
-                    mOrderState = ORDER_COMPLETED;
+                    mOrderState = ORDER_PAID;
                 }else if(mTabTitles[3].equals(tab.getText())){
                     mOrderState = ORDER_REFUNDING;
+                }else if(mTabTitles[4].equals(tab.getText())){
+                    mOrderState = ORDER_COMPLETED;
                 }
                 //获取订单信息
                 getOrderList(mOrderState);
@@ -258,9 +297,11 @@ public class OrderFragment extends SupportFragment{
                 }else if(mTabTitles[1].equals(tab.getText())){
                     mOrderState = ORDER_UNPAID;
                 }else if(mTabTitles[2].equals(tab.getText())){
-                    mOrderState = ORDER_COMPLETED;
+                    mOrderState = ORDER_PAID;
                 }else if(mTabTitles[3].equals(tab.getText())){
                     mOrderState = ORDER_REFUNDING;
+                }else if(mTabTitles[4].equals(tab.getText())){
+                    mOrderState = ORDER_COMPLETED;
                 }
                 //获取订单信息
                 getOrderList(mOrderState);
@@ -350,21 +391,102 @@ public class OrderFragment extends SupportFragment{
     }
 
     /**
-    * 测试数据用于模拟
+    * 处理 dialog 按钮点击事件
     */
-    private void generateTestData(){
-        for(int i = 0; i < 10; i++){
-            OrderItem orderItem = new OrderItem();
-            orderItem.setActivityName("第"+i+"个活动");
-            orderItem.setCost(i*200+"");
-            orderItem.setImageUrl("0");
-            orderItem.setOrderIdStr("1111"+i+"123456789");
-            if(i%2 == 0){
-                orderItem.setOrderState("1");
-            }else{
-                orderItem.setOrderState("0");
-            }
-            mOrderItems.add(orderItem);
+    private IDialogListener orderDeleteListener = new IDialogListener() {
+        @Override
+        public void onPositiveButtonClick() {
+            //确定按钮点击事件
+            LogUtil.d(TAG,"确定");
+            updateOrderState(mOrderItem,-2,mPosition);
         }
+
+        @Override
+        public void onNegativeButtonClick() {
+            //取消按钮点击事件
+            LogUtil.d(TAG,"取消");
+        }
+    };
+    /**
+     * 处理 dialog 按钮点击事件
+     */
+    private IDialogListener orderCancelListener = new IDialogListener() {
+        @Override
+        public void onPositiveButtonClick() {
+            //确定按钮点击事件
+            LogUtil.d(TAG,"确定");
+            updateOrderState(mOrderItem,-1,mPosition);
+        }
+
+        @Override
+        public void onNegativeButtonClick() {
+            //取消按钮点击事件
+            LogUtil.d(TAG,"取消");
+        }
+    };
+    /**
+     * 显示对话框
+     * @param dialogLayout 对话框布局
+     * @param positiveButtonId 确定按钮id
+     * @param positiveButtonText 确定按钮文字
+     * @param negativeButtonId  取消按钮id
+     * @param negativeButtonText  取消按钮文字
+     * @param titleId 标题id
+     * @param title 标题文字
+     * @param contentId 内容id
+     * @param content 内容文字
+     * @param dialogListener 按钮回调接口
+     */
+    private void showDialog(@LayoutRes int dialogLayout,
+                            @IdRes int positiveButtonId, CharSequence positiveButtonText,
+                            @IdRes int negativeButtonId, CharSequence negativeButtonText,
+                            @IdRes int titleId,String title,
+                            @IdRes int contentId,String content,
+                            IDialogListener dialogListener
+                            ){
+        DialogManager.create()
+                .with(_mActivity)
+                .setDialogListener(dialogListener)
+                .setDialogLayout(dialogLayout)
+                .setButtonResId(positiveButtonId,positiveButtonText,
+                        negativeButtonId,negativeButtonText)
+                .setTitle(titleId,title)
+                .setContent(contentId,content)
+                .show();
     }
+
+    /**
+     * 更新订单状态
+     * @param orderItem 订单项
+     * @param orderState 订单状态
+     * @param position 订单项位置
+     */
+    private void updateOrderState(OrderItem orderItem, final int orderState, final int position){
+        WzyxLoader.showLoading(_mActivity);
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("orderIdStr", orderItem.getOrderIdStr());
+        params.put("orderState",orderState);
+        OrderHandler.delete(params, new IOrderListener() {
+            @Override
+            public void onSuccess(String orderId) {
+                WzyxLoader.stopLoading();
+                if(orderState == -2){
+                    ToastUtil.toastShort(_mActivity,getResources().getString(R.string.order_delete_success));
+                }else if(orderState == -1){
+                    ToastUtil.toastShort(_mActivity,getResources().getString(R.string.order_cancel_success));
+                }
+                mAdapter.remove(position);
+            }
+            @Override
+            public void onFailure(String errorMessage) {
+                WzyxLoader.stopLoading();
+                if(orderState == -2){
+                    ToastUtil.toastShort(_mActivity,getResources().getString(R.string.order_delete_failure));
+                }else if(orderState == -1){
+                    ToastUtil.toastShort(_mActivity,getResources().getString(R.string.order_cancel_failure));
+                }
+            }
+        });
+    }
+
 }

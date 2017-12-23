@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_gravity="center_horizontal"
+    android:layout_marginStart="30dp"
+    android:layout_marginEnd="30dp"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@drawable/btn_border"
+    android:layout_height="wrap_content">
+    <View
+        android:background="@drawable/dialog_divider_border"
+        android:layout_width="match_parent"
+        android:layout_height="8dp">
+    </View>
+    <!--title开始-->
+    <TextView
+        android:id="@+id/tv_dialog_title"
+        tools:text="你确定要删除该订单吗？"
+        android:textColor="@color/black_333"
+        android:textSize="20sp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <!--title结束-->
+    <!--content开始-->
+    <TextView
+        tools:text="删除后该订单将不可见"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:id="@+id/tv_dialog_content"
+        android:textSize="14sp"
+        android:textColor="@color/black_666"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <!--content结束-->
+    <View
+        android:layout_marginTop="20dp"
+        android:background="@color/black_999"
+        android:layout_width="match_parent"
+        android:layout_height="0.2dp"/>
+    <!--取消，确认按钮开始-->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+        <Button
+            android:background="@drawable/btn_dialog_cancel_selector"
+            android:textSize="16sp"
+            tools:text="取消"
+            android:textColor="@color/black_333"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:id="@+id/btn_dialog_cancel"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+        <View
+            android:background="@color/black_999"
+            android:layout_width="0.2dp"
+            android:layout_height="match_parent"/>
+        <Button
+            android:background="@drawable/btn_dialog_confirm_selector"
+            android:textSize="16sp"
+            tools:text="确定"
+            android:textColor="@color/black_333"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:id="@+id/btn_dialog_confirm"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <!--取消，确认按钮结束-->
+</LinearLayout>

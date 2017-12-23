@@ -33,7 +33,7 @@ public class ActivityItemAdapter extends BaseQuickAdapter<ActivityItem,BaseViewH
         helper.setText(R.id.tv_fragment_near_enroll_number, mContext.getResources().getString(R.string.enroll_number,item.getEnrollNumber()));
         ImageView imageView = helper.getView(R.id.iv_fragment_near_item_pic);
         GlideApp.with(mContext)
-                .load(RestConstants.IMAGE_ROOT_URL+item.getImageUrl())
+                .load(RestConstants.IMAGE_ROOT_URL+item.getImageUrl().replace("\\","/"))
                 .placeholder(R.drawable.activity_default_pic)
                 .error(R.drawable.activity_default_pic)
                 .into(imageView);
