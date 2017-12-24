@@ -78,6 +78,44 @@
         android:layout_height="10dp"
         android:background="@color/bg_eee" />
 
+    <!--支付宝支付开始-->
+    <RelativeLayout
+        android:background="@drawable/layout_bg_selector"
+        android:id="@+id/rl_activity_pay_order_alipay"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center_vertical">
+        <ImageView
+            android:id="@+id/iv_activity_pay_order_alipay"
+            android:contentDescription="@string/alipay"
+            android:layout_width="21dp"
+            android:layout_height="21dp"
+            android:src="@drawable/ic_alipay"
+            android:layout_marginStart="10dp"
+            android:layout_centerVertical="true"/>
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv_activity_pay_alipay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/alipay"
+            android:layout_toEndOf="@id/iv_activity_pay_order_alipay"
+            android:layout_marginStart="20dp"
+            android:textSize="16sp"
+            android:textColor="@color/black_333"
+            android:layout_centerVertical="true"/>
+        <RadioButton
+            android:id="@+id/rb_iv_activity_pay_order_alipay"
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
+            android:button="@null"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="10dp"/>
+    </RelativeLayout>
+    <!--支付宝支付结束-->
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:background="@color/bg_eee" />
     <!--微信支付开始-->
     <RelativeLayout
         android:background="@drawable/layout_bg_selector"
@@ -112,43 +150,6 @@
             android:layout_marginEnd="10dp"/>
     </RelativeLayout>
     <!--微信支付结束-->
-    <View
-        android:layout_width="wrap_content"
-        android:layout_height="1dp"
-        android:background="@color/bg_eee" />
-    <!--支付宝支付开始-->
-    <RelativeLayout
-        android:background="@drawable/layout_bg_selector"
-        android:id="@+id/rl_activity_pay_order_alipay"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:gravity="center_vertical">
-        <ImageView
-            android:id="@+id/iv_activity_pay_order_alipay"
-            android:contentDescription="@string/alipay"
-            android:layout_width="21dp"
-            android:layout_height="21dp"
-            android:src="@drawable/ic_alipay"
-            android:layout_marginStart="10dp"
-            android:layout_centerVertical="true"/>
-        <android.support.v7.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/alipay"
-            android:layout_toEndOf="@id/iv_activity_pay_order_alipay"
-            android:layout_marginStart="20dp"
-            android:textSize="16sp"
-            android:textColor="@color/black_333"
-            android:layout_centerVertical="true"/>
-        <RadioButton
-            android:id="@+id/rb_iv_activity_pay_order_alipay"
-            android:layout_width="@dimen/dp_40"
-            android:layout_height="@dimen/dp_40"
-            android:button="@null"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="10dp"/>
-    </RelativeLayout>
-    <!--支付宝支付结束-->
     <View
         android:layout_width="wrap_content"
         android:layout_height="10dp"

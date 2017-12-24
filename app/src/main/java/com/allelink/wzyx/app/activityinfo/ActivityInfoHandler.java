@@ -11,6 +11,7 @@ import com.allelink.wzyx.net.RestCreator;
 import com.allelink.wzyx.utils.log.LogUtil;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -52,15 +53,17 @@ public class ActivityInfoHandler {
                 String responseString = response.body();
                 String result;
                 String message;
-                List<ActivityItem> activityItems = null;
+                List<ActivityItem> activityItems = new ArrayList<>();
                 LogUtil.json(TAG,responseString);
                 if(!TextUtils.isEmpty(responseString) && response.isSuccessful()){
                     JSONObject jsonObject = JSON.parseObject(responseString);
                     result = jsonObject.getString("result");
                     message = jsonObject.getString("message");
                     if(SUCCESS.equals(result)){
-                        activityItems = jsonObject.getJSONArray("data").toJavaList(ActivityItem.class);
-                        if(listener != null){
+                        if(jsonObject.getJSONArray("data") != null){
+                            activityItems = jsonObject.getJSONArray("data").toJavaList(ActivityItem.class);
+                        }
+                        if(listener != null && activityItems != null){
                             listener.onSuccess(activityItems);
                         }
                     }else if(ERROR.equals(result)){

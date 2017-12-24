@@ -142,7 +142,8 @@ public class OrderFragment extends SupportFragment{
         LogUtil.d(TAG,"订单页可见");
         //设置沉浸式状态栏
         StatusBarCompat.setStatusBarColor(_mActivity,getResources().getColor(R.color.white));
-        getOrderList(mOrderState);
+        refreshLayout.autoRefresh();
+
     }
 
     /**
@@ -178,8 +179,7 @@ public class OrderFragment extends SupportFragment{
                     //订单删除
                     case R.id.ll_right_delete:
                         //待付款和退款中的订单都不能删除
-                        if(orderState.equals(String.valueOf(ORDER_UNPAID))
-                                || orderState.equals(String.valueOf(ORDER_REFUNDING))){
+                        if(orderState.equals(String.valueOf(ORDER_REFUNDING))){
                             ToastUtil.toastShort(_mActivity,getString(R.string.order_cannot_delete));
                         }else{
                             showDialog(R.layout.dialog_common,
@@ -188,6 +188,7 @@ public class OrderFragment extends SupportFragment{
                                     R.id.tv_dialog_title,getString(R.string.confirm_delete_order),
                                     R.id.tv_dialog_content,getString(R.string.confirm_delete_order_tip),
                                     orderDeleteListener);
+
                         }
                         break;
                     //订单取消
@@ -357,7 +358,7 @@ public class OrderFragment extends SupportFragment{
      * @return 返回订单列表
      */
     private void getOrderList(int orderState,final RefreshLayout refreshLayout,final int type){
-        WzyxLoader.showLoading(_mActivity);
+        //WzyxLoader.showLoading(_mActivity);
         HashMap<String, Object> params = new HashMap<>();
         params.put(WzyxPreference.KEY_USER_ID, WzyxPreference.getCustomAppProfile(WzyxPreference.KEY_USER_ID));
         if(orderState != 6){
@@ -366,7 +367,7 @@ public class OrderFragment extends SupportFragment{
         OrderHandler.getOrderList(params, new IGetOrderListListener() {
             @Override
             public void onSuccess(List<OrderItem> orderItems) {
-                WzyxLoader.stopLoading();
+                //WzyxLoader.stopLoading();
                 mOrderItems = orderItems;
                 if(type == REFRESH){
                     mAdapter.replaceData(mOrderItems);
@@ -379,7 +380,7 @@ public class OrderFragment extends SupportFragment{
 
             @Override
             public void onFailure(String errorMessage) {
-                WzyxLoader.stopLoading();
+                //WzyxLoader.stopLoading();
                 ToastUtil.toastShort(_mActivity,errorMessage);
                 if(type == REFRESH){
                     refreshLayout.finishRefresh(1000,false);
@@ -476,6 +477,7 @@ public class OrderFragment extends SupportFragment{
                     ToastUtil.toastShort(_mActivity,getResources().getString(R.string.order_cancel_success));
                 }
                 mAdapter.remove(position);
+                refreshLayout.autoRefresh();
             }
             @Override
             public void onFailure(String errorMessage) {

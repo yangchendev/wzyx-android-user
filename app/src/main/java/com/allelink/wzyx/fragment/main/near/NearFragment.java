@@ -80,15 +80,17 @@ public class NearFragment extends SupportFragment {
                     "所有类型",
                     "外语培训",
                     "音乐培训",
-                    "美术培训"
+                    "美术培训",
+                    "职业培训"
             };
     /**
     * 各种类型
     */
-    private static final int ALL_TYPE = 0;
-    private static final int FOREIGN_LANGUAGE_TYPE = 1;
-    private static final int MUSIC_TYPE = 2;
-    private static final int ART_TYPE = 3;
+    private static final int ALL_TYPE = 4;
+    private static final int FOREIGN_LANGUAGE_TYPE = 0;
+    private static final int MUSIC_TYPE = 1;
+    private static final int ART_TYPE = 2;
+    private static final int VOCATIONAL_TECHNOLOGY = 3;
     /**
     * 用户选取的活动类型 默认为所有类型
     */
@@ -284,6 +286,8 @@ public class NearFragment extends SupportFragment {
                     mSelectedActivityType = MUSIC_TYPE;
                 }else if(mTabTitles[3].equals(tab.getText())){
                     mSelectedActivityType = ART_TYPE;
+                }else if(mTabTitles[4].equals(tab.getText())){
+                    mSelectedActivityType = VOCATIONAL_TECHNOLOGY;
                 }
                 mSelectedRankingType = COMPREHENSIVE_RANKING_TYPE;
                 //清除样式
@@ -316,6 +320,8 @@ public class NearFragment extends SupportFragment {
                     mSelectedActivityType = MUSIC_TYPE;
                 }else if(mTabTitles[3].equals(tab.getText())){
                     mSelectedActivityType = ART_TYPE;
+                }else if(mTabTitles[4].equals(tab.getText())){
+                    mSelectedActivityType = VOCATIONAL_TECHNOLOGY;
                 }
                 mSelectedRankingType = COMPREHENSIVE_RANKING_TYPE;
                 //清除样式
@@ -350,7 +356,7 @@ public class NearFragment extends SupportFragment {
         //现阶段需要
         params.put("lat",String.valueOf(lat));
         params.put("lng", String.valueOf(lng));
-        if(activityType == 0){
+        if(activityType == 4){
             params.put("activityType", null);
         }else{
             params.put("activityType", activityType);

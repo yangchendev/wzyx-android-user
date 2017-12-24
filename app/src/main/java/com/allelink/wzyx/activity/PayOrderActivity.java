@@ -108,8 +108,8 @@ public class PayOrderActivity extends BaseActivity implements IAliPayResultListe
         tvCost.setText(getResources().getString(R.string.activity_cost,mActivityCost));
         tvActivityName.setText(mActivityName);
         //默认微信支付
-        rbWechatPay.setChecked(true);
-        rbAliPay.setChecked(false);
+        rbWechatPay.setChecked(false);
+        rbAliPay.setChecked(true);
     }
 
     @OnClick(R.id.rb_activity_pay_order_wechat_pay)

@@ -10,6 +10,7 @@ import com.allelink.wzyx.net.RestCreator;
 import com.allelink.wzyx.utils.log.LogUtil;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -105,7 +106,7 @@ public class OrderHandler {
                 String responseString = response.body();
                 String result;
                 String message;
-                List<OrderItem> orderItems = null;
+                List<OrderItem> orderItems = new ArrayList<>();
                 if(!TextUtils.isEmpty(responseString) && response.isSuccessful()){
                     LogUtil.json(TAG,responseString);
                     JSONObject jsonObject = JSON.parseObject(responseString);
@@ -113,8 +114,10 @@ public class OrderHandler {
                     message = jsonObject.getString("message");
                     if(SUCCESS.equals(result)){
                         //得到未付款订单集合
-                        orderItems = jsonObject.getJSONArray("data").toJavaList(OrderItem.class);
-                        if(listener != null){
+                        if(jsonObject.getJSONArray("data") != null){
+                            orderItems = jsonObject.getJSONArray("data").toJavaList(OrderItem.class);
+                        }
+                        if(listener != null && orderItems != null){
                             listener.onSuccess(orderItems);
                         }
                     }else if(ERROR.equals(result)){
