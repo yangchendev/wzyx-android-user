@@ -24,6 +24,7 @@ public class WzyxPreference {
     public static final String KEY_AVATAR_URL = "avatar_url";
     public static final String KEY_GENDER = "gender";
     public static final String KEY_USER_ID = "userId";
+    public static final String KEY_PAY_SUCCESS = "pay";
     /**
     * 获取全局SharedPreferences
     */

@@ -25,7 +25,41 @@
         android:layout_height="48dp">
     </com.allelink.wzyx.ui.TitleBar>
     <!--导航栏结束-->
+   <!--倒计时栏开始-->
+    <LinearLayout
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+        <TextView
+            android:text="@string/left_time_pay"
+            android:layout_marginTop="8dp"
+            android:layout_gravity="center_horizontal"
+            android:textSize="18sp"
+            android:textColor="@color/black_666"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_activity_pay_time"
+            tools:text="14:29"
+            android:layout_marginTop="4dp"
+            android:layout_gravity="center_horizontal"
+            android:textSize="20sp"
+            android:textColor="@color/black_333"
+            android:text="@string/left_time_pay_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginTop="8dp"
+            android:textSize="14sp"
+            android:text="@string/left_time_tip"
+            android:textColor="@color/black_999"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
+    </LinearLayout>
+    <!--倒计时栏结束-->
     <View
         android:layout_width="wrap_content"
         android:layout_height="10dp"

@@ -69,8 +69,8 @@
                     android:id="@+id/iv_fragment_order_item_pic"
                     android:layout_marginStart="10dp"
                     android:layout_gravity="center_vertical"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp" />
+                    android:layout_width="90dp"
+                    android:layout_height="90dp" />
                 <!--订单图片结束-->
                 <android.support.v7.widget.LinearLayoutCompat
                     android:orientation="vertical"
@@ -78,7 +78,7 @@
                     android:layout_marginEnd="10dp"
                     android:layout_gravity="center_vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="80dp">
+                    android:layout_height="90dp">
                     <TextView
                         android:id="@+id/tv_item_fragment_order_order_name"
                         tools:text="边学边采舞蹈培训中心"
@@ -92,6 +92,21 @@
                         android:textSize="12sp"
                         android:textColor="@color/black_999"
                         android:layout_marginTop="4dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:text="@string/left_time"
+                        android:id="@+id/tv_item_fragment_order_counter_down"
+                        tools:text="还剩：14分20秒"
+                        android:layout_marginTop="4dp"
+                        android:textSize="14sp"
+                        android:textColor="@color/delete"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:id="@+id/tv_item_fragment_order_left_time_tip"
+                        android:layout_marginTop="1dp"
+                        android:text="@string/left_time_tip"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                 </android.support.v7.widget.LinearLayoutCompat>

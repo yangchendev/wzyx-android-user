@@ -397,7 +397,7 @@ public class NearFragment extends SupportFragment {
         //现阶段需要
         params.put("lat",String.valueOf(lat));
         params.put("lng", String.valueOf(lng));
-        if(activityType == 0){
+        if(activityType == 4){
             params.put("activityType", null);
         }else{
             params.put("activityType", activityType);

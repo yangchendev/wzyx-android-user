@@ -114,7 +114,7 @@ public class ActivityInfoActivity extends BaseActivity {
 
             @Override
             public void onRightClick() {
-                ToastUtil.toastShort(ActivityInfoActivity.this,getResources().getString(R.string.collect_success));
+
             }
         });
 
@@ -161,11 +161,11 @@ public class ActivityInfoActivity extends BaseActivity {
         mActivityEndTime = activityDetailItem.getEndTime();
         mActivityPrice = activityDetailItem.getCost();
         mImageUrl = activityDetailItem.getImageUrl();
-        mImageUrl = "1,2,3,4";
+        mImageUrl = activityDetailItem.getImageUrl().replace("\\","/");
         //TODO
-        imageUrls = mImageUrl.split(",");
+        //imageUrls = mImageUrl.split(",");
         //设置到界面上
-        banner.setImages(Arrays.asList(imageUrls));
+        banner.setImages(Arrays.asList(mImageUrl));
         banner.start();
         tvActivityName.setText(mActivityName);
         tvEnrollNumber.setText(getResources().getString(R.string.enroll_number,mActivityEnrollNumber));
@@ -199,6 +199,7 @@ public class ActivityInfoActivity extends BaseActivity {
             bundle.putString(SELLER_ID,detailItem.getSellerId());
             bundle.putString(ACTIVITY_NAME,detailItem.getActivityName());
             bundle.putString(ACTIVITY_COST,detailItem.getCost());
+
             Intent intent = new Intent(ActivityInfoActivity.this, SubmitOrderActivity.class);
             intent.putExtras(bundle);
             startActivity(intent);

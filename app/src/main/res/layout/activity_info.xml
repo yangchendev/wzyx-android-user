@@ -14,7 +14,6 @@
         app:titleSize="6sp"
         app:titleColor="@color/black_333"
         app:leftButtonBackground="@drawable/btn_back_blue_selector"
-        app:rightButtonBackground="@drawable/btn_collect_selector"
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="48dp">

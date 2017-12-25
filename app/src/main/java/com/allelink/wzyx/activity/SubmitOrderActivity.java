@@ -35,6 +35,7 @@ public class SubmitOrderActivity extends BaseActivity {
     private static final String ACTIVITY_NAME = "activityName";
     private static final String ACTIVITY_COST = "cost";
     private static final String ORDER_ID = "orderId";
+    private static final String CREATE_TIME = "createTime";
     /**
     * UI
     */
@@ -106,7 +107,6 @@ public class SubmitOrderActivity extends BaseActivity {
         mSellerId = bundle.getString(SELLER_ID);
         mActivityName = bundle.getString(ACTIVITY_NAME);
         mActivityCost = bundle.getString(ACTIVITY_COST);
-
     }
     /**
     * 提交订单事件
@@ -127,6 +127,7 @@ public class SubmitOrderActivity extends BaseActivity {
                 intent.putExtra(ACTIVITY_COST, mActivityCost);
                 intent.putExtra(ACTIVITY_NAME, mActivityName);
                 intent.putExtra(ORDER_ID, orderId);
+                intent.putExtra(CREATE_TIME,"");
                 startActivity(intent);
             }
 

@@ -161,4 +161,8 @@
     <string name="order_cannot_cancel">该订单不可取消</string>
     <string name="order_cancel_success">订单取消成功</string>
     <string name="order_cancel_failure">订单取消失败</string>
+    <string name="left_time">还剩：%s</string>
+    <string name="left_time_tip">超时未支付订单将会自动取消</string>
+    <string name="left_time_pay">剩余时间</string>
+    <string name="left_time_pay_tip">%s</string>
 </resources>

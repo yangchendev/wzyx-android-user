@@ -15,7 +15,6 @@ import com.allelink.wzyx.app.WzyxApplication;
 import com.allelink.wzyx.app.sign.signin.ISignInListener;
 import com.allelink.wzyx.app.sign.signin.SignInHandler;
 import com.allelink.wzyx.utils.activity.ActivityUtils;
-import com.allelink.wzyx.utils.encrypt.SHAUtil;
 import com.allelink.wzyx.utils.log.LogUtil;
 import com.allelink.wzyx.utils.regex.RegexUtils;
 import com.allelink.wzyx.utils.storage.WzyxPreference;
@@ -66,6 +65,7 @@ public class LoginActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        WzyxApplication.addDestroyActivity(this,"LoginActivity");
         StatusBarCompat.setStatusBarColor(this,getResources().getColor(R.color.white));
         //隐藏actionBar
         ActionBar actionBar = getSupportActionBar();
@@ -104,7 +104,8 @@ public class LoginActivity extends BaseActivity {
         etPhoneNumber.setEnabled(false);
         btnLogin.setText(getResources().getString(R.string.on_logining));
         params.put("phoneNumber", mPhoneNumber);
-        params.put("password", SHAUtil.SHAEncode(mPassword));
+        //SHAUtil.SHAEncode(mPassword)
+        params.put("password", mPassword);
         SignInHandler.signIn(params, new ISignInListener() {
             @Override
             public void onSignInSuccess(String response) {
