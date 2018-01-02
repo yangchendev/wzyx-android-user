@@ -25,6 +25,7 @@ public class WzyxPreference {
     public static final String KEY_GENDER = "gender";
     public static final String KEY_USER_ID = "userId";
     public static final String KEY_PAY_SUCCESS = "pay";
+    public static final String KEY_TOTAL_POINTS = "totalPoints";
     /**
     * 获取全局SharedPreferences
     */

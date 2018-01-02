@@ -73,4 +73,5 @@ dependencies {
     implementation project(':citypicker')
     //支付宝支付依赖
     implementation files('libs/alipaySdk-20170922.jar')
+
 }

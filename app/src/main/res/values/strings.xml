@@ -31,9 +31,9 @@
     <string name="my_balance">我的余额</string>
     <string name="spec_balance">￥0.00</string>
     <string name="my_discount_coupon">我的抵用券</string>
-    <string name="spec_discount_coupon">1张待使用</string>
+    <string name="spec_discount_coupon">0张待使用</string>
     <string name="my_point">我的积分</string>
-    <string name="spec_point">80分</string>
+    <string name="spec_point">%s分</string>
     <string name="share_to_friends">分享好友</string>
     <string name="call_center">客服中心</string>
     <string name="cooperation">我要合作</string>

@@ -208,6 +208,8 @@ public class PayOrderActivity extends BaseActivity implements IAliPayResultListe
     @Override
     public void onAliPaySuccess() {
         LogUtil.d(TAG,"支付成功");
+        ToastUtil.toastShort(PayOrderActivity.this,getResources().getString(R.string.pay_success));
+        ToastUtil.toastShort(PayOrderActivity.this,"积分 +"+Math.round(Float.parseFloat(mActivityCost)));
         btnPayOrder.setEnabled(false);
         //通知服务器支付成功
         updateOrderInfo();
@@ -230,7 +232,6 @@ public class PayOrderActivity extends BaseActivity implements IAliPayResultListe
             @Override
             public void onSuccess(String orderId) {
                 WzyxLoader.stopLoading();
-                ToastUtil.toastShort(PayOrderActivity.this,getResources().getString(R.string.pay_success));
             }
             @Override
             public void onFailure(String errorMessage) {

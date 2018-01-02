@@ -92,6 +92,11 @@ public class GetUserInfoHandler {
                         }else{
                             user.setUserId(data.getString("userId"));
                         }
+                        if(data.getString("totalPoints") == null){
+                            user.setTotalPoints("0");
+                        }else{
+                            user.setTotalPoints(data.getString("totalPoints"));
+                        }
                         listener.onGetUserInfoSuccess(user);
                     }else if(ERROR.equals(userInfoResponse.getResult())){
                         //失败的回调

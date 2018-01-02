@@ -129,6 +129,7 @@ public class MainActivity extends BaseActivity {
         WzyxPreference.addCustomAppProfile(WzyxPreference.KEY_AVATAR_URL,user.getAvatar());
         WzyxPreference.addCustomAppProfile(WzyxPreference.KEY_BIRTHDAY,user.getBirthday());
         WzyxPreference.addCustomAppProfile(WzyxPreference.KEY_USER_ID,user.getUserId());
+        WzyxPreference.addCustomAppProfile(WzyxPreference.KEY_TOTAL_POINTS,user.getTotalPoints());
     }
     /**
     * 初始化fragment

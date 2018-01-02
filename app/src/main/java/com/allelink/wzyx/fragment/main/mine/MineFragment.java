@@ -97,6 +97,8 @@ public class MineFragment extends SupportFragment{
                     .load(avatar)
                     .into(ivAvatar);
         }
+        String totalPoints = WzyxPreference.getCustomAppProfile(WzyxPreference.KEY_TOTAL_POINTS);
+        specPoint.setText(getResources().getString(R.string.spec_point,totalPoints));
     }
 
 

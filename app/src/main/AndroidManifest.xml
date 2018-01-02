@@ -119,6 +119,9 @@
         <!-- 支付宝相关结束 -->
 
         <activity android:name=".activity.RefundActivity"></activity>
+        <!--mobPay-->
+        <meta-data android:name="Mob-AppKey" android:value="23769086a0378"/>
+        <meta-data android:name="Mob-AppSecret" android:value="e7981b5883efc9acc7d763bb0d53bc74"/>
     </application>
 
 </manifest>
