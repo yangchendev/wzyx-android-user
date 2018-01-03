@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.allelink.wzyx.R;
+import com.allelink.wzyx.activity.AboutActivity;
 import com.allelink.wzyx.activity.AccountSettingActivity;
 import com.allelink.wzyx.activity.SettingActivity;
 import com.allelink.wzyx.utils.activity.ActivityUtils;
@@ -193,6 +194,7 @@ public class MineFragment extends SupportFragment{
     @OnClick(R.id.ll_mine_about_layout)
     void about(){
         LogUtil.d(TAG,"about");
+        ActivityUtils.startActivity(_mActivity, AboutActivity.class);
     }
     /**
     * 进入个人中心

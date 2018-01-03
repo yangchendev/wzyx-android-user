@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grey"
+    tools:context="com.allelink.wzyx.activity.AboutActivity">
+    <com.allelink.wzyx.ui.TitleBar
+        android:id="@+id/tb_activity_about"
+        app:titleSize="6sp"
+        app:titleText="@string/about"
+        app:titleColor="@color/black_333"
+        app:leftButtonBackground="@drawable/btn_back_blue_selector"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+    </com.allelink.wzyx.ui.TitleBar>
+    <LinearLayout
+        android:layout_marginTop="160dp"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:src="@drawable/login_logo"
+            android:layout_width="72dp"
+            android:layout_height="72dp" />
+        <TextView
+            android:layout_marginTop="10dp"
+            android:textColor="@color/black_666"
+            android:textSize="16sp"
+            android:text="@string/wzyx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginTop="4dp"
+            android:id="@+id/tv_activity_about_version"
+            android:textColor="@color/black_666"
+            android:textSize="16sp"
+            tools:text="V 1.0.2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_marginBottom="20dp"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:gravity="center"
+            android:text="@string/copyright"
+            android:textSize="12sp"
+            android:textColor="@color/black_999"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</RelativeLayout>

@@ -165,4 +165,9 @@
     <string name="left_time_tip">超时未支付订单将会自动取消</string>
     <string name="left_time_pay">剩余时间</string>
     <string name="left_time_pay_tip">%s</string>
+    <string name="wzyx">万众艺兴</string>
+    <string name="copyright">嘉兴万众物联科技有限公司 版权所有\n
+        Copyright © 2015- 2025 Allelink.com.cn\n
+        All Rights Reserved
+    </string>
 </resources>
