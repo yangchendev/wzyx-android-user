@@ -228,6 +228,7 @@ public class PayOrderActivity extends BaseActivity implements IAliPayResultListe
         WzyxLoader.showLoading(PayOrderActivity.this);
         params.clear();
         params.put("orderIdStr", mOrderId);
+        params.put("userId",WzyxPreference.getCustomAppProfile(WzyxPreference.KEY_USER_ID));
         OrderHandler.updateOrderInfo(params, new IOrderListener() {
             @Override
             public void onSuccess(String orderId) {

@@ -89,7 +89,7 @@ public class RestConstants {
     /**
     * 通知后台订单支付成功
     */
-    public static final String NOTIFY_UPDATE_ORDER_INFO_URL = BASE_URL+"alllink/alipay/updateOrderInfo";
+    public static final String NOTIFY_UPDATE_ORDER_INFO_URL = BASE_URL+"alllink/pay/updateOrderInfo";
     /**
     * 申请退款地址
     */
