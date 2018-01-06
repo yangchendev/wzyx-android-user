@@ -8,7 +8,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
+import android.support.v7.widget.AppCompatTextView;
 import android.widget.RatingBar;
+import android.widget.TextView;
 
 import com.allelink.wzyx.R;
 import com.allelink.wzyx.app.order.IOrderListener;
@@ -31,6 +33,7 @@ public class EvaluationOrderActivity extends AppCompatActivity {
     private int evaluateLevel = 5;
     private static final String ORDER_ID = "orderId";
     private static final String ACTIVITY_ID = "activityId";
+    private static final int REQUEST_CODE_PAY_SUCCESS = 9000;
 
     @BindView(R.id.et_order_evaluate)
     AppCompatEditText editEvaluateOrder;
@@ -38,6 +41,8 @@ public class EvaluationOrderActivity extends AppCompatActivity {
     AppCompatButton btnEvaluateOrder;
     @BindView(R.id.rb_evaluateLevel)
     RatingBar rbEvaluateLevel;
+    @BindView(R.id.tv_evaluate_level_hint)
+    AppCompatTextView textLevelHint;
 
 
     @Override
@@ -52,14 +57,26 @@ public class EvaluationOrderActivity extends AppCompatActivity {
         orderId = intent.getStringExtra(ORDER_ID);
         activityId = intent.getStringExtra(ACTIVITY_ID);
         ButterKnife.bind(this);
+        rbEvaluateLevel.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+           @Override
+           public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+               switch((int) rating){
+                   case 1:textLevelHint.setText("很差");break;
+                   case 2:textLevelHint.setText("差");break;
+                   case 3:textLevelHint.setText("好");break;
+                   case 4:textLevelHint.setText("很好");break;
+                   case 5:textLevelHint.setText("非常好");break;
+                   default:textLevelHint.setText("请选择评价等级");break;
+               }
+           }
+       });
     }
-
 
     @OnClick(R.id.btn_order_evaluate)
     void onEvaluateOrder() {
         String text = editEvaluateOrder.getText().toString();
         HashMap<String, Object> params = new HashMap<>();
-        if (text != null) {
+        if (!text.equals("")&&!text.isEmpty()) {
             evaluateLevel = (int) rbEvaluateLevel.getRating();
             //TODO 将评价内容提交给服务器
             btnEvaluateOrder.setEnabled(true);
@@ -78,15 +95,12 @@ public class EvaluationOrderActivity extends AppCompatActivity {
                 public void onSuccess(String orderId) {
                     WzyxLoader.stopLoading();
                     ToastUtil.toastShort(EvaluationOrderActivity.this, "评论提交成功");
-                   // Intent intent=new Intent(EvaluationOrderActivity.this,OrderFragment.class);
-                  //  startActivity(intent);
-                    editEvaluateOrder.setTag("");
+                    editEvaluateOrder.setText("");
                     rbEvaluateLevel.setRating(0);
                     //切换到订单fragment
-                    android.support.v4.app.FragmentManager manager=getSupportFragmentManager();
-                    android.support.v4.app.FragmentTransaction transaction=manager.beginTransaction();
-                    transaction.replace(R.layout.activity_orderevaluate,new OrderFragment());
-                    transaction.commit();
+                    Intent intent = new Intent(EvaluationOrderActivity.this, MainActivity.class);
+                    intent.putExtra("pay_success", REQUEST_CODE_PAY_SUCCESS);
+                    startActivity(intent);
                 }
 
                 @Override

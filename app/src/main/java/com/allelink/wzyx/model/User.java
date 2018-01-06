@@ -35,7 +35,10 @@ public class User {
     * 用户Id
     */
     private String userId = null;
-
+    /**
+    * 积分
+    */
+    private String totalPoints = null;
     public String getNickname() {
         return nickname;
     }
@@ -82,6 +85,14 @@ public class User {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public String getTotalPoints() {
+        return totalPoints;
+    }
+
+    public void setTotalPoints(String totalPoints) {
+        this.totalPoints = totalPoints;
     }
 
     @Override

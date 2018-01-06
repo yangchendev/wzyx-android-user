@@ -39,6 +39,7 @@ public class WzyxApplication extends Application {
     */
     private static Map<String,Activity> destroyActivityMap = new HashMap<>();
     private static Context context;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -60,7 +61,6 @@ public class WzyxApplication extends Application {
                 .install();
         //AndroidUtilCode初始化
         Utils.init(this);
-
     }
     public static Context getContext(){
         return context;

@@ -1,8 +1,10 @@
 package com.allelink.wzyx.activity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.ActionBar;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -112,6 +114,7 @@ public class PayOrderActivity extends BaseActivity implements IAliPayResultListe
         });
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
     private void initView(Intent intent) {
         //设置自定义button图标
         rbWechatPay.setButtonDrawable(R.drawable.btn_payorder_selector);
@@ -208,6 +211,8 @@ public class PayOrderActivity extends BaseActivity implements IAliPayResultListe
     @Override
     public void onAliPaySuccess() {
         LogUtil.d(TAG,"支付成功");
+        ToastUtil.toastShort(PayOrderActivity.this,getResources().getString(R.string.pay_success));
+        ToastUtil.toastShort(PayOrderActivity.this,"积分 +"+Math.round(Float.parseFloat(mActivityCost)));
         btnPayOrder.setEnabled(false);
         //通知服务器支付成功
         updateOrderInfo();
@@ -226,11 +231,12 @@ public class PayOrderActivity extends BaseActivity implements IAliPayResultListe
         WzyxLoader.showLoading(PayOrderActivity.this);
         params.clear();
         params.put("orderIdStr", mOrderId);
+        params.put("userId",WzyxPreference.getCustomAppProfile(WzyxPreference.KEY_USER_ID));
+        params.put("totalAmount", mActivityCost);
         OrderHandler.updateOrderInfo(params, new IOrderListener() {
             @Override
             public void onSuccess(String orderId) {
                 WzyxLoader.stopLoading();
-                ToastUtil.toastShort(PayOrderActivity.this,getResources().getString(R.string.pay_success));
             }
             @Override
             public void onFailure(String errorMessage) {

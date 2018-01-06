@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.LinearLayoutCompat
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -13,25 +14,25 @@
             android:layout_height="60dp"
             android:src="@mipmap/ic_launcher"
             android:layout_marginTop="@dimen/dp_10"
-            android:layout_marginLeft="@dimen/dp_10"/>
+            android:layout_marginStart="@dimen/dp_10"/>
         <TextView
             android:id="@+id/tv_evaluate_user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="大不自多"
-            android:layout_alignLeft="@id/iv_evaluate_user_image"
-            android:layout_marginLeft="80dp"
+             android:text="大不自多"
+            android:layout_alignStart="@id/iv_evaluate_user_image"
+            android:layout_marginStart="80dp"
             android:layout_marginTop="@dimen/dp_10"
             android:textSize="@dimen/sp_16"
-            />
+            tools:ignore="HardcodedText" />
         <RatingBar
             android:id="@+id/rb_evaluate_level"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:numStars="5"
-            android:layout_alignLeft="@id/iv_evaluate_user_image"
+            android:layout_alignStart="@id/iv_evaluate_user_image"
             android:layout_alignTop="@id/tv_evaluate_user_name"
-            android:layout_marginLeft="80dp"
+            android:layout_marginStart="80dp"
             android:layout_marginTop="30dp"
             style="?android:attr/ratingBarStyleSmall"
             />
@@ -39,23 +40,24 @@
             android:id="@+id/tv_evaluate_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@id/iv_evaluate_user_image"
+            android:layout_alignStart="@id/iv_evaluate_user_image"
             android:layout_alignTop="@id/rb_evaluate_level"
-            android:layout_marginLeft="80dp"
+            android:layout_marginStart="80dp"
             android:layout_marginTop="30dp"
-            android:layout_marginRight="@dimen/dp_10"
-            android:layout_alignParentRight="true"
-            android:text="这是评论信息,这是评论信息,这是这是评论信息这是评论信息这是评论信息这是评论信息这是评论信息这是评论信息这是评论信息这是评论信息这是评论信息,这是评论信息,这是评论信息,这是评论信息,,,,,,,,,评论信息这是评论信息,这是评论信息,这是评论信息,,这是评论信息,这是评论信息,这是评论信息这是评论信息这是评论信息这是评论信息这是评论信息这是评论信息这是评 这是评论信息这是评论信息这是评论信息这是评论信息"/>
+            android:layout_marginEnd="@dimen/dp_10"
+            android:layout_alignParentEnd="true"
+            android:text="这是评论信息,这是评论信息,这是这是评论信息这是评论信息这是评论信息这是评论信息这是评论信息这是评论信息这是评论信息这是评论信息这是评论信息,这是评论信息,这是评论信息,这是评论信息,,,,,,,,,评论信息这是评论信息,这是评论信息,这是评论信息,,这是评论信息,这是评论信息,这是评论信息这是评论信息这是评论信息这是评论信息这是评论信息这是评论信息这是评 这是评论信息这是评论信息这是评论信息这是评论信息"
+            tools:ignore="HardcodedText" />
 
         <TextView
             android:id="@+id/tv_evaluate_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
             android:layout_marginTop="@dimen/dp_10"
-            android:layout_marginRight="@dimen/dp_10"
-            android:text="2018年1月4日"/>
+            android:layout_marginEnd="@dimen/dp_10"/>
+            <!--android:text="2018年1月4日"-->
 
     </RelativeLayout>
     <View

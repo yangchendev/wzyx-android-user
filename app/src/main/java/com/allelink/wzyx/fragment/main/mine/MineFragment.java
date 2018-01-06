@@ -1,8 +1,10 @@
 package com.allelink.wzyx.fragment.main.mine;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.allelink.wzyx.R;
+import com.allelink.wzyx.activity.AboutActivity;
 import com.allelink.wzyx.activity.AccountSettingActivity;
 import com.allelink.wzyx.activity.SettingActivity;
 import com.allelink.wzyx.activity.UserEvaluateListActivity;
@@ -77,6 +80,7 @@ public class MineFragment extends SupportFragment{
         return view;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
     @Override
     public void onSupportVisible() {
         super.onSupportVisible();
@@ -99,6 +103,8 @@ public class MineFragment extends SupportFragment{
                     .load(avatar)
                     .into(ivAvatar);
         }
+        String totalPoints = WzyxPreference.getCustomAppProfile(WzyxPreference.KEY_TOTAL_POINTS);
+        specPoint.setText(getResources().getString(R.string.spec_point,totalPoints));
     }
 
 
@@ -195,6 +201,7 @@ public class MineFragment extends SupportFragment{
     @OnClick(R.id.ll_mine_about_layout)
     void about(){
         LogUtil.d(TAG,"about");
+        ActivityUtils.startActivity(_mActivity, AboutActivity.class);
     }
     /**
     * 进入个人中心

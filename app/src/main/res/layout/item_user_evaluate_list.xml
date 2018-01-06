@@ -13,9 +13,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="大不自多"
-            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="@dimen/dp_10"
             android:textSize="@dimen/sp_16"
             />
@@ -24,9 +24,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:numStars="5"
-            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
             android:layout_alignTop="@id/tv_evaluate_activity_name"
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="30dp"
             style="?android:attr/ratingBarStyleSmall"
             />
@@ -34,22 +34,22 @@
             android:id="@+id/tv_evaluate_activity_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
             android:layout_alignTop="@id/rb_evaluate_activity_level"
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="30dp"
-            android:layout_marginRight="@dimen/dp_10"
-            android:layout_alignParentRight="true"
+            android:layout_marginEnd="@dimen/dp_10"
+            android:layout_alignParentEnd="true"
             android:text="这是评论信息,这是评论信息,这是这是评论信息这是评论信息这是评论信息这是评论信息这是评论信息这是评论信息这是评论信息这是评论信息这是评论信息,这是评论信息,这是评论信息,这是评论信息,,,,,,,,,评论信息这是评论信息,这是评论信息,这是评论信息,,这是评论信息,这是评论信息,这是评论信息这是评论信息这是评论信息这是评论信息这是评论信息这是评论信息这是评 这是评论信息这是评论信息这是评论信息这是评论信息"/>
 
         <TextView
             android:id="@+id/tv_evaluate_activity_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
             android:layout_marginTop="@dimen/dp_10"
-            android:layout_marginRight="@dimen/dp_10"
+            android:layout_marginEnd="@dimen/dp_10"
             android:text="2018年1月4日"/>
 
     </RelativeLayout>

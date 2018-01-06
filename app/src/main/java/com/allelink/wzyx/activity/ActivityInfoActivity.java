@@ -118,7 +118,6 @@ public class ActivityInfoActivity extends BaseActivity {
             }
         });
 
-
     }
 
     /**
@@ -206,7 +205,7 @@ public class ActivityInfoActivity extends BaseActivity {
         }
     }
 
-    @OnClick(R.id.tv_activity_info_activity_detail)
+    @OnClick(R.id.tv_evaluate)
     void onEvaluateList(){
         Intent intent=new Intent(ActivityInfoActivity.this, ActivityEvaluateActivity.class);
         intent.putExtra(ACTIVITY_ID,activityId);

@@ -66,7 +66,8 @@ public class OrderFragment extends SupportFragment{
             "全部",
             "待付款",
             "已取消",
-            "已完成"
+            "已完成",
+            "已评价"
     };
     /**
     * UI
@@ -92,14 +93,14 @@ public class OrderFragment extends SupportFragment{
     /**
      * 各种类型
      */
-    private static final int ORDER_ALL = 6;
+    private static final int ORDER_ALL = 7;
     private static final int ORDER_PAID = 1;
     private static final int ORDER_UNPAID = 0;
     private static final int ORDER_CANCELED = -1;
     private static final int ORDER_REFUNDING = 2;
     private static final int ORDER_REFUND_SUCCESS = 3;
     private static final int ORDER_COMPLETED = 5;
-   // private static final int ORDER_commented = 6;
+    private static final int ORDER_commented = 6;
     /**
     * 订单的状态
     */
@@ -210,7 +211,7 @@ public class OrderFragment extends SupportFragment{
                             //TODO 评价页面
                             LogUtil.d(TAG,"评价");
                             Intent intent = new Intent(_mActivity, EvaluationOrderActivity.class);
-                            intent.putExtra(ORDER_ID, orderItem.getOrderIdStr());
+                            intent.putExtra(ORDER_ID, orderItem.getOrderId());
                             intent.putExtra(ACTIVITY_ID,orderItem.getActivityId());
                             startActivity(intent);
                         }else if(orderState.equals(String.valueOf(ORDER_UNPAID))) {
@@ -278,6 +279,8 @@ public class OrderFragment extends SupportFragment{
                     mOrderState = ORDER_CANCELED;
                 }else if(mTabTitles[3].equals(tab.getText())){
                     mOrderState = ORDER_PAID;
+                }else if(mTabTitles[4].equals(tab.getText())) {
+                    mOrderState = ORDER_commented;
                 }
                 //获取订单信息
                 getOrderList(mOrderState);
@@ -298,6 +301,8 @@ public class OrderFragment extends SupportFragment{
                     mOrderState = ORDER_CANCELED;
                 }else if(mTabTitles[3].equals(tab.getText())){
                     mOrderState = ORDER_PAID;
+                }else if(mTabTitles[4].equals(tab.getText())) {
+                    mOrderState = ORDER_commented;
                 }
                 //获取订单信息
                 getOrderList(mOrderState);
@@ -329,7 +334,7 @@ public class OrderFragment extends SupportFragment{
         WzyxLoader.showLoading(_mActivity);
         HashMap<String, Object> params = new HashMap<>();
         params.put(WzyxPreference.KEY_USER_ID, WzyxPreference.getCustomAppProfile(WzyxPreference.KEY_USER_ID));
-        if(orderState != 6){
+        if(orderState != 7){
             params.put("orderState", orderState);
         }
         OrderHandler.getOrderList(params, new IGetOrderListListener() {
@@ -356,7 +361,7 @@ public class OrderFragment extends SupportFragment{
         //WzyxLoader.showLoading(_mActivity);
         HashMap<String, Object> params = new HashMap<>();
         params.put(WzyxPreference.KEY_USER_ID, WzyxPreference.getCustomAppProfile(WzyxPreference.KEY_USER_ID));
-        if(orderState != 6){
+        if(orderState != 7){
             params.put("orderState", orderState);
         }
         OrderHandler.getOrderList(params, new IGetOrderListListener() {

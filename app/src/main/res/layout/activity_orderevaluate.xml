@@ -17,17 +17,29 @@
         android:layout_height="48dp">
     </com.allelink.wzyx.ui.TitleBar>
     <!--导航栏结束-->
+    <android.support.v7.widget.LinearLayoutCompat
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
     <RatingBar
         android:id="@+id/rb_evaluateLevel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:numStars="5"
         android:stepSize="1"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_evaluate_level_hint"
+        android:layout_gravity="center"
+        android:textSize="@dimen/sp_16"
+        android:textColor="@color/black_333"
+        android:text="@string/evaluate_level"/>
+    </android.support.v7.widget.LinearLayoutCompat>
     <android.support.v7.widget.AppCompatEditText
         android:id="@+id/et_order_evaluate"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:hint="发表评论"
+        android:hint="@string/write_evaluate"
         android:layout_marginLeft="@dimen/dp_10"
         android:layout_marginRight="@dimen/dp_10"/>
 
@@ -35,7 +47,7 @@
         android:id="@+id/btn_order_evaluate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="提交评论"
+        android:text="@string/commit_comment"
         android:background="@color/colorPrimary"
         android:textColor="@color/white"
         android:textSize="@dimen/sp_16"

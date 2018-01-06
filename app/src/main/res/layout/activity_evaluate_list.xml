@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <!--导航栏开始-->
     <com.allelink.wzyx.ui.TitleBar
-        app:titleText="活动评价信息"
+        app:titleText="@string/activity_evaluate_message"
         app:titleSize="6sp"
         app:titleColor="@color/black_333"
         app:leftButtonBackground="@drawable/btn_back_blue_selector"
