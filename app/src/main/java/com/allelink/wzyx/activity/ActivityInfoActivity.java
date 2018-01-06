@@ -206,6 +206,12 @@ public class ActivityInfoActivity extends BaseActivity {
         }
     }
 
+    @OnClick(R.id.tv_activity_info_activity_detail)
+    void onEvaluateList(){
+        Intent intent=new Intent(ActivityInfoActivity.this, ActivityEvaluateActivity.class);
+        intent.putExtra(ACTIVITY_ID,activityId);
+        startActivity(intent);
+    }
     @Override
     protected void onStart() {
         super.onStart();

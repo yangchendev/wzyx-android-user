@@ -207,6 +207,20 @@
                 android:background="@color/grey"
                 android:layout_width="match_parent"
                 android:layout_height="10dp"/>
+            <!--活动评价开始-->
+            <android.support.v7.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_evaluate"
+                android:layout_marginStart="10dp"
+                android:text="活动评价"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/black_666"
+                android:textSize="16sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            </android.support.v7.widget.LinearLayoutCompat>
         </android.support.v7.widget.LinearLayoutCompat>
     </ScrollView>
     <!--活动报名开始-->

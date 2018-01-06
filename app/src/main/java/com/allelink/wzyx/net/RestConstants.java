@@ -17,7 +17,9 @@ public class RestConstants {
     /**
     * 服务器主机的地址
     */
-    public static final String BASE_URL = "http://101.132.191.9:8083/";
+    //public static final String BASE_URL = "http://101.132.191.9:8083/";
+    public static final String BASE_URL = "http://192.168.1.116:8086/";
+    public static final String BASE_URL_TEST = "http://10.0.2.2:8888/";
     /**
      * 注册的地址
      */
@@ -79,6 +81,21 @@ public class RestConstants {
     */
     public static final String DELETE_ORDER_URL = BASE_URL + "alllink/order/modifyOrderState";
     /**
+     * 评价订单地址
+     */
+    //TODO 需要修改URL
+    public static final String EVALUATE_ORDER_URL = BASE_URL+"alllink/evaluate/saveApp";
+    /**
+     * 活动评价列表地址
+     */
+    //TODO 需要修改URL
+    public static final String ACTIVITY_EVALUATE_URL = BASE_URL+"alllink/evaluate/getListByActivity";
+    /**
+     * 用户评价列表地址
+     */
+    //TODO 需要修改URL
+    public static final String USER_EVALUATE_URL = BASE_URL+"alllink/evaluate/getListByOneApp";
+    /**
     * 服务器图片目录地址
     */
     public static final String IMAGE_ROOT_URL = BASE_URL ;
@@ -94,4 +111,5 @@ public class RestConstants {
     * 申请退款地址
     */
     public static final String APPLY_REFUND_URL = BASE_URL+"alllink/pay/refundCheck";
+
 }

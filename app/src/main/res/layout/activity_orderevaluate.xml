@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--导航栏开始-->
+    <com.allelink.wzyx.ui.TitleBar
+        app:titleText="评价订单"
+        app:titleSize="6sp"
+        app:titleColor="@color/black_333"
+        app:leftButtonBackground="@drawable/btn_back_blue_selector"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+    </com.allelink.wzyx.ui.TitleBar>
+    <!--导航栏结束-->
+    <RatingBar
+        android:id="@+id/rb_evaluateLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numStars="5"
+        android:stepSize="1"/>
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/et_order_evaluate"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:hint="发表评论"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"/>
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_order_evaluate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="提交评论"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_16"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"/>
+
+
+</android.support.v7.widget.LinearLayoutCompat>

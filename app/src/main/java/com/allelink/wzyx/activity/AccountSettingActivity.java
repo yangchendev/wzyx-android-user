@@ -472,13 +472,12 @@ public class AccountSettingActivity extends BaseActivity {
 
 
     /**
-    * 权限允许或拒绝时的回调
-    */
+     * 权限允许或拒绝时的回调
+     */
     @SuppressLint("NeedOnRequestPermissionsResult")
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         AccountSettingActivityPermissionsDispatcher.onRequestPermissionsResult(this,requestCode,grantResults);
     }
-
 }

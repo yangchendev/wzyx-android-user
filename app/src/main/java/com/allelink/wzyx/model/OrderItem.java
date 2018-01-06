@@ -8,6 +8,12 @@ package com.allelink.wzyx.model;
  * @email yangchendev@qq.com
  */
 public class OrderItem {
+
+
+    /**
+     * 活动Id
+     */
+    private String activityId = null;
     /**
     * 订单Id
     */
@@ -36,6 +42,8 @@ public class OrderItem {
     * 订单图片
     */
     private String imageUrl = null;
+
+
     public String getOrderIdStr() {
         return orderIdStr;
     }
@@ -90,5 +98,13 @@ public class OrderItem {
 
     public void setOrderId(String orderId) {
         this.orderId = orderId;
+    }
+
+    public String getActivityId() {
+        return activityId;
+    }
+
+    public void setActivityId(String activityId) {
+        this.activityId = activityId;
     }
 }

@@ -1,5 +1,6 @@
 package com.allelink.wzyx.fragment.main.mine;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatTextView;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import com.allelink.wzyx.R;
 import com.allelink.wzyx.activity.AccountSettingActivity;
 import com.allelink.wzyx.activity.SettingActivity;
+import com.allelink.wzyx.activity.UserEvaluateListActivity;
 import com.allelink.wzyx.utils.activity.ActivityUtils;
 import com.allelink.wzyx.utils.log.LogUtil;
 import com.allelink.wzyx.utils.storage.WzyxPreference;
@@ -128,6 +130,8 @@ public class MineFragment extends SupportFragment{
     @OnClick(R.id.ll_mine_comment_layout)
     void comment(){
         LogUtil.d(TAG,"comment");
+        Intent intent=new Intent(_mActivity,UserEvaluateListActivity.class);
+        startActivity(intent);
     }
     /**
      * 账单点击事件

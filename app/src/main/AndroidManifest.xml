@@ -109,16 +109,19 @@
             android:configChanges="orientation|keyboardHidden|navigation|screenSize"
             android:exported="false"
             android:screenOrientation="behind"
-            android:windowSoftInputMode="adjustResize|stateHidden"></activity>
+            android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
             android:name="com.alipay.sdk.app.H5AuthActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
             android:screenOrientation="behind"
-            android:windowSoftInputMode="adjustResize|stateHidden"></activity>
+            android:windowSoftInputMode="adjustResize|stateHidden" />
         <!-- 支付宝相关结束 -->
 
-        <activity android:name=".activity.RefundActivity"></activity>
+        <activity android:name=".activity.RefundActivity" />
+        <activity android:name=".activity.EvaluationOrderActivity" />
+        <activity android:name=".activity.ActivityEvaluateActivity" />
+        <activity android:name=".activity.UserEvaluateListActivity"/>
     </application>
 
 </manifest>

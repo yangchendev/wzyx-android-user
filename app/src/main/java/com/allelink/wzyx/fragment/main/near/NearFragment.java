@@ -700,6 +700,7 @@ public class NearFragment extends SupportFragment {
                 });
     }
     private void generateTestData(){
+
         for(int i = 0; i < 15; i++){
             ActivityItem activityItem = new ActivityItem();
             activityItem.setActivityName("第"+i+"个活动");

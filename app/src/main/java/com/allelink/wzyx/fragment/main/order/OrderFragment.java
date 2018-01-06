@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.allelink.wzyx.R;
+import com.allelink.wzyx.activity.EvaluationOrderActivity;
 import com.allelink.wzyx.activity.PayOrderActivity;
 import com.allelink.wzyx.adapter.OrderItemAdapter;
 import com.allelink.wzyx.app.order.IGetOrderListListener;
@@ -57,6 +58,7 @@ public class OrderFragment extends SupportFragment{
     private static final String ACTIVITY_COST = "cost";
     private static final String ORDER_ID = "orderId";
     private static final String CREATE_TIME = "createTime";
+    private static final String ACTIVITY_ID = "activityId";
     /**
      * tab标签数据
      */
@@ -97,6 +99,7 @@ public class OrderFragment extends SupportFragment{
     private static final int ORDER_REFUNDING = 2;
     private static final int ORDER_REFUND_SUCCESS = 3;
     private static final int ORDER_COMPLETED = 5;
+   // private static final int ORDER_commented = 6;
     /**
     * 订单的状态
     */
@@ -204,14 +207,15 @@ public class OrderFragment extends SupportFragment{
 
                         if(orderState.equals(String.valueOf(ORDER_PAID))){
                             //退款
+                            //TODO 评价页面
                             LogUtil.d(TAG,"评价");
-//                            Intent intent = new Intent(_mActivity, RefundActivity.class);
-//                            intent.putExtra(ACTIVITY_COST, orderItem.getCost());
-//                            intent.putExtra(ORDER_ID, orderItem.getOrderIdStr());
-//                            startActivity(intent);
-                        }else if(orderState.equals(String.valueOf(ORDER_UNPAID))){
+                            Intent intent = new Intent(_mActivity, EvaluationOrderActivity.class);
+                            intent.putExtra(ORDER_ID, orderItem.getOrderIdStr());
+                            intent.putExtra(ACTIVITY_ID,orderItem.getActivityId());
+                            startActivity(intent);
+                        }else if(orderState.equals(String.valueOf(ORDER_UNPAID))) {
                             //去付款
-                            LogUtil.d(TAG,"去付款");
+                            LogUtil.d(TAG, "去付款");
                             Intent intent = new Intent(_mActivity, PayOrderActivity.class);
                             intent.putExtra(ACTIVITY_COST, orderItem.getCost());
                             intent.putExtra(ACTIVITY_NAME, orderItem.getActivityName());

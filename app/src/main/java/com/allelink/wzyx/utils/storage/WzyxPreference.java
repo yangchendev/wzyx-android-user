@@ -14,7 +14,7 @@ import com.allelink.wzyx.app.WzyxApplication;
  * @email 1048027353@qq.com
  */
 
-public class WzyxPreference {
+public  class WzyxPreference {
     /**
     * 一些需要用到的键
     */

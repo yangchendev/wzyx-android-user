@@ -308,4 +308,60 @@ public class OrderHandler {
             }
         });
     }
+    /**
+     * 评价订单
+     * @param params 请求参数 （用户Id,订单Id）
+     * @param listener 回调接口
+     */
+    public static void evaluateOrderInfo(HashMap<String,Object> params,final IOrderListener listener){
+        //将请求参数转换成json格式
+        String jsonString = JSON.toJSONString(params);
+        LogUtil.json(TAG,jsonString);
+        RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"),jsonString);
+        //post 提交json格式的数据
+        Call<String> call = RestCreator.getRestService().postRaw(RestConstants.EVALUATE_ORDER_URL, body);
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                //网络请求成功的回调
+                String responseString = response.body();
+                String result;
+                String message;
+                String orderId;
+                LogUtil.json(TAG,responseString);
+                if(!TextUtils.isEmpty(responseString) && response.isSuccessful()){
+                    JSONObject jsonObject = JSON.parseObject(responseString);
+                    result = jsonObject.getString("result");
+                    message = jsonObject.getString("message");
+                    if(SUCCESS.equals(result)){
+                        if(listener != null){
+                            orderId = "";
+                            listener.onSuccess(orderId);
+                        }
+                    }else if(ERROR.equals(result)){
+                        if(listener != null){
+                            listener.onFailure(message);
+                        }
+                    }
+                }else{
+                    try {
+                        if(listener != null){
+                            listener.onFailure(response.errorBody().string());
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                if(listener != null){
+                    listener.onFailure(t.getMessage());
+                }
+            }
+        });
+    }
+
+
 }
