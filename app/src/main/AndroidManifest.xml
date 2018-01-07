@@ -135,8 +135,8 @@
             android:name=".activity.AboutActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
-        <activity android:name=".activity.baidunav.BaiduNavActivity"></activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity android:name=".activity.baidunav.BaiduNavActivity"/>
     </application>
 
 </manifest>

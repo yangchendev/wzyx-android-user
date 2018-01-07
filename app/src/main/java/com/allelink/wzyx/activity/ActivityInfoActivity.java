@@ -43,6 +43,9 @@ public class ActivityInfoActivity extends BaseActivity {
     private static final String SELLER_ID = "sellerId";
     private static final String ACTIVITY_NAME = "activityName";
     private static final String ACTIVITY_COST = "cost";
+    private static final String LONGITUDE = "longitude";
+    private static final String LATITUDE = "latitude";
+
     /**
     * UI
     */
@@ -80,6 +83,8 @@ public class ActivityInfoActivity extends BaseActivity {
     private String mActivityPrice = null;
     private String mImageUrl = null;
     private ActivityDetailItem detailItem = null;
+    private double longitude;
+    private double latitude;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -162,6 +167,8 @@ public class ActivityInfoActivity extends BaseActivity {
         mActivityPrice = activityDetailItem.getCost();
         mImageUrl = activityDetailItem.getImageUrl();
         mImageUrl = activityDetailItem.getImageUrl().replace("\\","/");
+        longitude=activityDetailItem.getLongitude();
+        latitude=activityDetailItem.getLatitude();
         //TODO
         //imageUrls = mImageUrl.split(",");
         //设置到界面上
@@ -219,10 +226,10 @@ public class ActivityInfoActivity extends BaseActivity {
      */
     @OnClick(R.id.tv_activity_info_activity_address)
     void onBaiduNav(){
-//        Intent intent=new Intent(ActivityInfoActivity.this,BaiduNavActivity.class);
-//        intent.putExtra("longitude","");
-//        intent.putExtra("latitude","");
-//        startActivity(intent);
+        Intent intent=new Intent(ActivityInfoActivity.this,BaiduNavActivity.class);
+        intent.putExtra(LONGITUDE,longitude);
+        intent.putExtra(LATITUDE,latitude);
+        startActivity(intent);
     }
     @Override
     protected void onStart() {
