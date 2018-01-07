@@ -17,9 +17,8 @@ public class RestConstants {
     /**
     * 服务器主机的地址
     */
-    //public static final String BASE_URL = "http://101.132.191.9:8083/";
-    public static final String BASE_URL = "http://192.168.1.116:8086/";
-    public static final String BASE_URL_TEST = "http://10.0.2.2:8888/";
+    public static final String BASE_URL = "http://101.132.191.9:8083/";
+    //public static final String BASE_URL = "http://192.168.1.116:8086/";
     /**
      * 注册的地址
      */

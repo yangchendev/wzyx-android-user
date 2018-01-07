@@ -1,6 +1,14 @@
 package com.allelink.wzyx.adapter;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Icon;
 import android.net.Uri;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,8 +18,13 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.allelink.wzyx.R;
+import com.allelink.wzyx.app.GlideApp;
 import com.allelink.wzyx.model.EvaluateListItem;
+import com.allelink.wzyx.net.RestConstants;
 
+import java.io.InputStream;
+import java.net.URI;
+import java.net.URL;
 import java.util.List;
 
 
@@ -23,10 +36,10 @@ public class EvaluateActivityAdapter extends RecyclerView.Adapter<EvaluateActivi
 
 
     private List<EvaluateListItem> evaluateList;
-
+    Context mContext;
     class viewHolder extends RecyclerView.ViewHolder{
         View EvaluateView;
-        ImageView userImage;
+        AppCompatImageView userImage;
         TextView user_name;
         RatingBar evaluateLevel;
         TextView evaluateContent;
@@ -50,13 +63,19 @@ public class EvaluateActivityAdapter extends RecyclerView.Adapter<EvaluateActivi
     public viewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_activity_evaluate,parent,false);
         final viewHolder holder=new viewHolder(view);
+        mContext=view.getContext();
         return holder;
     }
 
     @Override
     public void onBindViewHolder(viewHolder holder, int position) {
-        EvaluateListItem evaluate=evaluateList.get(position);
-        holder.userImage.setImageURI(Uri.parse(evaluate.getPhoto()));
+         EvaluateListItem evaluate = evaluateList.get(position);
+        //holder.userImage.setImageURI(Uri.parse("http://101.132.191.9:8083/pic/"+evaluate.getPhoto()));
+        GlideApp.with(mContext)
+                .load(RestConstants.IMAGE_ROOT_URL+"pic/"+evaluate.getPhoto().replace("\\","/"))
+                .placeholder(R.drawable.activity_default_pic)
+                .error(R.drawable.activity_default_pic)
+                .into(holder.userImage);
         holder.user_name.setText(evaluate.getNickname());
         holder.evaluateLevel.setRating(evaluate.getEvaluateLevel());
         holder.evaluateContent.setText(evaluate.getEvaluateContent());

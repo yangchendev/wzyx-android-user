@@ -136,6 +136,7 @@
     <string name="refund">退款</string>
     <string name="completed">已完成</string>
     <string name="paid">已支付</string>
+    <string name="commented">已评价</string>
     <string name="canceled">已取消</string>
     <string name="order_id">订单号：%s</string>
     <string name="order_empty">还没有该类型订单哦～</string>

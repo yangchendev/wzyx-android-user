@@ -9,6 +9,9 @@ android {
         versionCode 1
         versionName "V 1.0.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        ndk{
+            abiFilters"armeabi"
+        }
     }
     buildTypes {
         release {

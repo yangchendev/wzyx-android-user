@@ -17,6 +17,7 @@ import com.allelink.wzyx.activity.AboutActivity;
 import com.allelink.wzyx.activity.AccountSettingActivity;
 import com.allelink.wzyx.activity.SettingActivity;
 import com.allelink.wzyx.activity.UserEvaluateListActivity;
+import com.allelink.wzyx.activity.baidunav.BaiduNavActivity;
 import com.allelink.wzyx.utils.activity.ActivityUtils;
 import com.allelink.wzyx.utils.log.LogUtil;
 import com.allelink.wzyx.utils.storage.WzyxPreference;
@@ -129,6 +130,7 @@ public class MineFragment extends SupportFragment{
     @OnClick(R.id.ll_mine_collection_layout)
     void collection(){
         LogUtil.d(TAG,"collection");
+
     }
     /**
      * 评论点击事件

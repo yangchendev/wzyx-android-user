@@ -6,6 +6,7 @@ import android.support.v7.widget.AppCompatTextView;
 import android.widget.Button;
 
 import com.allelink.wzyx.R;
+import com.allelink.wzyx.activity.baidunav.BaiduNavActivity;
 import com.allelink.wzyx.activity.base.BaseActivity;
 import com.allelink.wzyx.app.WzyxApplication;
 import com.allelink.wzyx.app.activityinfo.ActivityInfoHandler;
@@ -204,12 +205,24 @@ public class ActivityInfoActivity extends BaseActivity {
             startActivity(intent);
         }
     }
-
+    /**
+     * 查看评价信息
+     */
     @OnClick(R.id.tv_evaluate)
     void onEvaluateList(){
         Intent intent=new Intent(ActivityInfoActivity.this, ActivityEvaluateActivity.class);
         intent.putExtra(ACTIVITY_ID,activityId);
         startActivity(intent);
+    }
+    /**
+     * 导航到活动地点
+     */
+    @OnClick(R.id.tv_activity_info_activity_address)
+    void onBaiduNav(){
+//        Intent intent=new Intent(ActivityInfoActivity.this,BaiduNavActivity.class);
+//        intent.putExtra("longitude","");
+//        intent.putExtra("latitude","");
+//        startActivity(intent);
     }
     @Override
     protected void onStart() {

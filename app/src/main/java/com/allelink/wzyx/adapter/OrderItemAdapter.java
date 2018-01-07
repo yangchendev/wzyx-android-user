@@ -55,6 +55,10 @@ public class OrderItemAdapter extends BaseItemDraggableAdapter<OrderItem,BaseVie
     */
     private static final String ORDER_COMPETED = "5";
     /**
+     * 订单已完成
+     */
+    private static final String ORDER_COMMENTED = "6";
+    /**
     * 30分钟倒计时
     */
     private static final long COUNTER_DOWN_TIME = 30*60*1000;
@@ -164,6 +168,19 @@ public class OrderItemAdapter extends BaseItemDraggableAdapter<OrderItem,BaseVie
                 tvOrderCost.setTextColor(mContext.getResources().getColor(R.color.brands_color));
                 btnRight.setVisibility(View.VISIBLE);
                 btnRight.setText(mContext.getResources().getString(R.string.comment));
+                btnRight.setTextColor(mContext.getResources().getColor(R.color.brands_color));
+                btnRight.setBackground(mContext.getResources().getDrawable(R.drawable.btn_refund_border));
+                break;
+            //已评价
+            case ORDER_COMMENTED:
+                leftTimeTip.setVisibility(View.GONE);
+                tvCounterDown.setVisibility(View.GONE);
+                orderStateView.setBackgroundColor(mContext.getResources().getColor(R.color.brands_color));
+                tvOrderState.setText(mContext.getResources().getString(R.string.commented));
+                tvOrderState.setTextColor(mContext.getResources().getColor(R.color.brands_color));
+                tvOrderCost.setTextColor(mContext.getResources().getColor(R.color.brands_color));
+                btnRight.setVisibility(View.VISIBLE);
+                btnRight.setText(mContext.getResources().getString(R.string.commented));
                 btnRight.setTextColor(mContext.getResources().getColor(R.color.brands_color));
                 btnRight.setBackground(mContext.getResources().getDrawable(R.drawable.btn_refund_border));
                 break;
