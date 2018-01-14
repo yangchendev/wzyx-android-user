@@ -1,6 +1,5 @@
 package com.allelink.wzyx.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -9,18 +8,20 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.allelink.wzyx.R;
 import com.allelink.wzyx.activity.base.BaseActivity;
-import com.allelink.wzyx.adapter.EvaluateActivityAdapter;
 import com.allelink.wzyx.adapter.UserEvaluateAdapter;
+import com.allelink.wzyx.app.WzyxApplication;
 import com.allelink.wzyx.app.comment.ICommentListener;
 import com.allelink.wzyx.app.comment.commentHandler;
-import com.allelink.wzyx.model.EvaluateListItem;
 import com.allelink.wzyx.model.UserEvaluateItem;
+import com.allelink.wzyx.ui.TitleBar;
 import com.allelink.wzyx.ui.loader.WzyxLoader;
 import com.allelink.wzyx.utils.storage.WzyxPreference;
 import com.allelink.wzyx.utils.toast.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import qiu.niorgai.StatusBarCompat;
 
 public class UserEvaluateListActivity extends BaseActivity {
 
@@ -29,7 +30,24 @@ public class UserEvaluateListActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_evaluate_list);
+        StatusBarCompat.setStatusBarColor(this,getResources().getColor(R.color.white));
         initData();
+        initTitleBar();
+    }
+
+    private void initTitleBar() {
+        TitleBar titleBar = findViewById(R.id.tb_user_evaluate_list_activity);
+        titleBar.setOnTitleBarButtonClickListener(new TitleBar.onTitleBarButtonClickListener() {
+            @Override
+            public void onLeftClick() {
+                ((WzyxApplication)getApplication()).finishSingleActivity(UserEvaluateListActivity.this);
+            }
+
+            @Override
+            public void onRightClick() {
+
+            }
+        });
     }
 
     private void initData() {

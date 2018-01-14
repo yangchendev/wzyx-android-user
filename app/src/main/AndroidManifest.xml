@@ -119,9 +119,21 @@
         <!-- 支付宝相关结束 -->
 
         <activity android:name=".activity.RefundActivity" />
-        <activity android:name=".activity.EvaluationOrderActivity" />
-        <activity android:name=".activity.ActivityEvaluateActivity" />
-        <activity android:name=".activity.UserEvaluateListActivity" />
+        <activity android:name=".activity.EvaluationOrderActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            />
+        <activity android:name=".activity.ActivityEvaluateActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            />
+        <activity android:name=".activity.UserEvaluateListActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            />
         <activity android:name=".activity.baidunav.BNDemoGuideActivity" />
         <!-- mobPay -->
         <meta-data

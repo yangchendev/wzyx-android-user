@@ -190,6 +190,7 @@ public class OrderFragment extends SupportFragment{
                                 orderDeleteListener);
                         break;
                     //订单取消
+
                     case R.id.ll_right_cancel:
                         //已取消和已完成订单不可取消
                         if(orderState.equals(String.valueOf(ORDER_PAID))

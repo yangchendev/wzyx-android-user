@@ -1,19 +1,11 @@
 package com.allelink.wzyx.adapter;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Icon;
-import android.net.Uri;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -22,9 +14,6 @@ import com.allelink.wzyx.app.GlideApp;
 import com.allelink.wzyx.model.EvaluateListItem;
 import com.allelink.wzyx.net.RestConstants;
 
-import java.io.InputStream;
-import java.net.URI;
-import java.net.URL;
 import java.util.List;
 
 
@@ -33,7 +22,7 @@ import java.util.List;
  */
 
 public class EvaluateActivityAdapter extends RecyclerView.Adapter<EvaluateActivityAdapter.viewHolder> {
-
+    private static final String TAG = "EvaluateActivityAdapter";
 
     private List<EvaluateListItem> evaluateList;
     Context mContext;
@@ -70,6 +59,9 @@ public class EvaluateActivityAdapter extends RecyclerView.Adapter<EvaluateActivi
     @Override
     public void onBindViewHolder(viewHolder holder, int position) {
          EvaluateListItem evaluate = evaluateList.get(position);
+        if(evaluate.getPhoto() == null){
+            evaluate.setPhoto("");
+        }
         //holder.userImage.setImageURI(Uri.parse("http://101.132.191.9:8083/pic/"+evaluate.getPhoto()));
         GlideApp.with(mContext)
                 .load(RestConstants.IMAGE_ROOT_URL+"pic/"+evaluate.getPhoto().replace("\\","/"))

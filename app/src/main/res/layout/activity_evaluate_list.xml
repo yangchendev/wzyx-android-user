@@ -6,6 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <!--导航栏开始-->
     <com.allelink.wzyx.ui.TitleBar
+        android:id="@+id/tb_evaluate_activity"
         app:titleText="@string/activity_evaluate_message"
         app:titleSize="6sp"
         app:titleColor="@color/black_333"

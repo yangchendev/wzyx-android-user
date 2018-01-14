@@ -41,8 +41,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.OnClick;
-
 public class BaiduNavActivity extends AppCompatActivity {
 
     private Context context;
@@ -343,7 +341,7 @@ public class BaiduNavActivity extends AppCompatActivity {
         BNaviSettingManager.setIsAutoQuitWhenArrived(true);
         Bundle bundle = new Bundle();
         // 必须设置APPID，否则会静音
-        bundle.putString(BNCommonSettingParam.TTS_APP_ID, "10498067");
+        bundle.putString(BNCommonSettingParam.TTS_APP_ID, "10483259");
         BNaviSettingManager.setNaviSdkParam(bundle);
     }
 

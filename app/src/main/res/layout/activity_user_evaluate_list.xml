@@ -6,7 +6,17 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.allelink.wzyx.activity.UserEvaluateListActivity">
-
+    <!--导航栏开始-->
+    <com.allelink.wzyx.ui.TitleBar
+        android:id="@+id/tb_user_evaluate_list_activity"
+        app:titleText="@string/user_evaluate_message"
+        app:titleSize="6sp"
+        app:titleColor="@color/black_333"
+        app:leftButtonBackground="@drawable/btn_back_blue_selector"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+    </com.allelink.wzyx.ui.TitleBar>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_user_evaluate_list"
         android:layout_width="match_parent"

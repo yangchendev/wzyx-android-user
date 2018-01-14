@@ -179,7 +179,7 @@ public class OrderItemAdapter extends BaseItemDraggableAdapter<OrderItem,BaseVie
                 tvOrderState.setText(mContext.getResources().getString(R.string.commented));
                 tvOrderState.setTextColor(mContext.getResources().getColor(R.color.brands_color));
                 tvOrderCost.setTextColor(mContext.getResources().getColor(R.color.brands_color));
-                btnRight.setVisibility(View.VISIBLE);
+                btnRight.setVisibility(View.INVISIBLE);
                 btnRight.setText(mContext.getResources().getString(R.string.commented));
                 btnRight.setTextColor(mContext.getResources().getColor(R.color.brands_color));
                 btnRight.setBackground(mContext.getResources().getDrawable(R.drawable.btn_refund_border));

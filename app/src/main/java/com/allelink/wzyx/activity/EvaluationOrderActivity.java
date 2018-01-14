@@ -1,8 +1,6 @@
 package com.allelink.wzyx.activity;
 
 import android.annotation.SuppressLint;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,12 +8,12 @@ import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatTextView;
 import android.widget.RatingBar;
-import android.widget.TextView;
 
 import com.allelink.wzyx.R;
+import com.allelink.wzyx.app.WzyxApplication;
 import com.allelink.wzyx.app.order.IOrderListener;
 import com.allelink.wzyx.app.order.OrderHandler;
-import com.allelink.wzyx.fragment.main.order.OrderFragment;
+import com.allelink.wzyx.ui.TitleBar;
 import com.allelink.wzyx.ui.loader.WzyxLoader;
 import com.allelink.wzyx.utils.storage.WzyxPreference;
 import com.allelink.wzyx.utils.toast.ToastUtil;
@@ -25,6 +23,7 @@ import java.util.HashMap;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import qiu.niorgai.StatusBarCompat;
 
 public class EvaluationOrderActivity extends AppCompatActivity {
 
@@ -43,12 +42,14 @@ public class EvaluationOrderActivity extends AppCompatActivity {
     RatingBar rbEvaluateLevel;
     @BindView(R.id.tv_evaluate_level_hint)
     AppCompatTextView textLevelHint;
-
+    @BindView(R.id.tb_evaluate_order_activity)
+    TitleBar titleBar = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_orderevaluate);
+        StatusBarCompat.setStatusBarColor(this,getResources().getColor(R.color.white));
         android.app.ActionBar actionBar = getActionBar();
         if (actionBar != null) {
             actionBar.hide();
@@ -57,6 +58,7 @@ public class EvaluationOrderActivity extends AppCompatActivity {
         orderId = intent.getStringExtra(ORDER_ID);
         activityId = intent.getStringExtra(ACTIVITY_ID);
         ButterKnife.bind(this);
+        initTitleBar();
         rbEvaluateLevel.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
            @Override
            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
@@ -72,13 +74,27 @@ public class EvaluationOrderActivity extends AppCompatActivity {
        });
     }
 
+    private void initTitleBar() {
+        titleBar.setOnTitleBarButtonClickListener(new TitleBar.onTitleBarButtonClickListener() {
+            @Override
+            public void onLeftClick() {
+                ((WzyxApplication)getApplication()).finishSingleActivity(EvaluationOrderActivity.this);
+            }
+
+            @Override
+            public void onRightClick() {
+
+            }
+        });
+    }
+
     @OnClick(R.id.btn_order_evaluate)
     void onEvaluateOrder() {
         String text = editEvaluateOrder.getText().toString();
         HashMap<String, Object> params = new HashMap<>();
         if (!text.equals("")&&!text.isEmpty()) {
             evaluateLevel = (int) rbEvaluateLevel.getRating();
-            //TODO 将评价内容提交给服务器
+            //将评价内容提交给服务器
             btnEvaluateOrder.setEnabled(true);
             params.clear();
             WzyxLoader.showLoading(this);

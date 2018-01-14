@@ -8,6 +8,7 @@
 
     <!--导航栏开始-->
     <com.allelink.wzyx.ui.TitleBar
+        android:id="@+id/tb_evaluate_order_activity"
         app:titleText="评价订单"
         app:titleSize="6sp"
         app:titleColor="@color/black_333"
@@ -18,6 +19,10 @@
     </com.allelink.wzyx.ui.TitleBar>
     <!--导航栏结束-->
     <android.support.v7.widget.LinearLayoutCompat
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
     <RatingBar
@@ -32,10 +37,14 @@
         android:id="@+id/tv_evaluate_level_hint"
         android:layout_gravity="center"
         android:textSize="@dimen/sp_16"
-        android:textColor="@color/black_333"
+        android:textColor="@color/black_666"
         android:text="@string/evaluate_level"/>
     </android.support.v7.widget.LinearLayoutCompat>
     <android.support.v7.widget.AppCompatEditText
+
+        android:padding="10dp"
+        android:background="@drawable/edit_boder"
+        android:gravity="start"
         android:id="@+id/et_order_evaluate"
         android:layout_width="match_parent"
         android:layout_height="200dp"
@@ -44,11 +53,12 @@
         android:layout_marginRight="@dimen/dp_10"/>
 
     <android.support.v7.widget.AppCompatButton
+        android:layout_marginTop="10dp"
         android:id="@+id/btn_order_evaluate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/commit_comment"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/btn_confirm_selector"
         android:textColor="@color/white"
         android:textSize="@dimen/sp_16"
         android:layout_marginLeft="@dimen/dp_10"

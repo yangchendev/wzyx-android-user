@@ -173,7 +173,8 @@
     </string>
     <string name="activity_evaluate">查看活动评价</string>
     <string name="activity_evaluate_message">活动评价信息</string>
-    <string name="evaluate_level">请评价星级</string>
-    <string name="write_evaluate">发表评论</string>
+    <string name="user_evaluate_message">我的评价</string>
+    <string name="evaluate_level">为活动打分</string>
+    <string name="write_evaluate">写下您对活动的评价吧 (@^o^@)</string>
     <string name="commit_comment">提交评论</string>
 </resources>
