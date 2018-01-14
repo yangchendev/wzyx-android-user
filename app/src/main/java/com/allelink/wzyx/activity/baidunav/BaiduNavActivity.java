@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -71,6 +72,7 @@ public class BaiduNavActivity extends AppCompatActivity {
     private BDLocation myLocation;
 
     private Button baidunav1;
+    private FloatingActionButton navBtn = null;
     private static final String TAG = "BaiduNavActivity";
 
     @Override
@@ -79,11 +81,16 @@ public class BaiduNavActivity extends AppCompatActivity {
         context=getApplicationContext();
         SDKInitializer.initialize(context);
         setContentView(R.layout.activity_baidu_nav);
-
+        //隐藏actionBar
+        android.app.ActionBar actionBar = getActionBar();
+        if(actionBar != null){
+            actionBar.hide();
+        }
         mMapView = findViewById(R.id.tmp_mTexturemap);
         mBaiduMap = mMapView.getMap();
         //开启定位
         mBaiduMap.setMyLocationEnabled(true);
+        navBtn = findViewById(R.id.fab_activity_baidu_nav);
         initLocation();
         initLatLong();
 //        mBaiduMap.setOnMapLongClickListener(new BaiduMap.OnMapLongClickListener() {
@@ -112,6 +119,17 @@ public class BaiduNavActivity extends AppCompatActivity {
                     routeplanToNavi(false);}
             }
         });
+        navBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mDestLocationData == null) {
+                    Toast.makeText(BaiduNavActivity.this, "请设置目标地点", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    routeplanToNavi(true);}
+            }
+        });
+
     }
 
     /**
@@ -249,7 +267,7 @@ public class BaiduNavActivity extends AppCompatActivity {
     /**
      * 内部TTS播报状态回传handler
      */
-    private Handler ttsHandler = new Handler() {
+    private  Handler ttsHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             int type = msg.what;
@@ -313,14 +331,14 @@ public class BaiduNavActivity extends AppCompatActivity {
 
                     @Override
                     public void initSuccess() {
-                        Toast.makeText(BaiduNavActivity.this, "百度导航引擎初始化成功", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(BaiduNavActivity.this, "百度导航引擎初始化成功", Toast.LENGTH_SHORT).show();
                         hasInitSuccess = true;
                         initSetting();
                     }
 
                     @Override
                     public void initStart() {
-                        Toast.makeText(BaiduNavActivity.this, "百度导航引擎初始化开始", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(BaiduNavActivity.this, "百度导航引擎初始化开始", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override

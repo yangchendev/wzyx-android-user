@@ -16,6 +16,7 @@
         app:leftButtonBackground="@drawable/btn_back_blue_selector"
         android:background="@color/white"
         android:layout_width="match_parent"
+        app:rightButtonBackground="@drawable/btn_nav_selector"
         android:layout_height="48dp">
     </com.allelink.wzyx.ui.TitleBar>
     <!--导航栏结束-->

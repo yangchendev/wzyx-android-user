@@ -120,7 +120,10 @@ public class ActivityInfoActivity extends BaseActivity {
 
             @Override
             public void onRightClick() {
-
+                Intent intent=new Intent(ActivityInfoActivity.this,BaiduNavActivity.class);
+                intent.putExtra(LONGITUDE,longitude);
+                intent.putExtra(LATITUDE,latitude);
+                startActivity(intent);
             }
         });
 

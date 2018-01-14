@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,6 +7,7 @@
     android:orientation="vertical"
     tools:context="com.allelink.wzyx.activity.baidunav.BaiduNavActivity">
     <Button
+        android:visibility="invisible"
         android:id="@+id/btn_baidu_nav"
         android:text="开始导航"
         android:layout_width="match_parent"
@@ -16,5 +17,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
     </com.baidu.mapapi.map.TextureMapView>
+    <android.support.design.widget.FloatingActionButton
+        android:src="@drawable/icon_nav"
+        app:backgroundTint="@color/brands_color"
+        android:id="@+id/fab_activity_baidu_nav"
+        android:layout_marginBottom="10dp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_width="50dp"
+        android:layout_height="50dp" />
 
-</LinearLayout>
+</FrameLayout>
