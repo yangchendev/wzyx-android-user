@@ -22,6 +22,7 @@
     <!--导航栏结束-->
 
     <ScrollView
+        android:paddingBottom="68dp"
         android:fillViewport="true"
         android:layout_below="@id/tb_activity_info"
         android:layout_width="match_parent"
@@ -149,10 +150,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <android.support.v7.widget.AppCompatTextView
-                    android:maxLines="5"
-                    android:ellipsize="end"
                     android:id="@+id/tv_activity_info_activity_intro"
-                    tools:text="单人舞蹈课程，舒适的练习环境，专业的舞蹈老师为您指导，节假日均可报名，免费WiFi"
+                    tools:text="单人舞蹈课程，舒适的练习环境，专业的舞蹈老师为您指导，节假日均可报名，免费WiFi,单人舞蹈课程，舒适的练习环境，专业的舞蹈老师为您指导，节假日均可报名，免费WiFi,单人舞蹈课程，舒适的练习环境，专业的舞蹈老师为您指导，节假日均可报名，免费WiFi,单人舞蹈课程，舒适的练习环境，专业的舞蹈老师为您指导，节假日均可报名，免费WiFi,单人舞蹈课程，舒适的练习环境，专业的舞蹈老师为您指导，节假日均可报名，免费WiFi,单人舞蹈课程，舒适的练习环境，专业的舞蹈老师为您指导，节假日均可报名，免费WiFi,单人舞蹈课程，舒适的练习环境，专业的舞蹈老师为您指导，节假日均可报名，免费WiFi,单人舞蹈课程，舒适的练习环境，专业的舞蹈老师为您指导，节假日均可报名，免费WiFi"
                     android:textSize="12sp"
                     android:textColor="@color/black_333"
                     android:layout_gravity="center_vertical"
@@ -160,7 +159,7 @@
                     android:layout_marginEnd="10dp"
                     android:layout_marginStart="10dp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="match_parent" />
                 <android.support.v7.widget.AppCompatTextView
                     android:text="@string/activity_period"
                     android:layout_marginTop="10dp"
@@ -173,7 +172,7 @@
                     android:layout_height="wrap_content" />
                 <android.support.v7.widget.LinearLayoutCompat
                     android:paddingBottom="10dp"
-                    android:layout_marginTop="8dp"
+                    android:paddingTop="8dp"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -202,33 +201,34 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                 </android.support.v7.widget.LinearLayoutCompat>
+                <!--活动详情结束-->
+                <View
+                    android:background="@color/grey"
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"/>
+                <!--活动评价开始-->
+                <android.support.v7.widget.LinearLayoutCompat
+                    android:background="@color/white"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp">
+                    <android.support.v7.widget.AppCompatTextView
+                        android:text="@string/activity_evaluate"
+                        android:id="@+id/tv_evaluate"
+                        android:layout_marginStart="10dp"
+                        android:layout_gravity="center_vertical"
+                        android:textColor="@color/black_666"
+                        android:textSize="16sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </android.support.v7.widget.LinearLayoutCompat>
             </android.support.v7.widget.LinearLayoutCompat>
-            <!--活动详情结束-->
-            <View
-                android:background="@color/grey"
-                android:layout_width="match_parent"
-                android:layout_height="10dp"/>
-            <!--活动评价开始-->
-            <android.support.v7.widget.LinearLayoutCompat
-                android:background="@color/white"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_marginBottom="10dp"
-                android:layout_height="40dp">
-                <android.support.v7.widget.AppCompatTextView
-                    android:text="@string/activity_evaluate"
-                    android:id="@+id/tv_evaluate"
-                    android:layout_marginStart="10dp"
-                    android:layout_gravity="center_vertical"
-                    android:textColor="@color/black_666"
-                    android:textSize="16sp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </android.support.v7.widget.LinearLayoutCompat>
+
         </android.support.v7.widget.LinearLayoutCompat>
     </ScrollView>
     <!--活动报名开始-->
     <RelativeLayout
+
         android:id="@+id/rl_activity_info_enroll"
         android:layout_alignParentBottom="true"
         android:background="@color/bg_eee"
