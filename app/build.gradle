@@ -76,5 +76,8 @@ dependencies {
     implementation project(':citypicker')
     //支付宝支付依赖
     implementation files('libs/alipaySdk-20170922.jar')
+    //leakCanary依赖
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.4'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
 
 }

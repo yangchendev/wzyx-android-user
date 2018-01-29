@@ -8,6 +8,7 @@ import com.allelink.wzyx.utils.log.LogUtil;
 import com.blankj.utilcode.util.Utils;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
+import com.squareup.leakcanary.LeakCanary;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -61,6 +62,8 @@ public class WzyxApplication extends Application {
                 .install();
         //AndroidUtilCode初始化
         Utils.init(this);
+        //leakCanary初始化
+        LeakCanary.install(this);
     }
     public static Context getContext(){
         return context;
