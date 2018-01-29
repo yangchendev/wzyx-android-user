@@ -91,11 +91,11 @@ public class LoginActivity extends BaseActivity {
         mPhoneNumber = etPhoneNumber.getText().toString().trim();
         mPassword = etPassword.getText().toString().trim();
         if(!checkPhoneNumber(mPhoneNumber)){
-            ToastUtil.toastShort(LoginActivity.this,getResources().getString(R.string.wrong_phone_number));
+            ToastUtil.toastShort(getApplicationContext(),getResources().getString(R.string.wrong_phone_number));
             return;
         }
         if (!checkPassword(mPassword)){
-            ToastUtil.toastShort(LoginActivity.this,getResources().getString(R.string.wrong_password));
+            ToastUtil.toastShort(getApplicationContext(),getResources().getString(R.string.wrong_password));
             return;
         }
         //在按钮上显示“登录中...”来提示用户
@@ -115,7 +115,7 @@ public class LoginActivity extends BaseActivity {
                 btnLogin.setText(getResources().getString(R.string.login));
                 AccountManager.setSignState(true);
                 WzyxPreference.addCustomAppProfile(WzyxPreference.KEY_PHONE_NUMBER,mPhoneNumber);
-                ToastUtil.toastShort(LoginActivity.this,getResources().getString(R.string.sign_in_success));
+                ToastUtil.toastShort(getApplicationContext(),getResources().getString(R.string.sign_in_success));
                 ActivityUtils.startActivity(LoginActivity.this,MainActivity.class);
                 ((WzyxApplication)getApplication()).finishSingleActivity(LoginActivity.this);
             }
@@ -127,7 +127,7 @@ public class LoginActivity extends BaseActivity {
                 etPassword.setEnabled(true);
                 etPhoneNumber.setEnabled(true);
                 btnLogin.setText(getResources().getString(R.string.login));
-                ToastUtil.toastShort(LoginActivity.this,error);
+                ToastUtil.toastShort(getApplicationContext(),error);
             }
         });
     }
