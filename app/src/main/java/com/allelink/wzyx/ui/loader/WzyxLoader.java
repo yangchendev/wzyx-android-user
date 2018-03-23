@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatDialog;
 import android.view.Gravity;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 
 import com.allelink.wzyx.R;
 import com.allelink.wzyx.utils.dimen.DimenUtil;

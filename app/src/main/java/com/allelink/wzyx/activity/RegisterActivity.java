@@ -38,7 +38,7 @@ import qiu.niorgai.StatusBarCompat;
  * @email 1048027353@qq.com
  */
 
-public class RegisterActivity extends BaseActivity {
+public class  RegisterActivity extends BaseActivity {
     private static final String TAG = RegisterActivity.class.getSimpleName();
     /**
     * UI

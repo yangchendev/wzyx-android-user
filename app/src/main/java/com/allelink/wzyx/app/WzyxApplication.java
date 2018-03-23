@@ -47,7 +47,7 @@ public class WzyxApplication extends Application {
         //初始化Logger
         Logger.addLogAdapter(new AndroidLogAdapter());
         //控制日志输出
-        LogUtil.LEVEL = LogUtil.VERBOSE;
+        LogUtil.LEVEL = LogUtil.NOTHING;
         context = getApplicationContext();
         //初始化栈视图功能
         Fragmentation.builder()
